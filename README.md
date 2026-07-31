@@ -32,6 +32,9 @@ The intended application-facing framing is:
 The collaboration model borrows the protocol, not the chrome, from open-source
 software: request → contribution → review → acceptance → durable lineage.
 
+The application-ready product rationale, GitHub-to-Suno mapping, MVP boundary,
+metrics, risks, and interview talk track are in [`SUBMISSION-PRIMER.md`](./SUBMISSION-PRIMER.md).
+
 All people, songs, credits, and metrics shown here are illustrative. This
 independent concept is not affiliated with Suno.
 

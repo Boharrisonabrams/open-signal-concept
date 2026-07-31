@@ -15,7 +15,9 @@ visible creator reputation.
 
 [Explore the interactive spec →](https://open-signal-concept.boabrams.workers.dev)
 
-Illustrative people, audio, and outcomes. Independent concept; not affiliated
+Try the 60-second path: **Open call → Add your take → Compare → Accept → Profile**.
+
+Fictional people, audio, and outcomes. Independent concept; not affiliated
 with Suno.
 
 ## Short field version
@@ -24,3 +26,10 @@ I built Open Signal, a playable mobile product spec for the human layer around
 Suno creation: precise contribution requests, contextual review, genuine owner
 choice, and rights-aware credit for what ships:
 https://open-signal-concept.boabrams.workers.dev
+
+## One-line interview framing
+
+Open Signal applies an open-source-inspired collaboration protocol—not open
+licensing or GitHub visual chrome—to music: a precise request becomes a scoped
+contribution, contextual review, owner-controlled acceptance, and durable
+rights-and-credit lineage.

@@ -33,7 +33,8 @@ test("server-renders the Open Signal concept and social metadata", async () => {
   assert.match(html, /Hear every version\. Credit what ships\./);
   assert.match(html, /Open Signal adds the human layer/);
   assert.match(html, /Interactive product spec/);
-  assert.match(html, /Proposed experience and illustrative outcomes/);
+  assert.match(html, /Fictional people, audio, and outcomes/);
+  assert.match(html, /rel="canonical" href="http:\/\/localhost:3000\/"/i);
   assert.match(html, /property="og:image"/i);
   assert.doesNotMatch(html, /vinext-starter|Your site is taking shape/i);
 });
@@ -75,5 +76,6 @@ test("keeps the complete decision, credit, and lineage story in source", async (
     access(new URL("../public/adopter-malik.jpg", import.meta.url)),
     access(new URL("../public/adopter-ana.jpg", import.meta.url)),
     access(new URL("../public/adopter-jules.jpg", import.meta.url)),
+    access(new URL("../SUBMISSION-PRIMER.md", import.meta.url)),
   ]);
 });

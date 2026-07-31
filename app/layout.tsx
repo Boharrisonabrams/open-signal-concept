@@ -26,6 +26,11 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Open Signal — An interactive product spec for Suno",
     description:
       "A playable mobile-first product specification for precise human contribution, contextual review, and rights-aware creative credit on Suno.",
+    authors: [{ name: "Bo Abrams" }],
+    creator: "Bo Abrams",
+    alternates: {
+      canonical: base.toString(),
+    },
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",

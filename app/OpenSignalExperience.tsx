@@ -1033,7 +1033,9 @@ function CompareScene({
                 <button
                   className="gradient-button"
                   type="button"
-                  onClick={() => onAccept(selected)}
+                  onClick={() => {
+                    if (selected !== "original") onAccept(selected);
+                  }}
                 >
                   <Icon name="spark" />
                   {acceptedId ? "Accept instead" : "Accept contribution"}
@@ -1190,10 +1192,25 @@ function AcceptanceReceipt({
   onClose: () => void;
 }) {
   const creator = contributions[contributionId];
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    closeButtonRef.current?.focus();
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [onClose]);
 
   return (
-    <div className="receipt-overlay" role="dialog" aria-modal="true" aria-labelledby="receipt-title">
-      <button className="receipt-overlay__backdrop" type="button" onClick={onClose} aria-label="Close acceptance receipt" />
+    <div className="receipt-overlay" role="dialog" aria-modal="true" aria-labelledby="receipt-title" aria-describedby="receipt-note">
+      <button className="receipt-overlay__backdrop" type="button" onClick={onClose} aria-label="Close acceptance receipt" tabIndex={-1} />
       <section className="receipt-sheet">
         <span className="sheet-handle" aria-hidden="true" />
         <header>
@@ -1201,7 +1218,7 @@ function AcceptanceReceipt({
             <span>Recorded on acceptance</span>
             <h2 id="receipt-title">Rights + credit receipt</h2>
           </div>
-          <button className="round-control" type="button" onClick={onClose} aria-label="Close acceptance receipt"><Icon name="close" /></button>
+          <button ref={closeButtonRef} className="round-control" type="button" onClick={onClose} aria-label="Close acceptance receipt"><Icon name="close" /></button>
         </header>
         <div className="receipt-creator">
           <img src={creator.image} alt="" />
@@ -1214,7 +1231,7 @@ function AcceptanceReceipt({
           <div><dt>Stem reuse</dt><dd>Not included. Separate permission is required.</dd></div>
           <div><dt>Attribution</dt><dd>{creator.handle} stays attached to downstream remixes.</dd></div>
         </dl>
-        <div className="receipt-confirmation"><Icon name="check" size={16} /><span><strong>Confirmed by both creators</strong><small>Illustrative rights model for this product spec</small></span></div>
+        <div className="receipt-confirmation" id="receipt-note"><Icon name="check" size={16} /><span><strong>Confirmed by both creators</strong><small>Illustrative rights model for this product spec</small></span></div>
         <button className="gradient-button" type="button" onClick={onClose}>Done</button>
       </section>
     </div>
@@ -1578,18 +1595,19 @@ export function OpenSignalExperience() {
   }, [rightsConfirmed]);
 
   const sharePrototype = useCallback(async () => {
+    const canShare = typeof navigator.share === "function";
     const shareData = {
       title: "Open Signal — an interactive product spec",
       text: "Ask for a take, hear it in context, and preserve credit for what ships.",
       url: new URL("/", window.location.href).href,
     };
 
-    setShareStatus(navigator.share ? "Opening share sheet…" : "Copying link…");
+    setShareStatus(canShare ? "Opening share sheet…" : "Copying link…");
     if (shareTimeout.current) window.clearTimeout(shareTimeout.current);
     shareTimeout.current = window.setTimeout(() => setShareStatus(null), 2600);
 
     try {
-      if (navigator.share) {
+      if (canShare) {
         await navigator.share(shareData);
         setShareStatus("Share sheet opened");
       } else {
@@ -1674,6 +1692,7 @@ export function OpenSignalExperience() {
                 className={scene === item ? "is-active" : ""}
                 onClick={() => navigate(item)}
                 disabled={item === "accepted" && !acceptedId}
+                aria-pressed={scene === item}
               >
                 {SCENE_LABELS[item]}
               </button>
@@ -1768,7 +1787,7 @@ export function OpenSignalExperience() {
       </section>
 
       <footer className="site-footer">
-        <p>Interactive product spec · Proposed experience and illustrative outcomes · Not affiliated with Suno</p>
+        <p>Interactive product spec · Fictional people, audio, and outcomes · Not affiliated with Suno</p>
         <p>Designed for the Staff Product Manager, mobile creation role</p>
       </footer>
       {shareStatus ? <div className="site-toast" role="status"><Icon name="check" size={16} />{shareStatus}</div> : null}
