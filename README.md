@@ -4,6 +4,9 @@ An interactive product specification for directed music collaboration, durable
 creative credit, and human reputation on Suno. It illustrates a proposed
 experience and community outcomes; it is not an existing Suno feature.
 
+Public prototype:
+[open-signal-concept.boabrams.workers.dev](https://open-signal-concept.boabrams.workers.dev)
+
 The prototype follows one mobile-first flow:
 
 1. A creator opens a precise section of a song for contribution.
@@ -37,3 +40,11 @@ npm run dev
 
 Use `npm test` for the production build and rendered-output checks, and
 `npm run lint` for static analysis.
+
+## Deploy
+
+The public artifact is a Cloudflare Worker. After authenticating Wrangler:
+
+```bash
+npm run deploy
+```
