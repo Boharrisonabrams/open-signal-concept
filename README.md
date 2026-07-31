@@ -11,6 +11,10 @@ The prototype follows one mobile-first flow:
 4. The accepted work becomes visible on the contributor's human profile and
    in the project's lineage.
 
+Each proposal is auditionable in context using an in-browser sound sketch.
+Production Suno renders can replace those sketches without changing the
+interaction model.
+
 All people, songs, credits, and metrics shown here are illustrative. This
 independent concept is not affiliated with Suno.
 

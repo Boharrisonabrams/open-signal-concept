@@ -29,9 +29,9 @@ test("server-renders the Open Signal concept and social metadata", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Open Signal — Make human contribution legible<\/title>/i);
-  assert.match(html, /Make human contribution legible\./);
-  assert.match(html, /Open Calls turn a promising song section into an invitation/);
+  assert.match(html, /<title>Open Signal — Hear every version\. Credit what ships\.<\/title>/i);
+  assert.match(html, /Hear every version\. Credit what ships\./);
+  assert.match(html, /Compare contributions in context/);
   assert.match(html, /Concept prototype/);
   assert.match(html, /property="og:image"/i);
   assert.doesNotMatch(html, /vinext-starter|Your site is taking shape/i);
@@ -49,7 +49,9 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Verified human/);
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
-  assert.match(source, /Open Sound Registry/);
+  assert.match(source, /Sound Registry/);
+  assert.match(source, /scheduleVersionPreview/);
+  assert.match(source, /Tap a version to hear it in context/);
   assert.match(source, /open-signal:accepted/);
 
   await Promise.all([
@@ -57,5 +59,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
     access(new URL("../public/nia-okafor.png", import.meta.url)),
     access(new URL("../public/og.png", import.meta.url)),
     access(new URL("../public/favicon.svg", import.meta.url)),
+    access(new URL("../public/adopter-malik.jpg", import.meta.url)),
+    access(new URL("../public/adopter-ana.jpg", import.meta.url)),
+    access(new URL("../public/adopter-jules.jpg", import.meta.url)),
   ]);
 });

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 type Scene = "player" | "call" | "compare" | "accepted" | "profile";
 type ContributionId = "original" | "lowlight" | "circuitromance";
@@ -52,11 +52,212 @@ const contributions = {
   },
 } as const;
 
+const adopters = [
+  { name: "Malik Chen", role: "producer", image: "/adopter-malik.jpg" },
+  { name: "Ana Torres", role: "percussion", image: "/adopter-ana.jpg" },
+  { name: "Jules Mercer", role: "vocals", image: "/adopter-jules.jpg" },
+] as const;
+
 const bars = Array.from({ length: 72 }, (_, index) => {
   const wave = Math.abs(Math.sin(index * 0.91) * 13);
   const pulse = Math.abs(Math.cos(index * 0.27) * 9);
   return Math.round(5 + wave + pulse);
 });
+
+type DemoAudioHandle = {
+  context: AudioContext;
+  master: GainNode;
+  timeout: number;
+};
+
+function scheduleTone(
+  context: AudioContext,
+  destination: AudioNode,
+  frequency: number,
+  start: number,
+  duration: number,
+  options: {
+    type?: OscillatorType;
+    volume?: number;
+    attack?: number;
+    filter?: number;
+    detune?: number;
+  } = {},
+) {
+  const oscillator = context.createOscillator();
+  const envelope = context.createGain();
+  const {
+    type = "triangle",
+    volume = 0.045,
+    attack = 0.025,
+    filter,
+    detune = 0,
+  } = options;
+
+  oscillator.type = type;
+  oscillator.frequency.setValueAtTime(frequency, start);
+  oscillator.detune.setValueAtTime(detune, start);
+  envelope.gain.setValueAtTime(0.0001, start);
+  envelope.gain.exponentialRampToValueAtTime(volume, start + attack);
+  envelope.gain.exponentialRampToValueAtTime(
+    0.0001,
+    start + Math.max(attack + 0.04, duration),
+  );
+
+  if (filter) {
+    const lowPass = context.createBiquadFilter();
+    lowPass.type = "lowpass";
+    lowPass.frequency.setValueAtTime(filter, start);
+    oscillator.connect(lowPass).connect(envelope);
+  } else {
+    oscillator.connect(envelope);
+  }
+
+  envelope.connect(destination);
+  oscillator.start(start);
+  oscillator.stop(start + duration + 0.04);
+}
+
+function scheduleKick(
+  context: AudioContext,
+  destination: AudioNode,
+  start: number,
+) {
+  const oscillator = context.createOscillator();
+  const envelope = context.createGain();
+  oscillator.type = "sine";
+  oscillator.frequency.setValueAtTime(118, start);
+  oscillator.frequency.exponentialRampToValueAtTime(44, start + 0.16);
+  envelope.gain.setValueAtTime(0.14, start);
+  envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.22);
+  oscillator.connect(envelope).connect(destination);
+  oscillator.start(start);
+  oscillator.stop(start + 0.24);
+}
+
+function scheduleHat(
+  context: AudioContext,
+  destination: AudioNode,
+  start: number,
+  volume = 0.018,
+) {
+  const buffer = context.createBuffer(
+    1,
+    Math.floor(context.sampleRate * 0.055),
+    context.sampleRate,
+  );
+  const data = buffer.getChannelData(0);
+  for (let index = 0; index < data.length; index += 1) {
+    data[index] = Math.random() * 2 - 1;
+  }
+
+  const source = context.createBufferSource();
+  const highPass = context.createBiquadFilter();
+  const envelope = context.createGain();
+  source.buffer = buffer;
+  highPass.type = "highpass";
+  highPass.frequency.setValueAtTime(5200, start);
+  envelope.gain.setValueAtTime(volume, start);
+  envelope.gain.exponentialRampToValueAtTime(0.0001, start + 0.05);
+  source.connect(highPass).connect(envelope).connect(destination);
+  source.start(start);
+}
+
+function scheduleVersionPreview(
+  context: AudioContext,
+  destination: AudioNode,
+  version: ContributionId,
+) {
+  const start = context.currentTime + 0.04;
+  const beat = 60 / 106;
+  const previewBeats = 14;
+
+  [164.81, 196, 246.94].forEach((frequency, index) => {
+    scheduleTone(
+      context,
+      destination,
+      frequency,
+      start,
+      previewBeats * beat,
+      {
+        type: index === 0 ? "sine" : "triangle",
+        volume: index === 0 ? 0.025 : 0.012,
+        attack: 0.45,
+        filter: 1200,
+      },
+    );
+  });
+
+  for (let beatIndex = 0; beatIndex < previewBeats; beatIndex += 1) {
+    const at = start + beatIndex * beat;
+    if (beatIndex % 2 === 0) scheduleKick(context, destination, at);
+    scheduleHat(
+      context,
+      destination,
+      at + beat * 0.5,
+      beatIndex % 4 === 3 ? 0.026 : 0.014,
+    );
+  }
+
+  if (version === "original") {
+    const cadence = [329.63, 392, 493.88, 440, 392, 329.63, 293.66];
+    cadence.forEach((frequency, index) => {
+      scheduleTone(
+        context,
+        destination,
+        frequency,
+        start + (index * previewBeats * beat) / cadence.length,
+        beat * 0.78,
+        { type: "triangle", volume: 0.052, filter: 2400 },
+      );
+    });
+  }
+
+  if (version === "lowlight") {
+    const counterline = [
+      { beat: 1, frequency: 493.88 },
+      { beat: 3.1, frequency: 392 },
+      { beat: 5.2, frequency: 440 },
+      { beat: 7.4, frequency: 369.99 },
+      { beat: 10, frequency: 293.66 },
+      { beat: 12, frequency: 329.63 },
+    ];
+    counterline.forEach(({ beat: offset, frequency }, index) => {
+      scheduleTone(
+        context,
+        destination,
+        frequency,
+        start + offset * beat,
+        beat * 1.35,
+        {
+          type: "sawtooth",
+          volume: 0.032,
+          attack: 0.08,
+          filter: 1350,
+          detune: index % 2 === 0 ? -4 : 3,
+        },
+      );
+    });
+  }
+
+  if (version === "circuitromance") {
+    const bassResponse = [82.41, 82.41, 98, 73.42, 110, 98, 82.41];
+    bassResponse.forEach((frequency, index) => {
+      const at = start + index * beat * 2;
+      scheduleTone(context, destination, frequency, at, beat * 1.45, {
+        type: "sawtooth",
+        volume: 0.06,
+        attack: 0.012,
+        filter: index % 2 === 0 ? 520 : 760,
+      });
+      scheduleTone(context, destination, frequency * 2, at + beat * 0.35, beat * 0.35, {
+        type: "square",
+        volume: 0.012,
+        filter: 900,
+      });
+    });
+  }
+}
 
 function Icon({
   name,
@@ -406,12 +607,14 @@ function WaveRow({
   id,
   selected,
   accepted,
+  playing,
   onSelect,
   onPlay,
 }: {
   id: ContributionId;
   selected: boolean;
   accepted: boolean;
+  playing: boolean;
   onSelect: () => void;
   onPlay: () => void;
 }) {
@@ -426,13 +629,14 @@ function WaveRow({
 
   return (
     <button
-      className={`wave-row${selected ? " is-selected" : ""}${accepted ? " is-accepted" : ""}`}
+      className={`wave-row${selected ? " is-selected" : ""}${accepted ? " is-accepted" : ""}${playing ? " is-playing" : ""}`}
       type="button"
       onClick={() => {
         onSelect();
         onPlay();
       }}
       aria-pressed={selected}
+      aria-label={`${playing ? "Pause" : "Play"} ${data.handle} version`}
     >
       <span
         className="wave-row__label"
@@ -444,7 +648,7 @@ function WaveRow({
         {data.handle}
       </span>
       <span className="wave-row__play" aria-hidden="true">
-        <Icon name="play" size={15} />
+        <Icon name={playing ? "pause" : "play"} size={15} />
       </span>
       <span className="wave-row__wave">
         <span className="wave-row__before"><WaveBars color="#c4c1c1" quiet /></span>
@@ -464,6 +668,8 @@ function CompareScene({
   accepted,
   selected,
   onSelect,
+  playingId,
+  onPlay,
   onAccept,
   onProfile,
   onClose,
@@ -471,6 +677,8 @@ function CompareScene({
   accepted: boolean;
   selected: ContributionId;
   onSelect: (id: ContributionId) => void;
+  playingId: ContributionId | null;
+  onPlay: (id: ContributionId) => void;
   onAccept: () => void;
   onProfile: () => void;
   onClose: () => void;
@@ -499,6 +707,10 @@ function CompareScene({
           <div className="compare-copy">
             <strong>Replace section 0:42–0:56 <span>(14s)</span></strong>
             <small>Guitar riff</small>
+            <span className="audition-hint">
+              <i aria-hidden="true" />
+              Tap a version to hear it in context
+            </span>
           </div>
           <div className="timeline-labels" aria-hidden="true">
             <span>0:30</span><span>0:42</span><span>0:56</span><span>1:10</span>
@@ -508,22 +720,25 @@ function CompareScene({
               id="original"
               selected={selected === "original"}
               accepted={false}
+              playing={playingId === "original"}
               onSelect={() => onSelect("original")}
-              onPlay={() => onSelect("original")}
+              onPlay={() => onPlay("original")}
             />
             <WaveRow
               id="lowlight"
               selected={selected === "lowlight"}
               accepted={accepted}
+              playing={playingId === "lowlight"}
               onSelect={() => onSelect("lowlight")}
-              onPlay={() => onSelect("lowlight")}
+              onPlay={() => onPlay("lowlight")}
             />
             <WaveRow
               id="circuitromance"
               selected={selected === "circuitromance"}
               accepted={false}
+              playing={playingId === "circuitromance"}
               onSelect={() => onSelect("circuitromance")}
-              onPlay={() => onSelect("circuitromance")}
+              onPlay={() => onPlay("circuitromance")}
             />
           </div>
           <p className="compare-caveat">Only this section changes. The rest of the track stays the same.</p>
@@ -571,8 +786,14 @@ function CompareScene({
                 </button>
               )}
               <div className="inspector-actions">
-                <button type="button"><Icon name="play" size={14} />Play original</button>
-                <button type="button"><Icon name="play" size={14} />Play proposal</button>
+                <button type="button" onClick={() => onPlay("original")}>
+                  <Icon name={playingId === "original" ? "pause" : "play"} size={14} />
+                  {playingId === "original" ? "Pause original" : "Play original"}
+                </button>
+                <button type="button" onClick={() => onPlay(selected)}>
+                  <Icon name={playingId === selected ? "pause" : "play"} size={14} />
+                  {playingId === selected ? "Pause proposal" : "Play proposal"}
+                </button>
               </div>
               <button className="comment-button" type="button"><Icon name="comment" size={17} />Comment</button>
             </>
@@ -580,7 +801,7 @@ function CompareScene({
             <div className="original-inspector">
               <span>Original section</span>
               <h3>The baseline</h3>
-              <p>Hear the stock guitar cadence before auditioning alternatives.</p>
+              <p>{playingId === "original" ? "Playing the baseline in context." : "Tap the original waveform to hear the baseline."}</p>
               <button type="button" onClick={() => onSelect("lowlight")}>
                 Review @lowlight
                 <Icon name="arrow" size={17} />
@@ -592,13 +813,27 @@ function CompareScene({
       <footer className="compare-player">
         <img src="/open-signal-cover.png" alt="" />
         <div><strong>Open Signal</strong><small>Mara Venn</small></div>
-        <button type="button" aria-label="Play selected version"><Icon name="play" /></button>
+        <button
+          type="button"
+          aria-label={`${playingId === selected ? "Pause" : "Play"} selected version`}
+          onClick={() => onPlay(selected)}
+        >
+          <Icon name={playingId === selected ? "pause" : "play"} />
+        </button>
       </footer>
     </section>
   );
 }
 
-function ProfileScene({ onClose }: { onClose: () => void }) {
+function ProfileScene({
+  playing,
+  onPlay,
+  onClose,
+}: {
+  playing: boolean;
+  onPlay: () => void;
+  onClose: () => void;
+}) {
   return (
     <section className="profile-scene scene" aria-label="Nia Okafor profile">
       <div className="status-bar" aria-hidden="true">
@@ -620,7 +855,9 @@ function ProfileScene({ onClose }: { onClose: () => void }) {
       <div className="profile-actions">
         <button type="button"><Icon name="person" />Follow</button>
         <button type="button" aria-label="Share Nia's profile"><Icon name="share" /></button>
-        <button className="gradient-square" type="button" aria-label="Play Nia's work"><Icon name="play" /></button>
+        <button className="gradient-square" type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} Nia's work`}>
+          <Icon name={playing ? "pause" : "play"} />
+        </button>
       </div>
       <small className="follower-count">1,132 followers</small>
       <section className="credits">
@@ -640,7 +877,9 @@ function ProfileScene({ onClose }: { onClose: () => void }) {
             <strong>Muted trumpet counterline accepted into Open Signal</strong>
             <span>0:42–0:56 · Mara Venn</span>
           </div>
-          <button type="button" aria-label="Play accepted contribution"><Icon name="play" /></button>
+          <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} accepted contribution`}>
+            <Icon name={playing ? "pause" : "play"} />
+          </button>
         </article>
         <article>
           <div className="texture-art" aria-hidden="true" />
@@ -660,28 +899,28 @@ function PhoneDemo({
   scene,
   accepted,
   selected,
-  playing,
+  playingId,
   onScene,
   onSelect,
   onAccept,
-  onTogglePlay,
+  onPlay,
 }: {
   scene: Scene;
   accepted: boolean;
   selected: ContributionId;
-  playing: boolean;
+  playingId: ContributionId | null;
   onScene: (scene: Scene) => void;
   onSelect: (id: ContributionId) => void;
   onAccept: () => void;
-  onTogglePlay: () => void;
+  onPlay: (id: ContributionId) => void;
 }) {
   return (
     <div className={`phone-frame phone-frame--${scene}`}>
       <div className="phone-island" aria-hidden="true" />
       {scene === "player" ? (
         <PlayerScene
-          playing={playing}
-          onTogglePlay={onTogglePlay}
+          playing={playingId === "original"}
+          onTogglePlay={() => onPlay("original")}
           onOpenCall={() => onScene("call")}
         />
       ) : null}
@@ -696,13 +935,19 @@ function PhoneDemo({
           accepted={accepted}
           selected={selected}
           onSelect={onSelect}
+          playingId={playingId}
+          onPlay={onPlay}
           onAccept={onAccept}
           onProfile={() => onScene("profile")}
           onClose={() => onScene("call")}
         />
       ) : null}
       {scene === "profile" ? (
-        <ProfileScene onClose={() => onScene(accepted ? "accepted" : "compare")} />
+        <ProfileScene
+          playing={playingId === "lowlight"}
+          onPlay={() => onPlay("lowlight")}
+          onClose={() => onScene(accepted ? "accepted" : "compare")}
+        />
       ) : null}
     </div>
   );
@@ -792,11 +1037,19 @@ function LineageDiagram({ accepted }: { accepted: boolean }) {
       </div>
       <div className="lineage-arrow"><Icon name="arrow" /></div>
       <div className="downstream">
-        <strong>Downstream adoption</strong>
-        <div className="avatar-stack" aria-hidden="true">
-          <span /><span /><span /><span />
+        <small>Reused by</small>
+        <div className="avatar-stack">
+          <img src="/nia-okafor.png" alt="Nia Okafor" title="Nia Okafor · producer" />
+          {adopters.map((adopter) => (
+            <img
+              key={adopter.name}
+              src={adopter.image}
+              alt={adopter.name}
+              title={`${adopter.name} · ${adopter.role}`}
+            />
+          ))}
         </div>
-        <span>Used in 12 projects</span>
+        <strong>12 projects</strong>
       </div>
     </div>
   );
@@ -806,7 +1059,71 @@ export function OpenSignalExperience() {
   const [scene, setScene] = useState<Scene>("player");
   const [accepted, setAccepted] = useState(false);
   const [selected, setSelected] = useState<ContributionId>("lowlight");
-  const [playing, setPlaying] = useState(false);
+  const [playingId, setPlayingId] = useState<ContributionId | null>(null);
+  const audioHandle = useRef<DemoAudioHandle | null>(null);
+
+  const stopAudio = useCallback(() => {
+    const handle = audioHandle.current;
+    if (handle) {
+      window.clearTimeout(handle.timeout);
+      const now = handle.context.currentTime;
+      handle.master.gain.cancelScheduledValues(now);
+      handle.master.gain.setValueAtTime(
+        Math.max(handle.master.gain.value, 0.0001),
+        now,
+      );
+      handle.master.gain.exponentialRampToValueAtTime(0.0001, now + 0.06);
+      window.setTimeout(() => {
+        void handle.context.close();
+      }, 80);
+      audioHandle.current = null;
+    }
+    setPlayingId(null);
+  }, []);
+
+  const togglePreview = useCallback(
+    async (version: ContributionId) => {
+      if (playingId === version) {
+        stopAudio();
+        return;
+      }
+
+      stopAudio();
+      const context = new AudioContext();
+      await context.resume();
+      const master = context.createGain();
+      const compressor = context.createDynamicsCompressor();
+      master.gain.setValueAtTime(0.82, context.currentTime);
+      compressor.threshold.setValueAtTime(-18, context.currentTime);
+      compressor.knee.setValueAtTime(18, context.currentTime);
+      compressor.ratio.setValueAtTime(5, context.currentTime);
+      master.connect(compressor).connect(context.destination);
+      scheduleVersionPreview(context, master, version);
+
+      const timeout = window.setTimeout(() => {
+        void context.close();
+        if (audioHandle.current?.context === context) {
+          audioHandle.current = null;
+          setPlayingId(null);
+        }
+      }, 8100);
+
+      audioHandle.current = { context, master, timeout };
+      setPlayingId(version);
+    },
+    [playingId, stopAudio],
+  );
+
+  useEffect(
+    () => () => {
+      const handle = audioHandle.current;
+      if (!handle) return;
+      window.clearTimeout(handle.timeout);
+      void handle.context.close();
+      audioHandle.current = null;
+    },
+    [],
+  );
 
   useEffect(() => {
     const syncFromLocation = () => {
@@ -848,9 +1165,9 @@ export function OpenSignalExperience() {
     window.localStorage.removeItem("open-signal:accepted");
     setAccepted(false);
     setSelected("lowlight");
-    setPlaying(false);
+    stopAudio();
     navigate("player");
-  }, [navigate]);
+  }, [navigate, stopAudio]);
 
   const progress = useMemo(() => SCENES.indexOf(scene), [scene]);
 
@@ -867,24 +1184,27 @@ export function OpenSignalExperience() {
 
       <section className="hero">
         <div className="hero-copy">
-          <h1>Make human contribution legible.</h1>
+          <h1>Hear every version. Credit what ships.</h1>
           <p>
-            Open Calls turn a promising song section into an invitation—and
-            accepted work into durable creative reputation.
+            Open one section. Compare contributions in context. Keep credit
+            attached to the sound.
           </p>
-          <SongRail playing={playing} onTogglePlay={() => setPlaying((value) => !value)} />
+          <SongRail
+            playing={playingId === "original"}
+            onTogglePlay={() => void togglePreview("original")}
+          />
           <ol className="hero-steps">
             <li className={progress >= 1 ? "is-active" : ""}>
               <span>1</span>
-              <div><strong>Open a section</strong><small>Define the exact time and what you need.</small></div>
+              <div><strong>Open</strong><small>Name the section and the ask.</small></div>
             </li>
             <li className={progress >= 2 ? "is-active" : ""}>
               <span>2</span>
-              <div><strong>Review contributions</strong><small>Compare alternatives from real producers.</small></div>
+              <div><strong>Listen</strong><small>Switch versions in context.</small></div>
             </li>
             <li className={accepted ? "is-active" : ""}>
               <span>3</span>
-              <div><strong>Credit what ships</strong><small>Accept one into the track. Credit stays visible.</small></div>
+              <div><strong>Credit</strong><small>Accept one. Preserve who made it.</small></div>
             </li>
           </ol>
         </div>
@@ -907,28 +1227,25 @@ export function OpenSignalExperience() {
             scene={scene}
             accepted={accepted}
             selected={selected}
-            playing={playing}
+            playingId={playingId}
             onScene={navigate}
             onSelect={setSelected}
             onAccept={acceptContribution}
-            onTogglePlay={() => setPlaying((value) => !value)}
+            onPlay={(version) => void togglePreview(version)}
           />
         </div>
 
         <aside className="proof-column">
           <div className="proof-column__copy">
-            <span>Not more remixing.</span>
-            <h2>Directed contribution.</h2>
-            <p>
-              A creator names the problem. Producers answer with craft.
-              The maintainer decides what becomes canonical.
-            </p>
+            <span>Directed, not generic.</span>
+            <h2>Ask for the missing part.</h2>
+            <p>The song owner keeps the final say.</p>
           </div>
           <HumanProofCard accepted={accepted} onOpen={() => navigate("profile")} />
           <div className="trust-stack">
-            <div><Icon name="verified" /><span><strong>Verified human</strong><small>Identity, not celebrity</small></span></div>
-            <div><Icon name="check" /><span><strong>Credits verified</strong><small>External work, substantiated</small></span></div>
-            <div><Icon name="spark" /><span><strong>Native reputation</strong><small>Accepted work and reuse</small></span></div>
+            <div><Icon name="verified" /><span><strong>Verified human</strong><small>Identity</small></span></div>
+            <div><Icon name="check" /><span><strong>Credits verified</strong><small>Authorship</small></span></div>
+            <div><Icon name="spark" /><span><strong>Native reputation</strong><small>Accepted work</small></span></div>
           </div>
         </aside>
       </section>
@@ -936,57 +1253,44 @@ export function OpenSignalExperience() {
       <section className="lineage-section" aria-labelledby="lineage-title">
         <div className="section-heading">
           <div>
-            <h2 id="lineage-title">The decision becomes the network.</h2>
-            <p>Project ancestry stays readable after the song leaves the editor.</p>
+            <h2 id="lineage-title">Every version keeps its story.</h2>
+            <p>Contribution, decision, and reuse stay connected.</p>
           </div>
           <span>Open Call lineage</span>
         </div>
         <LineageDiagram accepted={accepted} />
       </section>
 
-      <section className="system-section" aria-labelledby="system-title">
-        <div className="system-thesis">
-          <h2 id="system-title">Start with one section.<br />Build toward an open sound registry.</h2>
-          <p>
-            GitHub made contribution, ancestry, and reputation visible for code.
-            Suno can make those same primitives musical—and unmistakably human.
-          </p>
+      <section className="principles-section" aria-labelledby="principles-title">
+        <div className="principles-heading">
+          <h2 id="principles-title">Four rules keep it human.</h2>
+          <p>Less feed. More authorship.</p>
         </div>
-        <div className="system-sequence">
-          <article>
-            <span>Now</span>
-            <h3>Open Calls</h3>
-            <p>Ask for help at the exact point where another person’s taste can improve the work.</p>
-          </article>
-          <Icon name="arrow" />
-          <article>
-            <span>Next</span>
-            <h3>Project Graph</h3>
-            <p>Make accepted decisions, contributors, and downstream adoption visible.</p>
-          </article>
-          <Icon name="arrow" />
-          <article>
-            <span>Later</span>
-            <h3>Open Sound Registry</h3>
-            <p>Give reusable sounds provenance without pretending provenance is already a commercial license.</p>
-          </article>
+        <div className="principles-rail">
+          <article><strong>Precise ask</strong><span>One section. One problem.</span></article>
+          <article><strong>Listen in context</strong><span>Switch versions without losing the song.</span></article>
+          <article><strong>Human credit</strong><span>Accepted work strengthens a real profile.</span></article>
+          <article><strong>Portable lineage</strong><span>Credit travels when the sound does.</span></article>
+        </div>
+        <div className="product-horizon" aria-label="Product horizon">
+          <span>Open Calls</span>
+          <Icon name="arrow" size={17} />
+          <span>Project Graph</span>
+          <Icon name="arrow" size={17} />
+          <span>Sound Registry</span>
         </div>
       </section>
 
       <section className="measurement-section" aria-labelledby="measurement-title">
         <div>
-          <h2 id="measurement-title">The product bet</h2>
-          <p>
-            Better songs pull creators back. Visible credit pulls skilled
-            contributors in. Together they create a quality loop ordinary
-            remixing cannot.
-          </p>
+          <h2 id="measurement-title">The first test</h2>
+          <p>Do better contributions increase the chance a song ships?</p>
         </div>
         <dl>
-          <div><dt>Primary signal</dt><dd>Accepted contributions per Open Call within seven days</dd></div>
-          <div><dt>Retention proof</dt><dd>Creator return and contributor repeat rate</dd></div>
-          <div><dt>Catalog proof</dt><dd>Project publication and downstream reuse</dd></div>
-          <div><dt>Guardrails</dt><dd>Spam, abandonment, reports, and rights disputes</dd></div>
+          <div><dt>Quality</dt><dd>Contribution accepted</dd></div>
+          <div><dt>Retention</dt><dd>Both creators return</dd></div>
+          <div><dt>Network</dt><dd>Accepted sound reused</dd></div>
+          <div><dt>Guardrail</dt><dd>Spam and rights reports</dd></div>
         </dl>
       </section>
 
