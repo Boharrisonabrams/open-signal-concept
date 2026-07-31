@@ -47,7 +47,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Replace the guitar riff/);
   assert.match(source, /Keep the tension\. Lose the stock indie cadence\./);
   assert.match(source, /Accept contribution/);
-  assert.match(source, /Verified human/);
+  assert.match(source, /Verified creator/);
+  assert.doesNotMatch(source, /Verified human/);
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
   assert.match(source, /Sound Registry/);

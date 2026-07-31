@@ -430,7 +430,7 @@ function VerifiedHuman({ compact = false }: { compact?: boolean }) {
   return (
     <span className={`verified-human${compact ? " is-compact" : ""}`}>
       <Icon name="verified" size={compact ? 15 : 18} />
-      {compact ? "Verified" : "Verified human"}
+      {compact ? "Verified" : "Verified creator"}
     </span>
   );
 }
@@ -762,7 +762,7 @@ function CompareScene({
                 )}
                 <span>
                   <strong>{selected === "lowlight" ? "Nia Okafor" : "Circuit Romance"}</strong>
-                  <small>{selected === "lowlight" ? "Verified human" : "Verified group"}</small>
+                  <small>{selected === "lowlight" ? "Verified creator" : "Verified collective"}</small>
                 </span>
                 <Icon name="verified" size={17} />
               </button>
@@ -985,7 +985,7 @@ function SongRail({
 function HumanProofCard({ accepted, onOpen }: { accepted: boolean; onOpen: () => void }) {
   return (
     <button className="human-proof-card" type="button" onClick={onOpen}>
-      <span className="human-proof-card__label">Human proof</span>
+      <span className="human-proof-card__label">Creator reputation</span>
       <img src="/nia-okafor.png" alt="" />
       <div>
         <strong>Nia Okafor</strong>
@@ -1245,7 +1245,7 @@ export function OpenSignalExperience() {
           </div>
           <HumanProofCard accepted={accepted} onOpen={() => navigate("profile")} />
           <div className="trust-stack">
-            <div><Icon name="verified" /><span><strong>Verified human</strong><small>Identity</small></span></div>
+            <div><Icon name="verified" /><span><strong>Identity verified</strong><small>Creator profile</small></span></div>
             <div><Icon name="check" /><span><strong>Credits verified</strong><small>Authorship</small></span></div>
             <div><Icon name="spark" /><span><strong>Native reputation</strong><small>Accepted work</small></span></div>
           </div>
