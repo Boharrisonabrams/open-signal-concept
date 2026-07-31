@@ -2,26 +2,36 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type Scene = "player" | "call" | "compare" | "accepted" | "profile";
+type Scene = "player" | "call" | "submit" | "compare" | "accepted" | "profile";
 type ContributionId = "original" | "lowlight" | "circuitromance";
+type CreatorContributionId = Exclude<ContributionId, "original">;
+type SubmissionMethod = "record" | "remix" | "upload";
 type IconName =
   | "arrow"
+  | "back"
   | "check"
   | "chevron"
   | "close"
   | "comment"
+  | "disc"
   | "dots"
+  | "heart"
   | "pause"
   | "person"
   | "play"
+  | "record"
+  | "remix"
   | "reset"
   | "share"
   | "spark"
+  | "studio"
+  | "upload"
   | "verified";
 
 const SCENES: Scene[] = [
   "player",
   "call",
+  "submit",
   "compare",
   "accepted",
   "profile",
@@ -30,6 +40,7 @@ const SCENES: Scene[] = [
 const SCENE_LABELS: Record<Scene, string> = {
   player: "Player",
   call: "Open call",
+  submit: "Submit",
   compare: "Compare",
   accepted: "Accepted",
   profile: "Profile",
@@ -42,6 +53,15 @@ const contributions = {
     note: "More tension, less stock cadence.",
     color: "#7f53df",
     tint: "#eee7ff",
+    name: "Nia Okafor",
+    image: "/nia-okafor.png",
+    verification: "Verified creator",
+    acceptedCount: 18,
+    reuses: 46,
+    openCalls: 7,
+    followers: "1,132",
+    album: "Hollow City",
+    workplace: "Northline Studios",
   },
   circuitromance: {
     handle: "@circuitromance",
@@ -49,6 +69,15 @@ const contributions = {
     note: "Sharper rhythm. Keep the negative space.",
     color: "#ef4f7b",
     tint: "#ffe7ee",
+    name: "Malik Chen",
+    image: "/adopter-malik.jpg",
+    verification: "Verified creator",
+    acceptedCount: 11,
+    reuses: 31,
+    openCalls: 4,
+    followers: "824",
+    album: "Glass Transit",
+    workplace: "Circuit Romance Studio",
   },
 } as const;
 
@@ -314,6 +343,13 @@ function Icon({
       </svg>
     );
   }
+  if (name === "back") {
+    return (
+      <svg {...common}>
+        <path d="m15 18-6-6 6-6" />
+      </svg>
+    );
+  }
   if (name === "dots") {
     return (
       <svg {...common} fill="currentColor" stroke="none">
@@ -326,8 +362,15 @@ function Icon({
   if (name === "share") {
     return (
       <svg {...common}>
-        <path d="M15 8.5 19 5m0 0-4-3.5M19 5H9a4 4 0 0 0-4 4v2" />
-        <path d="M8 8H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7" />
+        <path d="M12 15V3m0 0L8 7m4-4 4 4" />
+        <path d="M7 10H5a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2h-2" />
+      </svg>
+    );
+  }
+  if (name === "heart") {
+    return (
+      <svg {...common}>
+        <path d="M20.8 4.6a5.4 5.4 0 0 0-7.7 0L12 5.7l-1.1-1.1a5.4 5.4 0 0 0-7.7 7.7L12 21l8.8-8.7a5.4 5.4 0 0 0 0-7.7Z" />
       </svg>
     );
   }
@@ -382,7 +425,62 @@ function Icon({
       </svg>
     );
   }
+  if (name === "record") {
+    return (
+      <svg {...common}>
+        <rect x="9" y="3" width="6" height="12" rx="3" />
+        <path d="M5 10a7 7 0 0 0 14 0M12 17v4M8 21h8" />
+      </svg>
+    );
+  }
+  if (name === "remix") {
+    return (
+      <svg {...common}>
+        <path d="M4 7h5l6 10h5" />
+        <path d="m17 14 3 3-3 3M4 17h5l2-3M15 7h5m-3-3 3 3-3 3" />
+      </svg>
+    );
+  }
+  if (name === "upload") {
+    return (
+      <svg {...common}>
+        <path d="M12 16V4m0 0L8 8m4-4 4 4" />
+        <path d="M5 14v5h14v-5" />
+      </svg>
+    );
+  }
+  if (name === "disc") {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="12" r="9" />
+        <circle cx="12" cy="12" r="2.4" />
+      </svg>
+    );
+  }
+  if (name === "studio") {
+    return (
+      <svg {...common}>
+        <path d="M4 20V8l8-4 8 4v12" />
+        <path d="M8 20v-7h8v7M3 20h18" />
+      </svg>
+    );
+  }
   return null;
+}
+
+function StatusIcons() {
+  return (
+    <svg className="status-icons" width="50" height="13" viewBox="0 0 50 13" fill="none" aria-hidden="true">
+      <rect x="0" y="9" width="2.5" height="4" rx="1" fill="currentColor" />
+      <rect x="4.5" y="6.5" width="2.5" height="6.5" rx="1" fill="currentColor" />
+      <rect x="9" y="3.5" width="2.5" height="9.5" rx="1" fill="currentColor" />
+      <rect x="13.5" y="0.5" width="2.5" height="12.5" rx="1" fill="currentColor" />
+      <path d="M21 4.4c3.3-3 8.7-3 12 0M23.6 7.1c1.9-1.7 5-1.7 6.9 0M26.5 10.1a.8.8 0 1 0 1.6 0 .8.8 0 0 0-1.6 0Z" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
+      <rect x="37" y="2" width="11" height="9" rx="2.2" stroke="currentColor" strokeWidth="1.25" />
+      <rect x="38.7" y="3.7" width="7.7" height="5.6" rx="1.1" fill="currentColor" />
+      <path d="M49.1 5v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
+    </svg>
+  );
 }
 
 function WaveBars({
@@ -437,12 +535,18 @@ function VerifiedHuman({ compact = false }: { compact?: boolean }) {
 
 function PlayerScene({
   playing,
+  liked,
   onTogglePlay,
+  onToggleLike,
   onOpenCall,
+  onShare,
 }: {
   playing: boolean;
+  liked: boolean;
   onTogglePlay: () => void;
+  onToggleLike: () => void;
   onOpenCall: () => void;
+  onShare: () => void;
 }) {
   return (
     <section className="player-scene scene" aria-label="Open Signal player">
@@ -454,27 +558,24 @@ function PlayerScene({
       <div className="player-scene__shade" />
       <div className="status-bar status-bar--light" aria-hidden="true">
         <strong>9:41</strong>
-        <span>● ●● ◒</span>
+        <StatusIcons />
       </div>
       <header className="player-scene__header">
         <div>
           <h2>Open Signal</h2>
-          <button className="artist-link" type="button">
+          <div className="artist-link">
             <span className="artist-orb" />
             Mara Venn
             <VerifiedHuman compact />
-          </button>
+          </div>
         </div>
-        <button className="round-control round-control--dark" type="button" aria-label="Collapse player">
-          <Icon name="chevron" size={26} />
-        </button>
       </header>
       <nav className="action-rail" aria-label="Song actions">
-        <button type="button" aria-label="Like">
-          <span aria-hidden="true">♥</span>
-          <small>0</small>
+        <button className={liked ? "is-liked" : ""} type="button" onClick={onToggleLike} aria-label={liked ? "Unlike" : "Like"} aria-pressed={liked}>
+          <Icon name="heart" size={21} />
+          <small>{liked ? "1" : "0"}</small>
         </button>
-        <button type="button" aria-label="Share">
+        <button type="button" onClick={onShare} aria-label="Share Open Signal">
           <Icon name="share" size={22} />
         </button>
         <button
@@ -485,9 +586,6 @@ function PlayerScene({
         >
           <span className="open-call-glyph" aria-hidden="true" />
           <small>Open call</small>
-        </button>
-        <button type="button" aria-label="More actions">
-          <Icon name="dots" />
         </button>
       </nav>
       <div className="player-controls">
@@ -540,9 +638,11 @@ function BranchPreview() {
 
 function CallScene({
   onClose,
+  onContribute,
   onCompare,
 }: {
   onClose: () => void;
+  onContribute: () => void;
   onCompare: () => void;
 }) {
   return (
@@ -554,7 +654,7 @@ function CallScene({
         />
         <div className="status-bar status-bar--light" aria-hidden="true">
           <strong>9:41</strong>
-          <span>● ●● ◒</span>
+          <StatusIcons />
         </div>
         <div className="song-ribbon">
           <div>
@@ -587,10 +687,15 @@ function CallScene({
         </div>
         <div className="call-sheet__actions">
           <span><Icon name="person" /> 2 contributions</span>
-          <button type="button" onClick={onCompare}>
-            Compare
-            <Icon name="arrow" size={17} />
-          </button>
+          <div className="call-sheet__cta-group">
+            <button className="secondary-action" type="button" onClick={onContribute}>
+              Add your take
+            </button>
+            <button type="button" onClick={onCompare}>
+              Compare
+              <Icon name="arrow" size={17} />
+            </button>
+          </div>
         </div>
         <div className="requested-by">
           <span className="artist-orb" />
@@ -600,6 +705,147 @@ function CallScene({
           </div>
         </div>
       </div>
+    </section>
+  );
+}
+
+function SubmitScene({
+  method,
+  rightsConfirmed,
+  submitted,
+  playing,
+  onMethod,
+  onRightsConfirmed,
+  onPlay,
+  onSubmit,
+  onBack,
+  onReview,
+}: {
+  method: SubmissionMethod;
+  rightsConfirmed: boolean;
+  submitted: boolean;
+  playing: boolean;
+  onMethod: (method: SubmissionMethod) => void;
+  onRightsConfirmed: (confirmed: boolean) => void;
+  onPlay: () => void;
+  onSubmit: () => void;
+  onBack: () => void;
+  onReview: () => void;
+}) {
+  const methodOptions: Array<{
+    id: SubmissionMethod;
+    icon: IconName;
+    label: string;
+  }> = [
+    { id: "record", icon: "record", label: "Record" },
+    { id: "remix", icon: "remix", label: "Remix with Suno" },
+    { id: "upload", icon: "upload", label: "Upload" },
+  ];
+
+  return (
+    <section className="submit-scene scene" aria-label="Submit a contribution">
+      <div className="status-bar" aria-hidden="true">
+        <strong>9:41</strong>
+        <StatusIcons />
+      </div>
+      <header className="submit-header">
+        <button className="round-control" type="button" onClick={onBack} aria-label="Back to open call">
+          <Icon name="back" />
+        </button>
+        <div>
+          <span>Contributor view</span>
+          <strong>Add your take</strong>
+        </div>
+        <img src="/nia-okafor.png" alt="Nia Okafor" />
+      </header>
+
+      {submitted ? (
+        <div className="submission-success">
+          <div className="submission-success__mark"><Icon name="check" size={30} /></div>
+          <span>Sent for review</span>
+          <h2>Your take is in context.</h2>
+          <p>Mara can hear your 14-second contribution against the same song and ask for one revision before deciding.</p>
+          <div className="submission-success__receipt">
+            <div><span>Take</span><strong>Muted trumpet counterline</strong></div>
+            <div><span>Rights</span><strong>Confirmed by @lowlight</strong></div>
+            <div><span>If accepted</span><strong>Credit attaches to what ships</strong></div>
+          </div>
+          <button className="gradient-button" type="button" onClick={onReview}>
+            Review the decision flow
+            <Icon name="arrow" size={17} />
+          </button>
+        </div>
+      ) : (
+        <div className="submit-body">
+          <div className="submit-request">
+            <img src="/open-signal-cover.png" alt="" />
+            <div>
+              <span>Open call · 0:42–0:56</span>
+              <strong>Replace the guitar riff</strong>
+              <small>Keep the tension. Lose the stock indie cadence.</small>
+            </div>
+          </div>
+
+          <div className="submission-context">
+            <div>
+              <span>Original in context</span>
+              <small>106 BPM · E minor · 14 sec</small>
+            </div>
+            <WaveBars color="#8d8990" quiet />
+            <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} original section`}>
+              <Icon name={playing ? "pause" : "play"} size={17} />
+            </button>
+          </div>
+
+          <fieldset className="submission-methods">
+            <legend>How do you want to contribute?</legend>
+            <div>
+              {methodOptions.map((option) => (
+                <button
+                  key={option.id}
+                  className={method === option.id ? "is-selected" : ""}
+                  type="button"
+                  onClick={() => onMethod(option.id)}
+                  aria-pressed={method === option.id}
+                >
+                  <Icon name={option.icon} size={18} />
+                  <span>{option.label}</span>
+                </button>
+              ))}
+            </div>
+          </fieldset>
+
+          <div className="draft-take">
+            <img src="/nia-okafor.png" alt="" />
+            <div>
+              <span>Ready to submit</span>
+              <strong>Muted trumpet counterline</strong>
+              <small>@lowlight · Take 02 · 14 sec</small>
+            </div>
+            <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} draft take`}>
+              <Icon name={playing ? "pause" : "play"} size={17} />
+            </button>
+          </div>
+
+          <label className="rights-check">
+            <input
+              type="checkbox"
+              checked={rightsConfirmed}
+              onChange={(event) => onRightsConfirmed(event.target.checked)}
+            />
+            <span>
+              <strong>I made or control this audio.</strong>
+              <small>If accepted, Mara may publish and monetize it in this song. Separate stem reuse still requires permission.</small>
+            </span>
+          </label>
+
+          <button className="gradient-button submission-submit" type="button" disabled={!rightsConfirmed} onClick={onSubmit}>
+            Send for review
+            <Icon name="arrow" size={17} />
+          </button>
+          <p className="submission-note">One revision round · Attribution required · Illustrative terms</p>
+        </div>
+      )}
     </section>
   );
 }
@@ -666,32 +912,43 @@ function WaveRow({
 }
 
 function CompareScene({
-  accepted,
+  acceptedId,
   selected,
   onSelect,
   playingId,
   onPlay,
   onAccept,
+  onReceipt,
   onProfile,
   onClose,
 }: {
-  accepted: boolean;
+  acceptedId: CreatorContributionId | null;
   selected: ContributionId;
   onSelect: (id: ContributionId) => void;
   playingId: ContributionId | null;
   onPlay: (id: ContributionId) => void;
-  onAccept: () => void;
+  onAccept: (id: CreatorContributionId) => void;
+  onReceipt: () => void;
   onProfile: () => void;
   onClose: () => void;
 }) {
   const selectedData =
     selected === "original" ? null : contributions[selected];
+  const [commentOpen, setCommentOpen] = useState(false);
+  const [comment, setComment] = useState("Could you pull the final note back and leave more air before the transition?");
+  const [commentSent, setCommentSent] = useState(false);
+
+  const selectContribution = (id: ContributionId) => {
+    setCommentOpen(false);
+    setCommentSent(false);
+    onSelect(id);
+  };
 
   return (
     <section className="compare-scene scene" aria-label="Compare contributions">
       <header className="compare-header">
         <button className="round-control" type="button" onClick={onClose} aria-label="Back to open call">
-          <span className="back-arrow" aria-hidden="true">‹</span>
+          <Icon name="back" />
         </button>
         <img src="/open-signal-cover.png" alt="" />
         <div>
@@ -699,9 +956,6 @@ function CompareScene({
           <p>Mara Venn</p>
         </div>
         <span className="compare-header__mode">Collaborate</span>
-        <button className="round-control compare-header__more" type="button" aria-label="More">
-          <Icon name="dots" />
-        </button>
       </header>
       <div className="compare-body">
         <div className="compare-canvas">
@@ -722,23 +976,23 @@ function CompareScene({
               selected={selected === "original"}
               accepted={false}
               playing={playingId === "original"}
-              onSelect={() => onSelect("original")}
+              onSelect={() => selectContribution("original")}
               onPlay={() => onPlay("original")}
             />
             <WaveRow
               id="lowlight"
               selected={selected === "lowlight"}
-              accepted={accepted}
+              accepted={acceptedId === "lowlight"}
               playing={playingId === "lowlight"}
-              onSelect={() => onSelect("lowlight")}
+              onSelect={() => selectContribution("lowlight")}
               onPlay={() => onPlay("lowlight")}
             />
             <WaveRow
               id="circuitromance"
               selected={selected === "circuitromance"}
-              accepted={false}
+              accepted={acceptedId === "circuitromance"}
               playing={playingId === "circuitromance"}
-              onSelect={() => onSelect("circuitromance")}
+              onSelect={() => selectContribution("circuitromance")}
               onPlay={() => onPlay("circuitromance")}
             />
           </div>
@@ -755,35 +1009,34 @@ function CompareScene({
                 by <strong style={{ color: selectedData.color }}>{selectedData.handle}</strong>
               </p>
               <button className="profile-inline" type="button" onClick={onProfile}>
-                {selected === "lowlight" ? (
-                  <img src="/nia-okafor.png" alt="" />
-                ) : (
-                  <span className="artist-orb artist-orb--large" />
-                )}
+                <img src={selectedData.image} alt="" />
                 <span>
-                  <strong>{selected === "lowlight" ? "Nia Okafor" : "Circuit Romance"}</strong>
-                  <small>{selected === "lowlight" ? "Verified creator" : "Verified collective"}</small>
+                  <strong>{selectedData.name}</strong>
+                  <small>{selectedData.verification}</small>
                 </span>
                 <Icon name="verified" size={17} />
               </button>
               <p className="contribution-note">{selectedData.note}</p>
-              {accepted && selected === "lowlight" ? (
+              {acceptedId === selected ? (
                 <div className="accepted-panel">
                   <span><Icon name="spark" /> Accepted into Open Signal</span>
-                  <button type="button" onClick={onProfile}>
-                    View Nia’s profile
-                    <Icon name="arrow" size={17} />
-                  </button>
+                  <div className="acceptance-receipt-summary">
+                    <div>
+                      <small>Rights + credit recorded</small>
+                      <strong>{selectedData.handle} · Take 02</strong>
+                    </div>
+                    <button type="button" onClick={onReceipt}>View receipt</button>
+                  </div>
+                  <button type="button" onClick={onProfile}>View {selectedData.name}’s profile<Icon name="arrow" size={17} /></button>
                 </div>
               ) : (
                 <button
                   className="gradient-button"
                   type="button"
-                  disabled={selected !== "lowlight"}
-                  onClick={onAccept}
+                  onClick={() => onAccept(selected)}
                 >
                   <Icon name="spark" />
-                  {selected === "lowlight" ? "Accept contribution" : "Choose @lowlight to accept"}
+                  {acceptedId ? "Accept instead" : "Accept contribution"}
                 </button>
               )}
               <div className="inspector-actions">
@@ -796,14 +1049,35 @@ function CompareScene({
                   {playingId === selected ? "Pause proposal" : "Play proposal"}
                 </button>
               </div>
-              <button className="comment-button" type="button"><Icon name="comment" size={17} />Comment</button>
+              {commentSent ? (
+                <div className="comment-sent" role="status"><Icon name="check" size={15} />Feedback sent to {selectedData.handle}</div>
+              ) : commentOpen ? (
+                <form
+                  className="comment-composer"
+                  onSubmit={(event) => {
+                    event.preventDefault();
+                    if (!comment.trim()) return;
+                    setCommentSent(true);
+                    setCommentOpen(false);
+                  }}
+                >
+                  <label htmlFor={`review-comment-${selected}`}>Request one revision</label>
+                  <textarea id={`review-comment-${selected}`} value={comment} onChange={(event) => setComment(event.target.value)} />
+                  <div>
+                    <button type="button" onClick={() => setCommentOpen(false)}>Cancel</button>
+                    <button type="submit">Send feedback</button>
+                  </div>
+                </form>
+              ) : (
+                <button className="comment-button" type="button" onClick={() => setCommentOpen(true)}><Icon name="comment" size={17} />Request changes</button>
+              )}
             </>
           ) : (
             <div className="original-inspector">
               <span>Original section</span>
               <h3>The baseline</h3>
               <p>{playingId === "original" ? "Playing the baseline in context." : "Tap the original waveform to hear the baseline."}</p>
-              <button type="button" onClick={() => onSelect("lowlight")}>
+              <button type="button" onClick={() => selectContribution("lowlight")}>
                 Review @lowlight
                 <Icon name="arrow" size={17} />
               </button>
@@ -827,58 +1101,70 @@ function CompareScene({
 }
 
 function ProfileScene({
+  contributionId,
+  accepted,
   playing,
+  following,
   onPlay,
+  onFollow,
+  onShare,
   onClose,
 }: {
+  contributionId: CreatorContributionId;
+  accepted: boolean;
   playing: boolean;
+  following: boolean;
   onPlay: () => void;
+  onFollow: () => void;
+  onShare: () => void;
   onClose: () => void;
 }) {
+  const creator = contributions[contributionId];
+
   return (
-    <section className="profile-scene scene" aria-label="Nia Okafor profile">
+    <section className="profile-scene scene" aria-label={`${creator.name} profile`}>
       <div className="status-bar" aria-hidden="true">
         <strong>9:41</strong>
-        <span>● ●● ◒</span>
+        <StatusIcons />
       </div>
       <button className="round-control profile-scene__close" type="button" onClick={onClose} aria-label="Close profile">
         <Icon name="close" />
       </button>
-      <img className="profile-scene__portrait" src="/nia-okafor.png" alt="Nia Okafor in a recording studio" />
-      <h2>Nia Okafor</h2>
-      <p className="profile-handle">@lowlight</p>
+      <img className="profile-scene__portrait" src={creator.image} alt={`${creator.name} creator profile`} />
+      <h2>{creator.name}</h2>
+      <p className="profile-handle">{creator.handle}</p>
       <VerifiedHuman />
       <div className="reputation-stats" aria-label="Suno reputation">
-        <div><strong>18</strong><span>Accepted</span></div>
-        <div><strong>46</strong><span>Reuses</span></div>
-        <div><strong>7</strong><span>Open calls</span></div>
+        <div><strong>{creator.acceptedCount}</strong><span>Accepted</span></div>
+        <div><strong>{creator.reuses}</strong><span>Reuses</span></div>
+        <div><strong>{creator.openCalls}</strong><span>Open calls</span></div>
       </div>
       <div className="profile-actions">
-        <button type="button"><Icon name="person" />Follow</button>
-        <button type="button" aria-label="Share Nia's profile"><Icon name="share" /></button>
-        <button className="gradient-square" type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} Nia's work`}>
+        <button className={following ? "is-following" : ""} type="button" onClick={onFollow} aria-pressed={following}><Icon name={following ? "check" : "person"} />{following ? "Following" : "Follow"}</button>
+        <button type="button" onClick={onShare} aria-label={`Share ${creator.name}'s profile`}><Icon name="share" /></button>
+        <button className="gradient-square" type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} ${creator.name}'s work`}>
           <Icon name={playing ? "pause" : "play"} />
         </button>
       </div>
-      <small className="follower-count">1,132 followers</small>
+      <small className="follower-count">{creator.followers} followers</small>
       <section className="credits">
         <div className="section-title-row">
           <h3>Selected credits</h3>
           <span><Icon name="verified" size={16} /> Credits verified</span>
         </div>
-        <p><span aria-hidden="true">◉</span> <strong>Hollow City</strong> — producer</p>
-        <p><span aria-hidden="true">▮▮</span> <strong>Northline Studios</strong> — sound design</p>
+        <p><Icon name="disc" size={15} /> <strong>{creator.album}</strong> — producer</p>
+        <p><Icon name="studio" size={15} /> <strong>{creator.workplace}</strong> — sound design</p>
       </section>
       <section className="profile-contributions">
         <h3>Contributions</h3>
         <article>
           <img src="/open-signal-cover.png" alt="" />
           <div>
-            <small>Accepted</small>
-            <strong>Muted trumpet counterline accepted into Open Signal</strong>
+            <small>{accepted ? "Accepted" : "In review"}</small>
+            <strong>{creator.title} {accepted ? "accepted into" : "proposed for"} Open Signal</strong>
             <span>0:42–0:56 · Mara Venn</span>
           </div>
-          <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} accepted contribution`}>
+          <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} contribution`}>
             <Icon name={playing ? "pause" : "play"} />
           </button>
         </article>
@@ -889,67 +1175,161 @@ function ProfileScene({
             <strong>Drum texture reused in 12 projects</strong>
             <span>Last used 2d ago · 12 projects</span>
           </div>
-          <button type="button" aria-label="Play reused texture"><Icon name="play" /></button>
+          <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} reused texture`}><Icon name={playing ? "pause" : "play"} /></button>
         </article>
       </section>
     </section>
   );
 }
 
+function AcceptanceReceipt({
+  contributionId,
+  onClose,
+}: {
+  contributionId: CreatorContributionId;
+  onClose: () => void;
+}) {
+  const creator = contributions[contributionId];
+
+  return (
+    <div className="receipt-overlay" role="dialog" aria-modal="true" aria-labelledby="receipt-title">
+      <button className="receipt-overlay__backdrop" type="button" onClick={onClose} aria-label="Close acceptance receipt" />
+      <section className="receipt-sheet">
+        <span className="sheet-handle" aria-hidden="true" />
+        <header>
+          <div>
+            <span>Recorded on acceptance</span>
+            <h2 id="receipt-title">Rights + credit receipt</h2>
+          </div>
+          <button className="round-control" type="button" onClick={onClose} aria-label="Close acceptance receipt"><Icon name="close" /></button>
+        </header>
+        <div className="receipt-creator">
+          <img src={creator.image} alt="" />
+          <div><strong>{creator.name}</strong><span>{creator.handle} · {creator.title}</span></div>
+          <Icon name="verified" size={19} />
+        </div>
+        <dl>
+          <div><dt>Exact asset</dt><dd>Take 02 · 0:42–0:56 · 14 sec</dd></div>
+          <div><dt>Song rights</dt><dd>Mara may publish and monetize this accepted take in Open Signal.</dd></div>
+          <div><dt>Stem reuse</dt><dd>Not included. Separate permission is required.</dd></div>
+          <div><dt>Attribution</dt><dd>{creator.handle} stays attached to downstream remixes.</dd></div>
+        </dl>
+        <div className="receipt-confirmation"><Icon name="check" size={16} /><span><strong>Confirmed by both creators</strong><small>Illustrative rights model for this product spec</small></span></div>
+        <button className="gradient-button" type="button" onClick={onClose}>Done</button>
+      </section>
+    </div>
+  );
+}
+
 function PhoneDemo({
   scene,
-  accepted,
+  acceptedId,
   selected,
+  submissionMethod,
+  rightsConfirmed,
+  submitted,
+  receiptOpen,
+  liked,
+  following,
   playingId,
   onScene,
   onSelect,
   onAccept,
+  onReceipt,
+  onCloseReceipt,
+  onSubmissionMethod,
+  onRightsConfirmed,
+  onSubmit,
+  onToggleLike,
+  onToggleFollow,
+  onShare,
   onPlay,
 }: {
   scene: Scene;
-  accepted: boolean;
+  acceptedId: CreatorContributionId | null;
   selected: ContributionId;
+  submissionMethod: SubmissionMethod;
+  rightsConfirmed: boolean;
+  submitted: boolean;
+  receiptOpen: boolean;
+  liked: boolean;
+  following: boolean;
   playingId: ContributionId | null;
   onScene: (scene: Scene) => void;
   onSelect: (id: ContributionId) => void;
-  onAccept: () => void;
+  onAccept: (id: CreatorContributionId) => void;
+  onReceipt: () => void;
+  onCloseReceipt: () => void;
+  onSubmissionMethod: (method: SubmissionMethod) => void;
+  onRightsConfirmed: (confirmed: boolean) => void;
+  onSubmit: () => void;
+  onToggleLike: () => void;
+  onToggleFollow: () => void;
+  onShare: () => void;
   onPlay: (id: ContributionId) => void;
 }) {
+  const profileContributionId = selected === "original" ? acceptedId ?? "lowlight" : selected;
+
   return (
     <div className={`phone-frame phone-frame--${scene}`}>
       <div className="phone-island" aria-hidden="true" />
       {scene === "player" ? (
         <PlayerScene
           playing={playingId === "original"}
+          liked={liked}
           onTogglePlay={() => onPlay("original")}
+          onToggleLike={onToggleLike}
           onOpenCall={() => onScene("call")}
+          onShare={onShare}
         />
       ) : null}
       {scene === "call" ? (
         <CallScene
           onClose={() => onScene("player")}
+          onContribute={() => onScene("submit")}
           onCompare={() => onScene("compare")}
+        />
+      ) : null}
+      {scene === "submit" ? (
+        <SubmitScene
+          method={submissionMethod}
+          rightsConfirmed={rightsConfirmed}
+          submitted={submitted}
+          playing={playingId === "lowlight"}
+          onMethod={onSubmissionMethod}
+          onRightsConfirmed={onRightsConfirmed}
+          onPlay={() => onPlay("lowlight")}
+          onSubmit={onSubmit}
+          onBack={() => onScene("call")}
+          onReview={() => onScene("compare")}
         />
       ) : null}
       {scene === "compare" || scene === "accepted" ? (
         <CompareScene
-          accepted={accepted}
+          acceptedId={acceptedId}
           selected={selected}
           onSelect={onSelect}
           playingId={playingId}
           onPlay={onPlay}
           onAccept={onAccept}
+          onReceipt={onReceipt}
           onProfile={() => onScene("profile")}
           onClose={() => onScene("call")}
         />
       ) : null}
       {scene === "profile" ? (
         <ProfileScene
-          playing={playingId === "lowlight"}
-          onPlay={() => onPlay("lowlight")}
-          onClose={() => onScene(accepted ? "accepted" : "compare")}
+          contributionId={profileContributionId}
+          accepted={acceptedId === profileContributionId}
+          playing={playingId === profileContributionId}
+          following={following}
+          onPlay={() => onPlay(profileContributionId)}
+          onFollow={onToggleFollow}
+          onShare={onShare}
+          onClose={() => onScene(acceptedId ? "accepted" : "compare")}
         />
       ) : null}
+      {receiptOpen && acceptedId ? <AcceptanceReceipt contributionId={acceptedId} onClose={onCloseReceipt} /> : null}
     </div>
   );
 }
@@ -977,34 +1357,37 @@ function SongRail({
         <span>0:00</span>
         <span>3:18</span>
       </div>
-      <button className="song-rail__more" type="button" aria-label="More"><Icon name="dots" /></button>
     </div>
   );
 }
 
-function HumanProofCard({ accepted, onOpen }: { accepted: boolean; onOpen: () => void }) {
+function HumanProofCard({ contributionId, accepted, onOpen }: { contributionId: CreatorContributionId; accepted: boolean; onOpen: () => void }) {
+  const creator = contributions[contributionId];
+
   return (
     <button className="human-proof-card" type="button" onClick={onOpen}>
       <span className="human-proof-card__label">Creator reputation</span>
-      <img src="/nia-okafor.png" alt="" />
+      <img src={creator.image} alt="" />
       <div>
-        <strong>Nia Okafor</strong>
-        <span>@lowlight</span>
+        <strong>{creator.name}</strong>
+        <span>{creator.handle}</span>
         <VerifiedHuman compact />
       </div>
       <p>
         {accepted
           ? "Accepted into Open Signal"
-          : "18 accepted contributions"}
+          : `${creator.acceptedCount} accepted contributions`}
       </p>
       <Icon name="arrow" size={17} />
     </button>
   );
 }
 
-function LineageDiagram({ accepted }: { accepted: boolean }) {
+function LineageDiagram({ acceptedId }: { acceptedId: CreatorContributionId | null }) {
+  const acceptedCreator = acceptedId ? contributions[acceptedId] : null;
+
   return (
-    <div className={`lineage-diagram${accepted ? " is-accepted" : ""}`}>
+    <div className={`lineage-diagram${acceptedId ? " is-accepted" : ""}`}>
       <div className="lineage-node lineage-node--source">
         <small>Original section</small>
         <strong>0:42–0:56</strong>
@@ -1032,16 +1415,20 @@ function LineageDiagram({ accepted }: { accepted: boolean }) {
         <span />
       </div>
       <div className="lineage-node lineage-node--accepted">
-        <small>{accepted ? "Accepted" : "Maintainer decision"}</small>
-        <strong>{accepted ? "In the track" : "One canonical version"}</strong>
-        <span>{accepted ? "Nia receives durable credit" : "Credit follows what ships"}</span>
+        <small>{acceptedCreator ? "Accepted" : "Creator decision"}</small>
+        <strong>{acceptedCreator ? acceptedCreator.title : "Choose what ships"}</strong>
+        <span>{acceptedCreator ? `${acceptedCreator.handle} receives durable credit` : "Credit follows the selected take"}</span>
       </div>
       <div className="lineage-arrow"><Icon name="arrow" /></div>
       <div className="downstream">
         <small>Reused by</small>
         <div className="avatar-stack">
-          <img src="/nia-okafor.png" alt="Nia Okafor" title="Nia Okafor · producer" />
-          {adopters.map((adopter) => (
+          <img
+            src={acceptedCreator?.image ?? "/nia-okafor.png"}
+            alt={acceptedCreator?.name ?? "Nia Okafor"}
+            title={`${acceptedCreator?.name ?? "Nia Okafor"} · accepted contributor`}
+          />
+          {adopters.filter((adopter) => adopter.image !== acceptedCreator?.image).map((adopter) => (
             <img
               key={adopter.name}
               src={adopter.image}
@@ -1058,10 +1445,18 @@ function LineageDiagram({ accepted }: { accepted: boolean }) {
 
 export function OpenSignalExperience() {
   const [scene, setScene] = useState<Scene>("player");
-  const [accepted, setAccepted] = useState(false);
+  const [acceptedId, setAcceptedId] = useState<CreatorContributionId | null>(null);
   const [selected, setSelected] = useState<ContributionId>("lowlight");
+  const [submissionMethod, setSubmissionMethod] = useState<SubmissionMethod>("remix");
+  const [rightsConfirmed, setRightsConfirmed] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [receiptOpen, setReceiptOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [following, setFollowing] = useState(false);
+  const [shareStatus, setShareStatus] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<ContributionId | null>(null);
   const audioHandle = useRef<DemoAudioHandle | null>(null);
+  const shareTimeout = useRef<number | null>(null);
 
   const stopAudio = useCallback(() => {
     const handle = audioHandle.current;
@@ -1118,10 +1513,12 @@ export function OpenSignalExperience() {
   useEffect(
     () => () => {
       const handle = audioHandle.current;
-      if (!handle) return;
-      window.clearTimeout(handle.timeout);
-      void handle.context.close();
-      audioHandle.current = null;
+      if (handle) {
+        window.clearTimeout(handle.timeout);
+        void handle.context.close();
+        audioHandle.current = null;
+      }
+      if (shareTimeout.current) window.clearTimeout(shareTimeout.current);
     },
     [],
   );
@@ -1129,11 +1526,12 @@ export function OpenSignalExperience() {
   useEffect(() => {
     const syncFromLocation = () => {
       const next = new URLSearchParams(window.location.search).get("scene") as Scene | null;
-      setScene(next && SCENES.includes(next) ? next : "player");
-      setAccepted((current) => {
-        if (current || next === "accepted" || next === "profile") return true;
-        return window.localStorage.getItem("open-signal:accepted") === "true";
-      });
+      const storedId = window.localStorage.getItem("open-signal:accepted-id");
+      const validAcceptedId = storedId === "lowlight" || storedId === "circuitromance" ? storedId : null;
+      const requestedScene = next && SCENES.includes(next) ? next : "player";
+      setAcceptedId(validAcceptedId);
+      if (validAcceptedId) setSelected(validAcceptedId);
+      setScene(requestedScene === "accepted" && !validAcceptedId ? "compare" : requestedScene);
     };
 
     const animationFrame = window.requestAnimationFrame(syncFromLocation);
@@ -1146,6 +1544,7 @@ export function OpenSignalExperience() {
 
   const navigate = useCallback((next: Scene) => {
     setScene(next);
+    setReceiptOpen(false);
     const url = new URL(window.location.href);
     if (next === "player") {
       url.searchParams.delete("scene");
@@ -1153,19 +1552,73 @@ export function OpenSignalExperience() {
       url.searchParams.set("scene", next);
     }
     window.history.pushState({}, "", url);
+    window.requestAnimationFrame(() => {
+      document.querySelectorAll<HTMLElement>(".phone-frame .scene").forEach((element) => {
+        element.scrollTop = 0;
+      });
+      if (window.matchMedia("(max-width: 680px)").matches) {
+        document.querySelector<HTMLElement>(".hero")?.scrollIntoView({ block: "start", behavior: "auto" });
+      }
+    });
   }, []);
 
-  const acceptContribution = useCallback(() => {
-    setAccepted(true);
-    setSelected("lowlight");
-    window.localStorage.setItem("open-signal:accepted", "true");
+  const acceptContribution = useCallback((id: CreatorContributionId) => {
+    setAcceptedId(id);
+    setSelected(id);
+    window.localStorage.setItem("open-signal:accepted-id", id);
+    window.localStorage.removeItem("open-signal:accepted");
     navigate("accepted");
+    window.setTimeout(() => setReceiptOpen(true), 180);
   }, [navigate]);
+
+  const submitContribution = useCallback(() => {
+    if (!rightsConfirmed) return;
+    setSubmitted(true);
+    setSelected("lowlight");
+  }, [rightsConfirmed]);
+
+  const sharePrototype = useCallback(async () => {
+    const shareData = {
+      title: "Open Signal — an interactive product spec",
+      text: "Ask for a take, hear it in context, and preserve credit for what ships.",
+      url: new URL("/", window.location.href).href,
+    };
+
+    setShareStatus(navigator.share ? "Opening share sheet…" : "Copying link…");
+    if (shareTimeout.current) window.clearTimeout(shareTimeout.current);
+    shareTimeout.current = window.setTimeout(() => setShareStatus(null), 2600);
+
+    try {
+      if (navigator.share) {
+        await navigator.share(shareData);
+        setShareStatus("Share sheet opened");
+      } else {
+        await navigator.clipboard.writeText(shareData.url);
+        setShareStatus("Link copied");
+      }
+    } catch (error) {
+      if (error instanceof DOMException && error.name === "AbortError") return;
+      try {
+        await navigator.clipboard.writeText(shareData.url);
+        setShareStatus("Link copied");
+      } catch {
+        setShareStatus("Copy the URL from your browser");
+      }
+    }
+
+  }, []);
 
   const resetDemo = useCallback(() => {
     window.localStorage.removeItem("open-signal:accepted");
-    setAccepted(false);
+    window.localStorage.removeItem("open-signal:accepted-id");
+    setAcceptedId(null);
     setSelected("lowlight");
+    setSubmissionMethod("remix");
+    setRightsConfirmed(false);
+    setSubmitted(false);
+    setReceiptOpen(false);
+    setLiked(false);
+    setFollowing(false);
     stopAudio();
     navigate("player");
   }, [navigate, stopAudio]);
@@ -1187,9 +1640,9 @@ export function OpenSignalExperience() {
         <div className="hero-copy">
           <h1>Hear every version. Credit what ships.</h1>
           <p>
-            A product spec for directed contribution on Suno: compare one
-            section, credit the work that ships, and turn collaboration into
-            human reputation.
+            Suno already helps creators generate, remix, and compare versions.
+            Open Signal adds the human layer: ask for one precise take, choose
+            what ships, and preserve rights-safe credit for who made it.
           </p>
           <SongRail
             playing={playingId === "original"}
@@ -1200,11 +1653,11 @@ export function OpenSignalExperience() {
               <span>1</span>
               <div><strong>Open</strong><small>Name the section and the ask.</small></div>
             </li>
-            <li className={progress >= 2 ? "is-active" : ""}>
+            <li className={["compare", "accepted", "profile"].includes(scene) ? "is-active" : ""}>
               <span>2</span>
               <div><strong>Listen</strong><small>Switch versions in context.</small></div>
             </li>
-            <li className={accepted ? "is-active" : ""}>
+            <li className={acceptedId ? "is-active" : ""}>
               <span>3</span>
               <div><strong>Credit</strong><small>Accept one. Preserve who made it.</small></div>
             </li>
@@ -1212,6 +1665,7 @@ export function OpenSignalExperience() {
         </div>
 
         <div className="demo-column">
+          <p className="mobile-thesis">Ask for a take. Hear it in context. Keep what works. Credit who made it.</p>
           <div className="scene-tabs" aria-label="Demo scenes">
             {SCENES.map((item) => (
               <button
@@ -1219,7 +1673,7 @@ export function OpenSignalExperience() {
                 type="button"
                 className={scene === item ? "is-active" : ""}
                 onClick={() => navigate(item)}
-                disabled={item === "accepted" && !accepted}
+                disabled={item === "accepted" && !acceptedId}
               >
                 {SCENE_LABELS[item]}
               </button>
@@ -1227,23 +1681,37 @@ export function OpenSignalExperience() {
           </div>
           <PhoneDemo
             scene={scene}
-            accepted={accepted}
+            acceptedId={acceptedId}
             selected={selected}
+            submissionMethod={submissionMethod}
+            rightsConfirmed={rightsConfirmed}
+            submitted={submitted}
+            receiptOpen={receiptOpen}
+            liked={liked}
+            following={following}
             playingId={playingId}
             onScene={navigate}
             onSelect={setSelected}
             onAccept={acceptContribution}
+            onReceipt={() => setReceiptOpen(true)}
+            onCloseReceipt={() => setReceiptOpen(false)}
+            onSubmissionMethod={setSubmissionMethod}
+            onRightsConfirmed={setRightsConfirmed}
+            onSubmit={submitContribution}
+            onToggleLike={() => setLiked((current) => !current)}
+            onToggleFollow={() => setFollowing((current) => !current)}
+            onShare={() => void sharePrototype()}
             onPlay={(version) => void togglePreview(version)}
           />
         </div>
 
         <aside className="proof-column">
           <div className="proof-column__copy">
-            <span>Community, not content volume.</span>
+            <span>Borrow the protocol, not the chrome.</span>
             <h2>Make contribution legible.</h2>
-            <p>The song owner keeps control. Accepted work builds reputation.</p>
+            <p>A precise request becomes a contribution, a review, a decision, and durable credit—all in Suno’s musical language.</p>
           </div>
-          <HumanProofCard accepted={accepted} onOpen={() => navigate("profile")} />
+          <HumanProofCard contributionId={acceptedId ?? "lowlight"} accepted={Boolean(acceptedId)} onOpen={() => navigate("profile")} />
           <div className="trust-stack">
             <div><Icon name="verified" /><span><strong>Identity verified</strong><small>Creator profile</small></span></div>
             <div><Icon name="check" /><span><strong>Credits verified</strong><small>Authorship</small></span></div>
@@ -1260,12 +1728,12 @@ export function OpenSignalExperience() {
           </div>
           <span>Open Call lineage</span>
         </div>
-        <LineageDiagram accepted={accepted} />
+        <LineageDiagram acceptedId={acceptedId} />
       </section>
 
       <section className="principles-section" aria-labelledby="principles-title">
         <div className="principles-heading">
-          <h2 id="principles-title">Four rules keep it human.</h2>
+          <h2 id="principles-title">Borrow the protocol, not the chrome.</h2>
           <p>Less feed. More authorship.</p>
         </div>
         <div className="principles-rail">
@@ -1274,25 +1742,28 @@ export function OpenSignalExperience() {
           <article><strong>Human credit</strong><span>Accepted work strengthens a real profile.</span></article>
           <article><strong>Portable lineage</strong><span>Credit travels when the sound does.</span></article>
         </div>
-        <div className="product-horizon" aria-label="Product horizon">
-          <span>Open Calls</span>
+        <div className="product-horizon" aria-label="GitHub collaboration logic translated into Suno language">
+          <strong>GitHub logic, Suno language</strong>
+          <span>Request</span>
           <Icon name="arrow" size={17} />
-          <span>Project Graph</span>
+          <span>Contribution</span>
           <Icon name="arrow" size={17} />
-          <span>Sound Registry</span>
+          <span>Review</span>
+          <Icon name="arrow" size={17} />
+          <span>Accept + credit</span>
         </div>
       </section>
 
       <section className="measurement-section" aria-labelledby="measurement-title">
         <div>
-          <h2 id="measurement-title">Community outcomes</h2>
-          <p>Does directed contribution help better music ship—and make human creativity more legible?</p>
+          <h2 id="measurement-title">What the beta must prove</h2>
+          <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
         </div>
         <dl>
-          <div><dt>Shipping</dt><dd>Song completion after an Open Call</dd></div>
-          <div><dt>Retention</dt><dd>Creator and contributor return</dd></div>
-          <div><dt>Reputation</dt><dd>Accepted credit is reused</dd></div>
-          <div><dt>Trust</dt><dd>Spam and rights reports stay bounded</dd></div>
+          <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>
+          <div><dt>Supply</dt><dd>Eligible Open Calls receiving a qualified take within 24 hours</dd></div>
+          <div><dt>Quality</dt><dd>Accepted contributions that survive into the published or exported song</dd></div>
+          <div><dt>Trust</dt><dd>Rights disputes, spam, and moderator time per 1,000 contributions</dd></div>
         </dl>
       </section>
 
@@ -1300,6 +1771,7 @@ export function OpenSignalExperience() {
         <p>Interactive product spec · Proposed experience and illustrative outcomes · Not affiliated with Suno</p>
         <p>Designed for the Staff Product Manager, mobile creation role</p>
       </footer>
+      {shareStatus ? <div className="site-toast" role="status"><Icon name="check" size={16} />{shareStatus}</div> : null}
     </main>
   );
 }

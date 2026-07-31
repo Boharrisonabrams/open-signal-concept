@@ -25,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: "Open Signal — An interactive product spec for Suno",
     description:
-      "An interactive mobile-first product specification for directed music collaboration, durable credit, and human creative reputation on Suno.",
+      "A playable mobile-first product specification for precise human contribution, contextual review, and rights-aware creative credit on Suno.",
     icons: {
       icon: "/favicon.svg",
       shortcut: "/favicon.svg",
@@ -33,7 +33,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Open Signal — An interactive product spec for Suno",
       description:
-        "Explore a proposed mobile workflow for directed contribution, playable comparison, durable credit, and human creative reputation.",
+        "Ask for one precise take, review it in context, choose what ships, and preserve rights-aware credit for who made it.",
       type: "website",
       images: [{ url: socialImage, width: 1731, height: 909 }],
     },
@@ -41,7 +41,7 @@ export async function generateMetadata(): Promise<Metadata> {
       card: "summary_large_image",
       title: "Open Signal — An interactive product spec for Suno",
       description:
-        "A playable mobile product specification for directed collaboration and human creative reputation on Suno.",
+        "A playable mobile product specification for human contribution, contextual review, and creator credit on Suno.",
       images: [socialImage],
     },
   };

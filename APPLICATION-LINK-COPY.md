@@ -5,12 +5,13 @@
 **Open Signal — an interactive product specification**
 
 I built a playable, mobile-first spec exploring directed contribution on
-Suno. It shows how a creator could open one precise section of a song, compare
-versions in context, choose what ships, and attach durable credit to the person
-who made it.
+Suno. It shows both sides of the loop: one creator opens a precise section of a
+song; another submits a take and confirms their rights; the owner compares,
+reviews, and chooses what ships; acceptance creates a portable credit receipt.
 
-The product hypothesis: better contribution tools can help more music ship
-while turning accepted work into visible human reputation.
+The product hypothesis: borrow the collaboration protocol—not the visual
+chrome—of open source to help more music ship while turning accepted work into
+visible creator reputation.
 
 [Explore the interactive spec →](https://open-signal-concept.boabrams.workers.dev)
 
@@ -19,7 +20,7 @@ with Suno.
 
 ## Short field version
 
-I built Open Signal, an interactive mobile product spec for directed
-collaboration on Suno. It explores whether playable comparison and durable
-credit can help better music ship while making human creativity more legible:
+I built Open Signal, a playable mobile product spec for the human layer around
+Suno creation: precise contribution requests, contextual review, genuine owner
+choice, and rights-aware credit for what ships:
 https://open-signal-concept.boabrams.workers.dev

@@ -31,7 +31,7 @@ test("server-renders the Open Signal concept and social metadata", async () => {
   const html = await response.text();
   assert.match(html, /<title>Open Signal — An interactive product spec for Suno<\/title>/i);
   assert.match(html, /Hear every version\. Credit what ships\./);
-  assert.match(html, /A product spec for directed contribution on Suno/);
+  assert.match(html, /Open Signal adds the human layer/);
   assert.match(html, /Interactive product spec/);
   assert.match(html, /Proposed experience and illustrative outcomes/);
   assert.match(html, /property="og:image"/i);
@@ -47,16 +47,25 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Replace the guitar riff/);
   assert.match(source, /Keep the tension\. Lose the stock indie cadence\./);
   assert.match(source, /Accept contribution/);
+  assert.match(source, /Accept instead/);
+  assert.doesNotMatch(source, /Choose @lowlight to accept/);
+  assert.match(source, /Add your take/);
+  assert.match(source, /Send for review/);
+  assert.match(source, /Rights \+ credit receipt/);
+  assert.match(source, /Separate stem reuse still requires permission/);
+  assert.match(source, /Request one revision/);
+  assert.match(source, /navigator\.share/);
   assert.match(source, /Verified creator/);
   assert.doesNotMatch(source, /Verified human/);
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
-  assert.match(source, /Sound Registry/);
-  assert.match(source, /Community outcomes/);
-  assert.match(source, /Song completion after an Open Call/);
+  assert.match(source, /Borrow the protocol, not the chrome/);
+  assert.match(source, /GitHub logic, Suno language/);
+  assert.match(source, /What the beta must prove/);
+  assert.match(source, /Incremental 7-day publish or export completion/);
   assert.match(source, /scheduleVersionPreview/);
   assert.match(source, /Tap a version to hear it in context/);
-  assert.match(source, /open-signal:accepted/);
+  assert.match(source, /open-signal:accepted-id/);
 
   await Promise.all([
     access(new URL("../public/open-signal-cover.png", import.meta.url)),

@@ -1,8 +1,9 @@
 # Open Signal
 
-An interactive product specification for directed music collaboration, durable
-creative credit, and human reputation on Suno. It illustrates a proposed
-experience and community outcomes; it is not an existing Suno feature.
+An interactive product specification for last-mile human music collaboration,
+rights-aware creative credit, and creator reputation on Suno. It illustrates a
+proposed experience and beta measurement plan; it is not an existing Suno
+feature.
 
 Public prototype:
 [open-signal-concept.boabrams.workers.dev](https://open-signal-concept.boabrams.workers.dev)
@@ -10,9 +11,12 @@ Public prototype:
 The prototype follows one mobile-first flow:
 
 1. A creator opens a precise section of a song for contribution.
-2. Producers submit alternatives against the same musical context.
-3. The creator compares proposals and accepts one canonical contribution.
-4. The accepted work becomes visible on the contributor's human profile and
+2. A contributor records, remixes with Suno, or uploads a take and confirms
+   the rights they control.
+3. The creator compares proposals, requests a revision, and accepts the take
+   they prefer.
+4. Acceptance creates a scoped rights-and-credit receipt.
+5. The accepted work becomes visible on the contributor's creator profile and
    in the project's lineage.
 
 Each proposal is auditionable in context using an in-browser sound sketch.
@@ -21,10 +25,12 @@ interaction model.
 
 The intended application-facing framing is:
 
-> Open Signal is an interactive product specification for directed
-> contribution on Suno. It explores whether playable comparison and durable
-> credit can help better music ship while making human creativity more
-> legible.
+> Suno already helps creators generate, remix, and compare versions. Open
+> Signal explores the missing human layer: ask for one precise take, choose
+> what ships, and preserve rights-safe credit for who made it.
+
+The collaboration model borrows the protocol, not the chrome, from open-source
+software: request → contribution → review → acceptance → durable lineage.
 
 All people, songs, credits, and metrics shown here are illustrative. This
 independent concept is not affiliated with Suno.
