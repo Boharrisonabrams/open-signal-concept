@@ -137,6 +137,11 @@ without creating unacceptable rights or moderation cost?”
 - **Spam and impersonation:** start invite-only, verify identity for contributor
   status, verify credits separately, rate-limit outreach, and keep an auditable
   report trail.
+- **Compensation:** this spec is deliberately credit-first. Payment for accepted
+  use, royalty splits, or bounties would change contributor incentives, the
+  legal surface, and moderation load, so they are sequenced after the beta
+  proves that directed contribution causes more songs to ship. The receipt is
+  designed to hold a compensation line without changing the acceptance flow.
 - **Workflow complexity:** keep the mobile flow to five verbs: open, contribute,
   listen, decide, credit.
 

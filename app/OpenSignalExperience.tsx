@@ -573,7 +573,7 @@ function PlayerScene({
       <nav className="action-rail" aria-label="Song actions">
         <button className={liked ? "is-liked" : ""} type="button" onClick={onToggleLike} aria-label={liked ? "Unlike" : "Like"} aria-pressed={liked}>
           <Icon name="heart" size={21} />
-          <small>{liked ? "1" : "0"}</small>
+          <small>{liked ? "342" : "341"}</small>
         </button>
         <button type="button" onClick={onShare} aria-label="Share Open Signal">
           <Icon name="share" size={22} />
@@ -701,7 +701,7 @@ function CallScene({
           <span className="artist-orb" />
           <div>
             <strong>Requested by Mara Venn</strong>
-            <small>2 hours ago</small>
+            <small>Invite-only call · 2 hours ago</small>
           </div>
         </div>
       </div>
@@ -741,6 +741,12 @@ function SubmitScene({
     { id: "remix", icon: "remix", label: "Remix with Suno" },
     { id: "upload", icon: "upload", label: "Upload" },
   ];
+
+  const methodDescriptor: Record<SubmissionMethod, string> = {
+    record: "recorded",
+    remix: "Suno remix",
+    upload: "uploaded",
+  };
 
   return (
     <section className="submit-scene scene" aria-label="Submit a contribution">
@@ -820,7 +826,7 @@ function SubmitScene({
             <div>
               <span>Ready to submit</span>
               <strong>Muted trumpet counterline</strong>
-              <small>@lowlight · Take 02 · 14 sec</small>
+              <small>@lowlight · Take 02 · {methodDescriptor[method]}</small>
             </div>
             <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} draft take`}>
               <Icon name={playing ? "pause" : "play"} size={17} />

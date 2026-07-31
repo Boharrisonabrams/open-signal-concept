@@ -51,6 +51,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Accept instead/);
   assert.doesNotMatch(source, /Choose @lowlight to accept/);
   assert.match(source, /Add your take/);
+  assert.match(source, /Invite-only call/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);
   assert.match(source, /Separate stem reuse still requires permission/);

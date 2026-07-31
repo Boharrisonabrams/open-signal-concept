@@ -109,6 +109,25 @@ The most useful files there are:
 - Public URL returned HTTP 200 and the current canonical URL is correct.
 - The repository was clean before this handoff file was added.
 
+### Refinement pass (2026-07-31, uncommitted, not deployed)
+
+Audit completed against this handoff. Four small local changes await Bo's
+review; the public Worker still serves the `3e405ad` build:
+
+- Call sheet: `Invite-only call · 2 hours ago` in the requested-by line, making
+  the audience scope legible on mobile and desktop (assumption 3).
+- Player: like counter seeded at 341 (342 when liked) instead of 0→1, so the
+  fictional world's scale is consistent with 1,132 followers and 12 reuses.
+- Submit: the draft-take subtitle now follows the chosen method — `recorded` /
+  `Suno remix` / `uploaded` — instead of a static `14 sec`.
+- Primer: new **Compensation** risk bullet naming credit-first sequencing and
+  why payment/royalties are deferred (assumption 6).
+- Tests: added an `Invite-only call` source assertion.
+
+`npm run lint`, `npm test` (2/2), `npx tsc --noEmit`, and `git diff --check`
+all pass; verified no horizontal overflow at 390×844, 1024×768, and 1440×900.
+Remaining assumptions were adjudicated keep-as-is; see the session report.
+
 Implemented scenes:
 
 1. **Player** — song context, playable sound sketch, like, share, and entry to an
