@@ -51,8 +51,8 @@ const contributions = {
     handle: "@lowlight",
     title: "Muted trumpet counterline",
     note: "More tension, less stock cadence.",
-    color: "#7f53df",
-    tint: "#eee7ff",
+    color: "#ff5ca8",
+    tint: "rgba(255, 92, 168, 0.16)",
     name: "Nia Okafor",
     image: "/nia-okafor.png",
     verification: "Verified creator",
@@ -67,8 +67,8 @@ const contributions = {
     handle: "@circuitromance",
     title: "Granular bass response",
     note: "Sharper rhythm. Keep the negative space.",
-    color: "#ef4f7b",
-    tint: "#ffe7ee",
+    color: "#ff9d47",
+    tint: "rgba(255, 157, 71, 0.16)",
     name: "Malik Chen",
     image: "/adopter-malik.jpg",
     verification: "Verified creator",
@@ -622,15 +622,15 @@ function BranchPreview() {
       <span className="branch-preview__time branch-preview__time--start">0:42</span>
       <span className="branch-preview__time branch-preview__time--end">0:56</span>
       <div className="branch-preview__context branch-preview__context--left">
-        <WaveBars color="#b7b4b4" quiet />
+        <WaveBars color="rgba(255, 255, 255, 0.3)" quiet />
       </div>
       <div className="branch-preview__tracks">
-        <div><WaveBars color="#de654f" /></div>
-        <div><WaveBars color="#7b315d" /></div>
-        <div><WaveBars color="#3a59bd" /></div>
+        <div><WaveBars color="#e9e2da" /></div>
+        <div><WaveBars color="#ff5ca8" /></div>
+        <div><WaveBars color="#ff9d47" /></div>
       </div>
       <div className="branch-preview__context branch-preview__context--right">
-        <WaveBars color="#b7b4b4" quiet />
+        <WaveBars color="rgba(255, 255, 255, 0.3)" quiet />
       </div>
     </div>
   );
@@ -676,14 +676,15 @@ function CallScene({
         </div>
         <BranchPreview />
         <div className="branch-key" aria-label="Waveform key">
-          <span><i style={{ background: "#de654f" }} />Original</span>
-          <span><i style={{ background: "#7b315d" }} />@lowlight</span>
-          <span><i style={{ background: "#3a59bd" }} />@circuitromance</span>
+          <span><i style={{ background: "#e9e2da" }} />Original</span>
+          <span><i style={{ background: "#ff5ca8" }} />@lowlight</span>
+          <span><i style={{ background: "#ff9d47" }} />@circuitromance</span>
         </div>
         <div className="call-copy">
           <h3>Replace the guitar riff</h3>
           <p>Keep the tension. Lose the stock indie cadence.</p>
           <small>106 BPM <b>·</b> E minor <b>·</b> 14 sec</small>
+          <p className="call-rights">If accepted, the take ships in this song. Stems stay yours.</p>
         </div>
         <div className="call-sheet__actions">
           <span><Icon name="person" /> 2 contributions</span>
@@ -750,7 +751,7 @@ function SubmitScene({
 
   return (
     <section className="submit-scene scene" aria-label="Submit a contribution">
-      <div className="status-bar" aria-hidden="true">
+      <div className="status-bar status-bar--light" aria-hidden="true">
         <strong>9:41</strong>
         <StatusIcons />
       </div>
@@ -797,7 +798,7 @@ function SubmitScene({
               <span>Original in context</span>
               <small>106 BPM · E minor · 14 sec</small>
             </div>
-            <WaveBars color="#8d8990" quiet />
+            <WaveBars color="rgba(255, 255, 255, 0.35)" quiet />
             <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} original section`}>
               <Icon name={playing ? "pause" : "play"} size={17} />
             </button>
@@ -860,6 +861,7 @@ function WaveRow({
   id,
   selected,
   accepted,
+  passed,
   playing,
   onSelect,
   onPlay,
@@ -867,6 +869,7 @@ function WaveRow({
   id: ContributionId;
   selected: boolean;
   accepted: boolean;
+  passed?: boolean;
   playing: boolean;
   onSelect: () => void;
   onPlay: () => void;
@@ -875,14 +878,14 @@ function WaveRow({
   const data = isOriginal
     ? {
         handle: "Original",
-        color: "#28272d",
-        tint: "#efedeb",
+        color: "#e9e2da",
+        tint: "rgba(255, 255, 255, 0.12)",
       }
     : contributions[id];
 
   return (
     <button
-      className={`wave-row${selected ? " is-selected" : ""}${accepted ? " is-accepted" : ""}${playing ? " is-playing" : ""}`}
+      className={`wave-row${selected ? " is-selected" : ""}${accepted ? " is-accepted" : ""}${passed && !accepted ? " is-passed" : ""}${playing ? " is-playing" : ""}`}
       type="button"
       onClick={() => {
         onSelect();
@@ -894,7 +897,7 @@ function WaveRow({
       <span
         className="wave-row__label"
         style={{
-          color: isOriginal ? "#25242a" : data.color,
+          color: data.color,
           background: data.tint,
         }}
       >
@@ -904,14 +907,16 @@ function WaveRow({
         <Icon name={playing ? "pause" : "play"} size={15} />
       </span>
       <span className="wave-row__wave">
-        <span className="wave-row__before"><WaveBars color="#c4c1c1" quiet /></span>
+        <span className="wave-row__before"><WaveBars color="rgba(255, 255, 255, 0.3)" quiet /></span>
         <span className="wave-row__branch" style={{ color: data.color }}>
           <WaveBars color={data.color} />
         </span>
-        <span className="wave-row__after"><WaveBars color="#c4c1c1" quiet /></span>
+        <span className="wave-row__after"><WaveBars color="rgba(255, 255, 255, 0.3)" quiet /></span>
       </span>
       {accepted ? (
         <span className="accepted-flag"><Icon name="check" size={14} /> Accepted</span>
+      ) : passed ? (
+        <span className="passed-flag">Passed</span>
       ) : null}
     </button>
   );
@@ -919,21 +924,25 @@ function WaveRow({
 
 function CompareScene({
   acceptedId,
+  passedIds,
   selected,
   onSelect,
   playingId,
   onPlay,
   onAccept,
+  onPass,
   onReceipt,
   onProfile,
   onClose,
 }: {
   acceptedId: CreatorContributionId | null;
+  passedIds: CreatorContributionId[];
   selected: ContributionId;
   onSelect: (id: ContributionId) => void;
   playingId: ContributionId | null;
   onPlay: (id: ContributionId) => void;
   onAccept: (id: CreatorContributionId) => void;
+  onPass: (id: CreatorContributionId) => void;
   onReceipt: () => void;
   onProfile: () => void;
   onClose: () => void;
@@ -989,6 +998,7 @@ function CompareScene({
               id="lowlight"
               selected={selected === "lowlight"}
               accepted={acceptedId === "lowlight"}
+              passed={passedIds.includes("lowlight")}
               playing={playingId === "lowlight"}
               onSelect={() => selectContribution("lowlight")}
               onPlay={() => onPlay("lowlight")}
@@ -997,6 +1007,7 @@ function CompareScene({
               id="circuitromance"
               selected={selected === "circuitromance"}
               accepted={acceptedId === "circuitromance"}
+              passed={passedIds.includes("circuitromance")}
               playing={playingId === "circuitromance"}
               onSelect={() => selectContribution("circuitromance")}
               onPlay={() => onPlay("circuitromance")}
@@ -1079,6 +1090,17 @@ function CompareScene({
               ) : (
                 <button className="comment-button" type="button" onClick={() => setCommentOpen(true)}><Icon name="comment" size={17} />Request changes</button>
               )}
+              {acceptedId !== selected ? (
+                passedIds.includes(selected as CreatorContributionId) ? (
+                  <p className="passed-note" role="status">
+                    Passed. {selectedData.handle} keeps this take and its rights.
+                  </p>
+                ) : (
+                  <button className="pass-button" type="button" onClick={() => onPass(selected as CreatorContributionId)}>
+                    Pass on this take
+                  </button>
+                )
+              ) : null}
             </>
           ) : (
             <div className="original-inspector">
@@ -1131,7 +1153,7 @@ function ProfileScene({
 
   return (
     <section className="profile-scene scene" aria-label={`${creator.name} profile`}>
-      <div className="status-bar" aria-hidden="true">
+      <div className="status-bar status-bar--light" aria-hidden="true">
         <strong>9:41</strong>
         <StatusIcons />
       </div>
@@ -1247,6 +1269,7 @@ function AcceptanceReceipt({
 function PhoneDemo({
   scene,
   acceptedId,
+  passedIds,
   selected,
   submissionMethod,
   rightsConfirmed,
@@ -1258,6 +1281,7 @@ function PhoneDemo({
   onScene,
   onSelect,
   onAccept,
+  onPass,
   onReceipt,
   onCloseReceipt,
   onSubmissionMethod,
@@ -1270,6 +1294,7 @@ function PhoneDemo({
 }: {
   scene: Scene;
   acceptedId: CreatorContributionId | null;
+  passedIds: CreatorContributionId[];
   selected: ContributionId;
   submissionMethod: SubmissionMethod;
   rightsConfirmed: boolean;
@@ -1281,6 +1306,7 @@ function PhoneDemo({
   onScene: (scene: Scene) => void;
   onSelect: (id: ContributionId) => void;
   onAccept: (id: CreatorContributionId) => void;
+  onPass: (id: CreatorContributionId) => void;
   onReceipt: () => void;
   onCloseReceipt: () => void;
   onSubmissionMethod: (method: SubmissionMethod) => void;
@@ -1330,11 +1356,13 @@ function PhoneDemo({
       {scene === "compare" || scene === "accepted" ? (
         <CompareScene
           acceptedId={acceptedId}
+          passedIds={passedIds}
           selected={selected}
           onSelect={onSelect}
           playingId={playingId}
           onPlay={onPlay}
           onAccept={onAccept}
+          onPass={onPass}
           onReceipt={onReceipt}
           onProfile={() => onScene("profile")}
           onClose={() => onScene("call")}
@@ -1469,6 +1497,7 @@ function LineageDiagram({ acceptedId }: { acceptedId: CreatorContributionId | nu
 export function OpenSignalExperience() {
   const [scene, setScene] = useState<Scene>("player");
   const [acceptedId, setAcceptedId] = useState<CreatorContributionId | null>(null);
+  const [passedIds, setPassedIds] = useState<CreatorContributionId[]>([]);
   const [selected, setSelected] = useState<ContributionId>("lowlight");
   const [submissionMethod, setSubmissionMethod] = useState<SubmissionMethod>("remix");
   const [rightsConfirmed, setRightsConfirmed] = useState(false);
@@ -1588,11 +1617,18 @@ export function OpenSignalExperience() {
   const acceptContribution = useCallback((id: CreatorContributionId) => {
     setAcceptedId(id);
     setSelected(id);
+    setPassedIds((current) => current.filter((passed) => passed !== id));
     window.localStorage.setItem("open-signal:accepted-id", id);
     window.localStorage.removeItem("open-signal:accepted");
     navigate("accepted");
     window.setTimeout(() => setReceiptOpen(true), 180);
   }, [navigate]);
+
+  const passContribution = useCallback((id: CreatorContributionId) => {
+    setPassedIds((current) =>
+      current.includes(id) ? current : [...current, id],
+    );
+  }, []);
 
   const submitContribution = useCallback(() => {
     if (!rightsConfirmed) return;
@@ -1636,6 +1672,7 @@ export function OpenSignalExperience() {
     window.localStorage.removeItem("open-signal:accepted");
     window.localStorage.removeItem("open-signal:accepted-id");
     setAcceptedId(null);
+    setPassedIds([]);
     setSelected("lowlight");
     setSubmissionMethod("remix");
     setRightsConfirmed(false);
@@ -1707,6 +1744,7 @@ export function OpenSignalExperience() {
           <PhoneDemo
             scene={scene}
             acceptedId={acceptedId}
+            passedIds={passedIds}
             selected={selected}
             submissionMethod={submissionMethod}
             rightsConfirmed={rightsConfirmed}
@@ -1718,6 +1756,7 @@ export function OpenSignalExperience() {
             onScene={navigate}
             onSelect={setSelected}
             onAccept={acceptContribution}
+            onPass={passContribution}
             onReceipt={() => setReceiptOpen(true)}
             onCloseReceipt={() => setReceiptOpen(false)}
             onSubmissionMethod={setSubmissionMethod}

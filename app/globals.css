@@ -7,8 +7,8 @@
   --line: #ddd9d5;
   --ink: #131217;
   --muted: #6f6b70;
-  --violet: #2d256e;
-  --purple: #7950dc;
+  --violet: #b1126e;
+  --purple: #f2148c;
   --pink: #ed4778;
   --coral: #ff6b4c;
   --lime: #b8f72a;
@@ -48,7 +48,7 @@ button:focus-visible,
 a:focus-visible,
 input:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid rgba(121, 80, 220, 0.45);
+  outline: 3px solid rgba(242, 20, 140, 0.45);
   outline-offset: 3px;
 }
 
@@ -1190,7 +1190,7 @@ p {
   border-color: var(--purple);
   background: #f2edff;
   color: var(--violet);
-  box-shadow: 0 0 0 2px rgba(121, 80, 220, 0.08);
+  box-shadow: 0 0 0 2px rgba(242, 20, 140, 0.08);
 }
 
 .draft-take {
@@ -1454,7 +1454,7 @@ p {
   height: 6px;
   border-radius: 50%;
   background: var(--purple);
-  box-shadow: 0 0 0 4px rgba(121, 80, 220, 0.1);
+  box-shadow: 0 0 0 4px rgba(242, 20, 140, 0.1);
 }
 
 .timeline-labels {
@@ -1492,12 +1492,12 @@ p {
 }
 
 .wave-row.is-accepted {
-  border-color: rgba(121, 80, 220, 0.55);
-  box-shadow: 0 0 0 3px rgba(121, 80, 220, 0.07);
+  border-color: rgba(242, 20, 140, 0.55);
+  box-shadow: 0 0 0 3px rgba(242, 20, 140, 0.07);
 }
 
 .wave-row.is-playing {
-  border-color: rgba(121, 80, 220, 0.72);
+  border-color: rgba(242, 20, 140, 0.72);
   background: white;
 }
 
@@ -1688,7 +1688,7 @@ p {
 
 .accepted-panel {
   padding: 14px;
-  border: 1px solid rgba(121, 80, 220, 0.35);
+  border: 1px solid rgba(242, 20, 140, 0.35);
   border-radius: 14px;
   background: #f4efff;
 }
@@ -1726,7 +1726,7 @@ p {
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 8px;
-  border: 1px solid rgba(121, 80, 220, 0.2);
+  border: 1px solid rgba(242, 20, 140, 0.2);
   border-radius: 9px;
   background: white;
 }
@@ -2535,7 +2535,7 @@ p {
 }
 
 .lineage-node--accepted {
-  border-color: rgba(121, 80, 220, 0.6);
+  border-color: rgba(242, 20, 140, 0.6);
 }
 
 .lineage-diagram.is-accepted .lineage-node--accepted {
@@ -2543,8 +2543,8 @@ p {
 }
 
 @keyframes accepted-glow {
-  0% { box-shadow: 0 0 0 0 rgba(121, 80, 220, 0.36); }
-  100% { box-shadow: 0 0 0 18px rgba(121, 80, 220, 0); }
+  0% { box-shadow: 0 0 0 0 rgba(242, 20, 140, 0.36); }
+  100% { box-shadow: 0 0 0 18px rgba(242, 20, 140, 0); }
 }
 
 .lineage-arrow {
@@ -3260,5 +3260,450 @@ p {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Suno product surface: the phone scenes follow the Suno mobile app idiom
+   (warm near-black surfaces, translucent chips, one lava-gradient action),
+   while the surrounding page keeps the light editorial spec voice. */
+
+.phone-frame {
+  --p-bg: #100d0b;
+  --p-sheet: #171310;
+  --p-card: #1f1915;
+  --p-card-2: #2a221c;
+  --p-line: rgba(255, 255, 255, 0.1);
+  --p-text: #f7f3ef;
+  --p-muted: rgba(247, 243, 239, 0.58);
+  --p-chip: rgba(255, 255, 255, 0.08);
+  --p-accent: #ff2d92;
+  --p-amber: #ffb02e;
+  --p-lava: linear-gradient(96deg, #ff1f8f, #ff4d1f 54%, #ffb02e);
+  background: var(--p-bg);
+}
+
+.phone-frame .scene {
+  background: var(--p-bg);
+  color: var(--p-text);
+}
+
+.phone-frame .round-control {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .round-control--dark {
+  background: rgba(20, 16, 13, 0.72);
+}
+
+.phone-frame .verified-human svg {
+  color: var(--p-accent);
+}
+
+.phone-frame :is(button, input, textarea):focus-visible {
+  outline-color: rgba(255, 176, 46, 0.85);
+}
+
+.phone-frame .gradient-button,
+.phone-frame .call-sheet__cta-group > button:not(.secondary-action) {
+  border-radius: 999px;
+  background: var(--p-lava);
+}
+
+.phone-frame .sheet-handle {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+/* Open call sheet */
+
+.phone-frame .call-sheet {
+  height: 66%;
+  background: var(--p-sheet);
+}
+
+.phone-frame .branch-preview__tracks {
+  background: rgba(255, 176, 46, 0.07);
+}
+
+.phone-frame .call-copy p {
+  color: rgba(247, 243, 239, 0.8);
+}
+
+.phone-frame .call-copy small,
+.phone-frame .branch-preview__time,
+.phone-frame .requested-by small {
+  color: var(--p-muted);
+}
+
+.phone-frame .call-rights {
+  margin: 9px 0 0;
+  color: var(--p-amber);
+  font-size: 11.5px;
+}
+
+.phone-frame .call-sheet__actions {
+  border-top-color: var(--p-line);
+  border-bottom-color: var(--p-line);
+}
+
+.phone-frame .call-sheet__cta-group .secondary-action {
+  border-color: var(--p-line);
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+/* Submit scene */
+
+.phone-frame .submit-scene {
+  background: var(--p-bg);
+}
+
+.phone-frame .submit-header {
+  background: rgba(16, 13, 11, 0.92);
+}
+
+.phone-frame .submit-header div > span,
+.phone-frame .submit-request small,
+.phone-frame .submission-context > div small,
+.phone-frame .submission-note,
+.phone-frame .submission-success > p,
+.phone-frame .submission-success__receipt span {
+  color: var(--p-muted);
+}
+
+.phone-frame .submit-request span {
+  color: var(--p-accent);
+}
+
+.phone-frame .submission-context {
+  border-color: var(--p-line);
+  background: var(--p-card);
+}
+
+.phone-frame .submission-context > button,
+.phone-frame .draft-take > button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .submission-methods button {
+  border-color: var(--p-line);
+  background: transparent;
+  color: var(--p-muted);
+}
+
+.phone-frame .submission-methods button.is-selected {
+  border-color: var(--p-accent);
+  background: rgba(255, 45, 146, 0.14);
+  color: var(--p-text);
+  box-shadow: 0 0 0 2px rgba(255, 45, 146, 0.12);
+}
+
+.phone-frame .draft-take {
+  background: var(--p-card-2);
+}
+
+.phone-frame .draft-take span {
+  color: var(--p-amber);
+}
+
+.phone-frame .draft-take small {
+  color: var(--p-muted);
+}
+
+.phone-frame .rights-check {
+  border-color: var(--p-line);
+  background: var(--p-card);
+}
+
+.phone-frame .rights-check input {
+  accent-color: var(--p-accent);
+}
+
+.phone-frame .rights-check small {
+  color: var(--p-muted);
+}
+
+.phone-frame .submission-success__mark {
+  background: var(--p-lava);
+}
+
+.phone-frame .submission-success > span {
+  color: var(--p-accent);
+}
+
+.phone-frame .submission-success__receipt > div {
+  border-color: var(--p-line);
+}
+
+/* Compare scene */
+
+.phone-frame .compare-scene {
+  background: var(--p-bg);
+}
+
+.phone-frame .compare-header p,
+.phone-frame .compare-copy strong span,
+.phone-frame .compare-copy small,
+.phone-frame .timeline-labels,
+.phone-frame .compare-caveat,
+.phone-frame .contribution-inspector__byline,
+.phone-frame .profile-inline small,
+.phone-frame .original-inspector > span,
+.phone-frame .original-inspector p,
+.phone-frame .compare-player small {
+  color: var(--p-muted);
+}
+
+.phone-frame .compare-header__mode {
+  border: 1px solid var(--p-line);
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .audition-hint {
+  color: var(--p-amber);
+}
+
+.phone-frame .audition-hint i {
+  background: var(--p-amber);
+  box-shadow: 0 0 0 4px rgba(255, 176, 46, 0.12);
+}
+
+.phone-frame .wave-row.is-selected {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: var(--p-card);
+}
+
+.phone-frame .wave-row.is-accepted {
+  border-color: rgba(255, 45, 146, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 45, 146, 0.1);
+}
+
+.phone-frame .wave-row.is-playing {
+  border-color: rgba(255, 176, 46, 0.65);
+  background: var(--p-card-2);
+}
+
+.phone-frame .wave-row.is-playing .wave-row__play {
+  background: var(--p-text);
+  color: #16110e;
+}
+
+.phone-frame .wave-row.is-playing .wave-row__wave::after {
+  background: var(--p-text);
+  box-shadow: 0 0 10px rgba(247, 243, 239, 0.4);
+}
+
+.phone-frame .wave-row.is-passed .wave-row__wave {
+  opacity: 0.55;
+}
+
+.phone-frame .wave-row__play {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .accepted-flag {
+  color: var(--p-accent);
+}
+
+.phone-frame .passed-flag {
+  position: absolute;
+  top: 4px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  color: var(--p-muted);
+  font-size: 8px;
+  font-weight: 720;
+  text-transform: uppercase;
+}
+
+.phone-frame .profile-inline svg {
+  color: var(--p-accent);
+}
+
+.phone-frame .accepted-panel {
+  border-color: rgba(255, 45, 146, 0.4);
+  background: rgba(255, 45, 146, 0.1);
+}
+
+.phone-frame .accepted-panel > span {
+  color: #ff8fc2;
+}
+
+.phone-frame .accepted-panel button,
+.phone-frame .original-inspector button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .acceptance-receipt-summary {
+  border-color: rgba(255, 45, 146, 0.25);
+  background: var(--p-card);
+}
+
+.phone-frame .acceptance-receipt-summary small {
+  color: var(--p-muted);
+}
+
+.phone-frame .accepted-panel .acceptance-receipt-summary button {
+  background: var(--p-chip);
+  color: var(--p-amber);
+}
+
+.phone-frame .inspector-actions button,
+.phone-frame .comment-button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .pass-button {
+  align-self: flex-start;
+  min-height: 30px;
+  margin-top: 2px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--p-muted);
+  font-size: 12px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.phone-frame .pass-button:hover {
+  color: var(--p-text);
+}
+
+.phone-frame .passed-note {
+  margin: 2px 0 0;
+  color: var(--p-muted);
+  font-size: 12px;
+}
+
+.phone-frame .comment-composer {
+  border-color: var(--p-line);
+  background: var(--p-card);
+}
+
+.phone-frame .comment-composer textarea {
+  border-color: var(--p-line);
+  background: #141110;
+  color: var(--p-text);
+}
+
+.phone-frame .comment-composer button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .comment-composer button[type="submit"] {
+  border-radius: 999px;
+  background: var(--p-lava);
+  color: white;
+}
+
+.phone-frame .comment-sent {
+  background: rgba(96, 214, 121, 0.14);
+  color: #8ce39a;
+}
+
+.phone-frame .compare-player {
+  border-top: 1px solid var(--p-line);
+  background: var(--p-card);
+}
+
+.phone-frame .compare-player button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+/* Profile scene */
+
+.phone-frame .profile-scene {
+  background: var(--p-bg);
+}
+
+.phone-frame .profile-handle,
+.phone-frame .follower-count,
+.phone-frame .section-title-row span,
+.phone-frame .credits p > svg,
+.phone-frame .profile-contributions article span,
+.phone-frame .reputation-stats span {
+  color: var(--p-muted);
+}
+
+.phone-frame .reputation-stats div + div {
+  border-color: var(--p-line);
+}
+
+.phone-frame .profile-actions button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+.phone-frame .profile-actions button.is-following {
+  background: rgba(96, 214, 121, 0.16);
+  color: #8ce39a;
+}
+
+.phone-frame .profile-actions .gradient-square {
+  background: var(--p-lava);
+  color: white;
+}
+
+.phone-frame .profile-contributions article small {
+  color: var(--p-accent);
+}
+
+.phone-frame .profile-contributions article button {
+  background: var(--p-chip);
+  color: var(--p-text);
+}
+
+/* Acceptance receipt sheet */
+
+.phone-frame .receipt-sheet {
+  background: var(--p-sheet);
+  color: var(--p-text);
+}
+
+.phone-frame .receipt-sheet > header span {
+  color: var(--p-accent);
+}
+
+.phone-frame .receipt-sheet dt,
+.phone-frame .receipt-creator span {
+  color: var(--p-muted);
+}
+
+.phone-frame .receipt-sheet dl > div {
+  border-color: var(--p-line);
+}
+
+.phone-frame .receipt-creator {
+  border-color: var(--p-line);
+  background: var(--p-card);
+}
+
+.phone-frame .receipt-creator > svg {
+  color: var(--p-accent);
+}
+
+.phone-frame .receipt-confirmation {
+  background: rgba(96, 214, 121, 0.14);
+  color: #8ce39a;
+}
+
+@media (max-width: 680px) {
+  .phone-frame .call-sheet {
+    height: 76%;
+  }
+
+  .phone-frame .call-rights {
+    margin-top: 5px;
+    font-size: 11px;
   }
 }

@@ -109,24 +109,54 @@ The most useful files there are:
 - Public URL returned HTTP 200 and the current canonical URL is correct.
 - The repository was clean before this handoff file was added.
 
-### Refinement pass (2026-07-31, uncommitted, not deployed)
+### Refinement pass 1 (2026-07-31, committed as `c9cc646`)
 
-Audit completed against this handoff. Four small local changes await Bo's
-review; the public Worker still serves the `3e405ad` build:
+Audit completed against this handoff; Bo approved all four changes:
 
-- Call sheet: `Invite-only call · 2 hours ago` in the requested-by line, making
-  the audience scope legible on mobile and desktop (assumption 3).
-- Player: like counter seeded at 341 (342 when liked) instead of 0→1, so the
-  fictional world's scale is consistent with 1,132 followers and 12 reuses.
-- Submit: the draft-take subtitle now follows the chosen method — `recorded` /
-  `Suno remix` / `uploaded` — instead of a static `14 sec`.
-- Primer: new **Compensation** risk bullet naming credit-first sequencing and
-  why payment/royalties are deferred (assumption 6).
-- Tests: added an `Invite-only call` source assertion.
+- Call sheet: `Invite-only call · 2 hours ago` in the requested-by line
+  (assumption 3).
+- Player: like counter seeded at 341/342 instead of 0/1.
+- Submit: the draft-take subtitle follows the chosen method — `recorded` /
+  `Suno remix` / `uploaded`.
+- Primer: **Compensation** risk bullet naming credit-first sequencing
+  (assumption 6).
+- Tests: `Invite-only call` source assertion.
 
-`npm run lint`, `npm test` (2/2), `npx tsc --noEmit`, and `git diff --check`
-all pass; verified no horizontal overflow at 390×844, 1024×768, and 1440×900.
-Remaining assumptions were adjudicated keep-as-is; see the session report.
+### Refinement pass 2 (2026-07-31, Suno brand + protocol completion)
+
+Bo granted full agency to render the concept in Suno's brand and product
+language and to complete the open-source contribution/credit/licensing loop.
+Grounded in Suno's current official iOS App Store screenshots (v1.81.0);
+Mobbin was unreachable without a login, and the App Store set is the same
+primary source.
+
+- Phone scenes now follow the Suno mobile idiom: warm near-black surfaces,
+  translucent chips, dark sheets, and the lava-gradient pill reserved for
+  primary actions. The editorial spec page around the phone stays light.
+  Implemented as a scoped `.phone-frame` token layer at the end of
+  `globals.css`, plus inline data-color updates in the TSX.
+- Site accent moved from purple to Suno magenta (`--purple: #f2148c`,
+  `--violet: #b1126e`) so page and product read as one brand. Contributor
+  identity hues moved into the Suno family (bone / magenta / orange).
+- Licensing loop completed upstream and downstream: the call sheet now states
+  rights before contribution ("If accepted, the take ships in this song.
+  Stems stay yours.") and the owner decision set is complete —
+  accept / request one revision / **Pass on this take**. Passing marks the
+  row `PASSED` and states that the contributor keeps the take and its rights;
+  accepting a previously passed take clears it. Reset clears passes.
+- Tests pin `Stems stay yours`, `Pass on this take`, and the passed-note copy.
+- Call sheet height raised (66% desktop, 76% mobile) so both primary actions
+  stay inside the frame with the new rights line at 390×844, 1024×768, and
+  1440×900 (measured, not eyeballed).
+- Full battery green: lint, `tsc --noEmit`, `npm test` 2/2,
+  `git diff --check`; discrete-step functional walk verified rights gate,
+  revision, pass, accept, auto-receipt (focus moves into the dialog, Escape
+  closes and restores focus), profile, follow, and reset on the final build.
+- Known cosmetic quirk (pre-existing): the widened desktop compare phone
+  overlaps the right rail by design; unchanged.
+- `public/og.png` still shows the previous look of the light call sheet if
+  regenerated screenshots are ever compared; the social image itself remains
+  valid and was not changed.
 
 Implemented scenes:
 
