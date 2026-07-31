@@ -104,10 +104,13 @@ The most useful files there are:
 ## Current state
 
 - Branch: `main`
-- Submission-build source baseline: commit `3e405ad` (`Polish Open Signal for submission`)
-- Public Cloudflare Worker version: `f74c5e2d-8669-470c-b8f3-6f2fb75ca19f`
-- Public URL returned HTTP 200 and the current canonical URL is correct.
-- The repository was clean before this handoff file was added.
+- Submission-build source baseline: commit `9dd6d6e` (Suno-brand + rights-loop
+  pass; supersedes `3e405ad`)
+- Public Cloudflare Worker version: `15c20b49-5ed9-4fd9-9333-aa271c5f8340`,
+  deployed 2026-07-31 with Bo's approval and verified live (HTTP 200, dark
+  sheet, lava CTA, rights line, and invite-only copy all confirmed in the
+  served build).
+- The repository is clean at `9dd6d6e` plus this handoff update.
 
 ### Refinement pass 1 (2026-07-31, committed as `c9cc646`)
 
