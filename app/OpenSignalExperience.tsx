@@ -421,6 +421,7 @@ function BrandMark() {
     <div className="brand" aria-label="Suno concept">
       <span className="brand__orb" aria-hidden="true" />
       <span>Suno</span>
+      <small>Concept</small>
     </div>
   );
 }
@@ -741,7 +742,7 @@ function CompareScene({
               onPlay={() => onPlay("circuitromance")}
             />
           </div>
-          <p className="compare-caveat">Only this section changes. The rest of the track stays the same.</p>
+          <p className="compare-caveat">Illustrative audio. Only this section changes.</p>
         </div>
         <aside className="contribution-inspector" aria-live="polite">
           {selectedData ? (
@@ -1175,7 +1176,7 @@ export function OpenSignalExperience() {
     <main className="site-shell">
       <header className="site-header">
         <BrandMark />
-        <p>A product concept by Bo Abrams</p>
+        <p><strong>Open Signal</strong> · Interactive product specification</p>
         <button type="button" onClick={resetDemo} aria-label="Reset demo">
           <Icon name="reset" size={16} />
           <span>Reset demo</span>
@@ -1186,8 +1187,9 @@ export function OpenSignalExperience() {
         <div className="hero-copy">
           <h1>Hear every version. Credit what ships.</h1>
           <p>
-            Open one section. Compare contributions in context. Keep credit
-            attached to the sound.
+            A product spec for directed contribution on Suno: compare one
+            section, credit the work that ships, and turn collaboration into
+            human reputation.
           </p>
           <SongRail
             playing={playingId === "original"}
@@ -1237,9 +1239,9 @@ export function OpenSignalExperience() {
 
         <aside className="proof-column">
           <div className="proof-column__copy">
-            <span>Directed, not generic.</span>
-            <h2>Ask for the missing part.</h2>
-            <p>The song owner keeps the final say.</p>
+            <span>Community, not content volume.</span>
+            <h2>Make contribution legible.</h2>
+            <p>The song owner keeps control. Accepted work builds reputation.</p>
           </div>
           <HumanProofCard accepted={accepted} onOpen={() => navigate("profile")} />
           <div className="trust-stack">
@@ -1283,19 +1285,19 @@ export function OpenSignalExperience() {
 
       <section className="measurement-section" aria-labelledby="measurement-title">
         <div>
-          <h2 id="measurement-title">The first test</h2>
-          <p>Do better contributions increase the chance a song ships?</p>
+          <h2 id="measurement-title">Community outcomes</h2>
+          <p>Does directed contribution help better music ship—and make human creativity more legible?</p>
         </div>
         <dl>
-          <div><dt>Quality</dt><dd>Contribution accepted</dd></div>
-          <div><dt>Retention</dt><dd>Both creators return</dd></div>
-          <div><dt>Network</dt><dd>Accepted sound reused</dd></div>
-          <div><dt>Guardrail</dt><dd>Spam and rights reports</dd></div>
+          <div><dt>Shipping</dt><dd>Song completion after an Open Call</dd></div>
+          <div><dt>Retention</dt><dd>Creator and contributor return</dd></div>
+          <div><dt>Reputation</dt><dd>Accepted credit is reused</dd></div>
+          <div><dt>Trust</dt><dd>Spam and rights reports stay bounded</dd></div>
         </dl>
       </section>
 
       <footer className="site-footer">
-        <p>Concept prototype · Illustrative people and data · Not affiliated with Suno</p>
+        <p>Interactive product spec · Proposed experience and illustrative outcomes · Not affiliated with Suno</p>
         <p>Designed for the Staff Product Manager, mobile creation role</p>
       </footer>
     </main>

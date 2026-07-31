@@ -29,10 +29,11 @@ test("server-renders the Open Signal concept and social metadata", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /<title>Open Signal — Hear every version\. Credit what ships\.<\/title>/i);
+  assert.match(html, /<title>Open Signal — An interactive product spec for Suno<\/title>/i);
   assert.match(html, /Hear every version\. Credit what ships\./);
-  assert.match(html, /Compare contributions in context/);
-  assert.match(html, /Concept prototype/);
+  assert.match(html, /A product spec for directed contribution on Suno/);
+  assert.match(html, /Interactive product spec/);
+  assert.match(html, /Proposed experience and illustrative outcomes/);
   assert.match(html, /property="og:image"/i);
   assert.doesNotMatch(html, /vinext-starter|Your site is taking shape/i);
 });
@@ -50,6 +51,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
   assert.match(source, /Sound Registry/);
+  assert.match(source, /Community outcomes/);
+  assert.match(source, /Song completion after an Open Call/);
   assert.match(source, /scheduleVersionPreview/);
   assert.match(source, /Tap a version to hear it in context/);
   assert.match(source, /open-signal:accepted/);

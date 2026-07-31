@@ -1,7 +1,8 @@
 # Open Signal
 
-An interactive product concept for directed music collaboration, durable
-creative credit, and human reputation on Suno.
+An interactive product specification for directed music collaboration, durable
+creative credit, and human reputation on Suno. It illustrates a proposed
+experience and community outcomes; it is not an existing Suno feature.
 
 The prototype follows one mobile-first flow:
 
@@ -14,6 +15,13 @@ The prototype follows one mobile-first flow:
 Each proposal is auditionable in context using an in-browser sound sketch.
 Production Suno renders can replace those sketches without changing the
 interaction model.
+
+The intended application-facing framing is:
+
+> Open Signal is an interactive product specification for directed
+> contribution on Suno. It explores whether playable comparison and durable
+> credit can help better music ship while making human creativity more
+> legible.
 
 All people, songs, credits, and metrics shown here are illustrative. This
 independent concept is not affiliated with Suno.

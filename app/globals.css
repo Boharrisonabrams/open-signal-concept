@@ -83,6 +83,11 @@ p {
   font-size: 13px;
 }
 
+.site-header > p strong {
+  color: var(--ink);
+  font-weight: 650;
+}
+
 .site-header > button {
   justify-self: end;
   display: inline-flex;
@@ -104,6 +109,18 @@ p {
   font-size: 24px;
   font-weight: 680;
   letter-spacing: -0.04em;
+}
+
+.brand small {
+  margin-left: 2px;
+  padding-left: 12px;
+  border-left: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  line-height: 18px;
+  text-transform: uppercase;
 }
 
 .brand__orb,
@@ -2138,6 +2155,11 @@ p {
 
   .brand {
     font-size: 20px;
+  }
+
+  .brand small {
+    padding-left: 9px;
+    font-size: 9px;
   }
 
   .brand__orb {
