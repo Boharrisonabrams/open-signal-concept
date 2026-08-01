@@ -28,6 +28,10 @@ export async function generateMetadata(): Promise<Metadata> {
       "A playable mobile-first product specification for precise human contribution, contextual review, and rights-aware creative credit on Suno.",
     authors: [{ name: "Bo Abrams" }],
     creator: "Bo Abrams",
+    robots: {
+      index: false,
+      follow: false,
+    },
     alternates: {
       canonical: base.toString(),
     },

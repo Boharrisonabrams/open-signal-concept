@@ -65,6 +65,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
   assert.match(source, /Borrow the protocol, not the chrome/);
+  assert.match(source, /Independent concept/);
+  assert.match(source, /Credit-first by design/);
   assert.match(source, /GitHub logic, Suno language/);
   assert.match(source, /What the beta must prove/);
   assert.match(source, /Incremental 7-day publish or export completion/);

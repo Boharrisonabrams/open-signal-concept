@@ -516,10 +516,14 @@ function MiniWaveform() {
 
 function BrandMark() {
   return (
-    <div className="brand" aria-label="Suno concept">
-      <span className="brand__orb" aria-hidden="true" />
-      <span>Suno</span>
-      <small>Concept</small>
+    <div className="brand" aria-label="Open Signal, an independent concept for Suno">
+      <svg className="brand__wave" viewBox="0 0 34 34" aria-hidden="true">
+        <rect x="6" y="11" width="4" height="12" rx="2" />
+        <rect x="15" y="6" width="4" height="22" rx="2" />
+        <rect x="24" y="13" width="4" height="8" rx="2" />
+      </svg>
+      <span>Open Signal</span>
+      <small>Independent concept<br />for Suno</small>
     </div>
   );
 }
@@ -1690,7 +1694,7 @@ export function OpenSignalExperience() {
     <main className="site-shell">
       <header className="site-header">
         <BrandMark />
-        <p><strong>Open Signal</strong> · Interactive product specification</p>
+        <p>Interactive product specification</p>
         <button type="button" onClick={resetDemo} aria-label="Reset demo">
           <Icon name="reset" size={16} />
           <span>Reset demo</span>
@@ -1771,7 +1775,7 @@ export function OpenSignalExperience() {
 
         <aside className="proof-column">
           <div className="proof-column__copy">
-            <span>Borrow the protocol, not the chrome.</span>
+            <span>The human layer.</span>
             <h2>Make contribution legible.</h2>
             <p>A precise request becomes a contribution, a review, a decision, and durable credit—all in Suno’s musical language.</p>
           </div>
@@ -1822,6 +1826,7 @@ export function OpenSignalExperience() {
         <div>
           <h2 id="measurement-title">What the beta must prove</h2>
           <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
+          <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
         </div>
         <dl>
           <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>

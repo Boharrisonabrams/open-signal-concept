@@ -157,9 +157,33 @@ primary source.
   closes and restores focus), profile, follow, and reset on the final build.
 - Known cosmetic quirk (pre-existing): the widened desktop compare phone
   overlaps the right rail by design; unchanged.
-- `public/og.png` still shows the previous look of the light call sheet if
-  regenerated screenshots are ever compared; the social image itself remains
-  valid and was not changed.
+- `public/og.png` regenerated in the new brand system (`497ff5a`).
+
+### Judge panel + fixes (2026-08-01)
+
+A three-judge blind panel (recruiter, CPO, skeptic lenses) evaluated the
+deployed build with a neutral evidence pack. Verdict: unanimous
+strengthen/forward/interview, zero unanimous submission blockers. Converged
+findings were fixed and shipped:
+
+- Header lockup no longer leads with the Suno mark: neutral waveform glyph +
+  "Open Signal — Independent concept for Suno"; the gradient-squircle orb
+  (Suno app-icon-adjacent, per the skeptic) is gone from site chrome. In-fiction
+  avatar orbs stay.
+- Compensation gap closed on-page: "Credit-first by design. Compensation and
+  splits enter once accepted takes prove they help songs ship." in the
+  measurement section.
+- Mantra de-dup: "Borrow the protocol, not the chrome." appears exactly once
+  on the page; both application blurbs rewrote the twin em-dash negations.
+- Primer gained "Hard questions to carry": Replace-Section-vs-human-take
+  counterfactual, uncleared-sample liability walk, compensation stance,
+  pass-then-regenerate dark pattern, invite-only-to-discovery bridge.
+- `robots: noindex, nofollow` added (direct links unaffected).
+- Tests pin "Independent concept" and "Credit-first by design".
+
+Panel transcripts are in the session; CPO interview-prep priorities (holdout
+design, contributor economics) are primer material, deliberately not page
+copy.
 
 Implemented scenes:
 

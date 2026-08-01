@@ -161,6 +161,52 @@ without creating unacceptable rights or moderation cost?”
 > openly licensed. I would start invite-only and test whether this causes more
 > edited songs to reach publish or export without unacceptable trust cost.
 
+## Hard questions to carry
+
+Answers to the probes this artifact invites. Practice these; do not improvise
+them.
+
+**"A stuck editor can roll Replace Section in ten seconds, free. When does a
+24-hour human take beat that?"**
+When the owner wants a specific person's judgment, not another sample from the
+model's distribution. Regeneration explores; a directed ask imports taste the
+owner already trusts, like a trumpet player's restraint or a producer's pocket.
+The beta wedge is exactly the population for whom re-rolling has already
+failed: repeated section edits, no export. If incremental completion does not
+beat editing alone, the thesis is wrong and we learn that cheaply.
+
+**"An accepted take turns out to contain an uncleared sample and the song is
+monetized. Walk me through it."**
+The rights confirmation puts the false claim on the contributor's account with
+an auditable record, and the receipt scopes exactly what the owner relied on.
+The beta needs three things behind that: a dispute intake, the ability to
+freeze monetization on the disputed asset, and retraction that preserves song
+history. On training: submitted and passed takes stay out of model training by
+default. That stance costs little in an invite-only beta and is expensive to
+retrofit later.
+
+**"The owner monetizes; the contributor gets credit. Why would good
+contributors supply that?"**
+Credit-first is the v1 wedge, not the end state. Splits attach cleanly to the
+receipt object once it exists; introducing money before trust and quality
+metrics exist maximizes disputes exactly when moderation is weakest. In beta,
+contributors are collaborators the owner invited, not a gig marketplace.
+
+**"What stops an owner from hearing an idea, passing, and prompting the model
+to regenerate it?"**
+Name it before they do: pass-then-regenerate is this feature's obvious dark
+pattern. Candidate mitigations to explore in beta: similarity flags between a
+passed take and subsequent generations in that section, a cooldown on the
+section after a pass, and a credit nudge when the resemblance is high. The
+receipt already creates the evidence trail that makes any of them enforceable.
+
+**"Invite-only assumes owners have collaborators. Most Suno creators can
+invite nobody. Then what?"**
+True, and deliberate: the beta tests the protocol, not the marketplace. The
+bridge to discovery is a qualified pool built from demonstrated work, in the
+spirit of Listen & Rank: contributors earn access to open calls through
+accepted work, before any public feed exists.
+
 ## Application link copy
 
 **Open Signal — an interactive product specification**

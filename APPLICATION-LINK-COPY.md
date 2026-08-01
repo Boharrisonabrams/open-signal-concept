@@ -9,9 +9,8 @@ Suno. It shows both sides of the loop: one creator opens a precise section of a
 song; another submits a take and confirms their rights; the owner compares,
 reviews, and chooses what ships; acceptance creates a portable credit receipt.
 
-The product hypothesis: borrow the collaboration protocol—not the visual
-chrome—of open source to help more music ship while turning accepted work into
-visible creator reputation.
+The product hypothesis: borrow open source's collaboration protocol so more
+music ships, and turn accepted work into visible creator reputation.
 
 [Explore the interactive spec →](https://open-signal-concept.boabrams.workers.dev)
 
@@ -29,7 +28,7 @@ https://open-signal-concept.boabrams.workers.dev
 
 ## One-line interview framing
 
-Open Signal applies an open-source-inspired collaboration protocol—not open
-licensing or GitHub visual chrome—to music: a precise request becomes a scoped
-contribution, contextual review, owner-controlled acceptance, and durable
-rights-and-credit lineage.
+Open Signal applies open source's collaboration protocol to music, without its
+licensing or its chrome: a precise request becomes a scoped contribution,
+contextual review, owner-controlled acceptance, and durable rights-and-credit
+lineage.
