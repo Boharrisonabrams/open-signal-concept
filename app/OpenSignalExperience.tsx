@@ -1273,6 +1273,8 @@ function AcceptanceReceipt({
 }
 
 function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
+  const malik = contributions.circuitromance;
+
   return (
     <section className="browse-scene scene" aria-label="Browse open work">
       <div className="status-bar status-bar--light" aria-hidden="true">
@@ -1283,10 +1285,85 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
         <h2>Open work</h2>
         <p>A feed of problems, not posts.</p>
       </header>
+
       <h3 className="browse-section-title">Trending open calls</h3>
-      <button className="browse-call-card browse-call-card--live" type="button" onClick={onOpenCall}>
-        Replace the guitar riff
-      </button>
+      <div className="browse-calls">
+        <button className="browse-call-card browse-call-card--live" type="button" onClick={onOpenCall}>
+          <img src="/open-signal-cover.png" alt="" />
+          <span className="browse-call-card__body">
+            <small>art-pop · E minor · 106 BPM</small>
+            <strong>Replace the guitar riff</strong>
+            <span>2 takes in review · Invite-only</span>
+          </span>
+          <span className="browse-call-card__by">Mara Venn</span>
+          <Icon name="arrow" size={17} />
+        </button>
+        <div className="browse-call-card">
+          <span className="browse-tile browse-tile--dusk" aria-hidden="true" />
+          <span className="browse-call-card__body">
+            <small>ambient · C♯ minor · 74 BPM</small>
+            <strong>Granular pad under the bridge</strong>
+            <span>4 takes in review · Open pool</span>
+          </span>
+          <span className="browse-call-card__by">@riverchapel</span>
+        </div>
+        <div className="browse-call-card">
+          <span className="browse-tile browse-tile--ember" aria-hidden="true" />
+          <span className="browse-call-card__body">
+            <small>alt-R&B · F major · 92 BPM</small>
+            <strong>Vocal texture for the outro</strong>
+            <span>1 take in review · Invited</span>
+          </span>
+          <span className="browse-call-card__by">@juneaux</span>
+        </div>
+      </div>
+
+      <h3 className="browse-section-title">Reusable components</h3>
+      <div className="browse-components">
+        <div className="browse-comp-tile">
+          <span className="texture-art" aria-hidden="true" />
+          <strong>Drum texture</strong>
+          <small>@lowlight · Reused in 12 projects</small>
+        </div>
+        <div className="browse-comp-tile">
+          <span className="browse-tile browse-tile--haze" aria-hidden="true" />
+          <strong>Tape-warble keys</strong>
+          <small>@circuitromance · Reused in 4 projects</small>
+        </div>
+        <div className="browse-comp-tile">
+          <span className="browse-tile browse-tile--dusk" aria-hidden="true" />
+          <strong>Granular bass one-shots</strong>
+          <small>@riverchapel · Reused in 3 projects</small>
+        </div>
+      </div>
+
+      <h3 className="browse-section-title">Top contributors</h3>
+      <div className="browse-people">
+        <div className="browse-person">
+          <img src="/nia-okafor.png" alt="Nia Okafor" />
+          <strong>@lowlight</strong>
+          <small>18 accepted</small>
+        </div>
+        <div className="browse-person">
+          <img src="/adopter-malik.jpg" alt="Malik Chen" />
+          <strong>@circuitromance</strong>
+          <small>{malik.acceptedCount} accepted</small>
+        </div>
+        <div className="browse-person">
+          <img src="/adopter-ana.jpg" alt="" />
+          <strong>@anaverse</strong>
+        </div>
+        <div className="browse-person">
+          <img src="/adopter-jules.jpg" alt="" />
+          <strong>@julesmakes</strong>
+        </div>
+      </div>
+
+      <h3 className="browse-section-title">Active collaborations</h3>
+      <div className="browse-activity">
+        <div><strong>Open Signal</strong><span>New take submitted 2h ago</span></div>
+        <div><strong>Hollow City</strong><span>Take accepted 1d ago</span></div>
+      </div>
     </section>
   );
 }

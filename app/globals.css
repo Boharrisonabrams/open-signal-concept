@@ -3710,6 +3710,235 @@ p {
   color: #8ce39a;
 }
 
+/* Browse scene */
+
+.phone-frame .browse-scene {
+  padding: 58px 20px 24px;
+  overflow-y: auto;
+  background: var(--p-bg);
+}
+
+.phone-frame .browse-header h2 {
+  margin: 0 0 3px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 34px;
+  font-weight: 460;
+  letter-spacing: -0.03em;
+}
+
+.phone-frame .browse-header p {
+  margin: 0 0 18px;
+  color: var(--p-muted);
+  font-size: 13px;
+}
+
+.phone-frame .browse-section-title {
+  margin: 18px 0 9px;
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.phone-frame .browse-calls {
+  display: grid;
+  gap: 8px;
+}
+
+.phone-frame .browse-call-card {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  min-height: 64px;
+  padding: 9px 11px;
+  border: 1px solid var(--p-line);
+  border-radius: 16px;
+  background: var(--p-card);
+  color: var(--p-text);
+  text-align: left;
+}
+
+.phone-frame .browse-call-card--live {
+  border-color: rgba(255, 45, 146, 0.45);
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.phone-frame .browse-call-card--live:hover {
+  border-color: rgba(255, 45, 146, 0.75);
+}
+
+.phone-frame .browse-call-card--live:active {
+  transform: scale(0.985);
+}
+
+.phone-frame .browse-call-card > img,
+.phone-frame .browse-tile {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.phone-frame .browse-tile--dusk {
+  background: linear-gradient(140deg, #2c1f4a, #713a8e 55%, #ff5ca8);
+}
+
+.phone-frame .browse-tile--ember {
+  background: linear-gradient(140deg, #3a1208, #b1330f 55%, #ffb02e);
+}
+
+.phone-frame .browse-tile--haze {
+  background: linear-gradient(140deg, #10303a, #1d6f6a 55%, #9be8c5);
+}
+
+.phone-frame .browse-call-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+  flex: 1;
+}
+
+.phone-frame .browse-call-card__body small {
+  color: var(--p-muted);
+  font-size: 10.5px;
+}
+
+.phone-frame .browse-call-card__body strong {
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 16.5px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.phone-frame .browse-call-card__body > span {
+  color: var(--p-muted);
+  font-size: 11px;
+}
+
+.phone-frame .browse-call-card__by {
+  color: var(--p-muted);
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.phone-frame .browse-call-card--live .browse-call-card__by {
+  color: var(--p-accent);
+}
+
+.phone-frame .browse-components {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding-bottom: 2px;
+}
+
+.phone-frame .browse-components::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-frame .browse-comp-tile {
+  flex: none;
+  width: 128px;
+  padding: 10px;
+  border: 1px solid var(--p-line);
+  border-radius: 14px;
+  background: var(--p-card);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.phone-frame .browse-comp-tile .texture-art,
+.phone-frame .browse-comp-tile .browse-tile {
+  width: 100%;
+  height: 44px;
+  border-radius: 9px;
+  margin-bottom: 4px;
+}
+
+.phone-frame .browse-comp-tile strong {
+  font-size: 12.5px;
+  font-weight: 640;
+}
+
+.phone-frame .browse-comp-tile small {
+  color: var(--p-muted);
+  font-size: 10px;
+  line-height: 1.35;
+}
+
+.phone-frame .browse-people {
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.phone-frame .browse-people::-webkit-scrollbar {
+  display: none;
+}
+
+.phone-frame .browse-person {
+  flex: none;
+  width: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.phone-frame .browse-person img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.phone-frame .browse-person strong {
+  font-size: 10px;
+  font-weight: 640;
+  white-space: nowrap;
+}
+
+.phone-frame .browse-person small {
+  color: var(--p-muted);
+  font-size: 9.5px;
+}
+
+.phone-frame .browse-activity {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 6px;
+}
+
+.phone-frame .browse-activity > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 11px;
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+  background: var(--p-card);
+}
+
+.phone-frame .browse-activity strong {
+  font-size: 12.5px;
+  font-weight: 640;
+}
+
+.phone-frame .browse-activity span {
+  color: var(--p-muted);
+  font-size: 11px;
+  white-space: nowrap;
+}
+
 @media (max-width: 680px) {
   .phone-frame .call-sheet {
     height: 76%;
