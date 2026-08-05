@@ -48,6 +48,13 @@ concept must remain additive and differentiated.
 
 ## User intent to preserve
 
+- **Copy voice rule (Bo, 2026-08-05):** inside the phone, every string is
+  either product-voice (what a real user needs in order to want to try the
+  feature) or viewer-essential disclosure ("Illustrative…"). Positioning and
+  reviewer-facing framing live on the editorial page only. This retired
+  "A feed of problems, not posts." from the browse scene in favor of
+  "Find a section that needs your sound."
+
 - Borrow GitHub's collaboration logic, not its visual chrome.
 - Make the product feel native to Suno and musical rather than technical.
 - Keep mobile as the primary surface while allowing a polished desktop review.
@@ -454,3 +461,31 @@ the post-pass profile "In review" seam (edge path). Evidence-pack note:
 four capture files in the session scratchpad were byte-identical duplicates
 (harness artifact, deleted); judges verified those states on the live build
 directly.
+
+### Judge panel 3 + voice pass (2026-08-05)
+
+Third blind panel on the browse build with a state-verified, md5-unique
+evidence pack including the OG unfurl card: unanimous
+strengthen/forward/interview for the third round (recruiter: "top 1–2% of
+work samples"; CPO craft 9; skeptic probe-resilience up to 7). Panel-two
+fixes held under attack (taxonomy "the labels carry it"; subtitle
+"correctly names generation's retention ceiling"; counts "non-round and
+plausible"). Shipped from converged findings + Bo's copy-voice rule:
+
+- Browse subline → user-voice "Find a section that needs your sound."
+  (test pin updated; the retired slogan also left the OG card, which now
+  uses the same user-voice headline).
+- Submit eyebrow → "Contributor view · @lowlight, invited" (kills the
+  skeptic's role-play hole and circular-timeline catch).
+- Nia's note de-echoed → "More tension, fewer safe choices." (removes the
+  generated-echo "stock cadence" repeat).
+- Accepted counts increment on acceptance (18→19 on profile and browse;
+  reset restores) — the skeptic's off-by-one.
+- Measurement section gained the why-now/cold-start line: "Supply starts
+  with the same stuck editors flipped around…"
+- APPLICATION-LINK-COPY gained a ~55-word short recommended blurb; primer
+  gained the prior-art/why-now hard question (BandLab/Kompoz/Blend) and the
+  passed-take derivation-chain cap.
+
+Remaining known probes are primer-armed, not page-fixed: derivative
+provenance depth, experiment design, browse-at-beta-scale.

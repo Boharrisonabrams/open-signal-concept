@@ -52,7 +52,7 @@ const contributions = {
   lowlight: {
     handle: "@lowlight",
     title: "Muted trumpet counterline",
-    note: "More tension, less stock cadence.",
+    note: "More tension, fewer safe choices.",
     color: "#ff5ca8",
     tint: "rgba(255, 92, 168, 0.16)",
     name: "Nia Okafor",
@@ -766,7 +766,7 @@ function SubmitScene({
           <Icon name="back" />
         </button>
         <div>
-          <span>Contributor view</span>
+          <span>Contributor view · @lowlight, invited</span>
           <strong>Add your take</strong>
         </div>
         <img src="/nia-okafor.png" alt="Nia Okafor" />
@@ -1171,7 +1171,7 @@ function ProfileScene({
       <p className="profile-handle">{creator.handle}</p>
       <VerifiedHuman />
       <div className="reputation-stats" aria-label="Suno reputation">
-        <div><strong>{creator.acceptedCount}</strong><span>Accepted</span></div>
+        <div><strong>{creator.acceptedCount + (accepted ? 1 : 0)}</strong><span>Accepted</span></div>
         <div><strong>{creator.reuses}</strong><span>Reuses</span></div>
         <div><strong>{creator.openCalls}</strong><span>Open calls</span></div>
       </div>
@@ -1272,7 +1272,13 @@ function AcceptanceReceipt({
   );
 }
 
-function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
+function BrowseScene({
+  onOpenCall,
+  acceptedId,
+}: {
+  onOpenCall: () => void;
+  acceptedId: CreatorContributionId | null;
+}) {
   const malik = contributions.circuitromance;
 
   return (
@@ -1283,7 +1289,7 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
       </div>
       <header className="browse-header">
         <h2>Open work</h2>
-        <p>A feed of problems, not posts.</p>
+        <p>Find a section that needs your sound.</p>
       </header>
 
       <h3 className="browse-section-title">Trending open calls</h3>
@@ -1342,12 +1348,12 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
         <div className="browse-person">
           <img src="/nia-okafor.png" alt="Nia Okafor" />
           <strong>@lowlight</strong>
-          <small>18 accepted</small>
+          <small>{contributions.lowlight.acceptedCount + (acceptedId === "lowlight" ? 1 : 0)} accepted</small>
         </div>
         <div className="browse-person">
           <img src="/adopter-malik.jpg" alt="Malik Chen" />
           <strong>@circuitromance</strong>
-          <small>{malik.acceptedCount} accepted</small>
+          <small>{malik.acceptedCount + (acceptedId === "circuitromance" ? 1 : 0)} accepted</small>
         </div>
         <div className="browse-person">
           <img src="/adopter-ana.jpg" alt="" />
@@ -1427,7 +1433,7 @@ function PhoneDemo({
     <div className={`phone-frame phone-frame--${scene}`}>
       <div className="phone-island" aria-hidden="true" />
       {scene === "browse" ? (
-        <BrowseScene onOpenCall={() => onScene("call")} />
+        <BrowseScene onOpenCall={() => onScene("call")} acceptedId={acceptedId} />
       ) : null}
       {scene === "player" ? (
         <PlayerScene
@@ -1930,6 +1936,7 @@ export function OpenSignalExperience() {
           <h2 id="measurement-title">What the beta must prove</h2>
           <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
           <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
+          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are.</p>
         </div>
         <dl>
           <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>

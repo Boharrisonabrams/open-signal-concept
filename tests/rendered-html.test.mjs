@@ -56,7 +56,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Pass on this take/);
   assert.match(source, /keeps this take and its rights/);
   assert.match(source, /Open work/);
-  assert.match(source, /A feed of problems, not posts/);
+  assert.match(source, /Find a section that needs your sound/);
   assert.match(source, /Trending open calls/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);

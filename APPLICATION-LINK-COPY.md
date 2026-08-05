@@ -1,6 +1,18 @@
 # Open Signal application link copy
 
-## Recommended
+## Recommended (short)
+
+**Open Signal — a playable, mobile-first product spec for Suno.** Browse open
+work, ask for one precise take, choose what ships, and mint rights-safe
+credit for who made it.
+
+https://open-signal-concept.boabrams.workers.dev
+
+60-second path: **Browse → Open call → Add your take → Compare → Accept →
+Profile**. Fictional people and audio; independent concept, not affiliated
+with Suno.
+
+## Longer version
 
 **Open Signal — an interactive product specification**
 

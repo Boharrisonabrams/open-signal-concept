@@ -214,7 +214,21 @@ which is what the rights confirmation attests and the receipt records. That
 is why song rights transfer only on acceptance, stems stay excluded by
 default, and the draft captures the take's method — recorded, Suno remix,
 or uploaded. Provenance is a first-class field. In beta, remix-method takes
-carry the derivation chain in the receipt.
+carry the derivation chain in the receipt. The same logic caps what a
+passed take is worth outside the song: the contributor keeps their layer
+and their idea, but a remix-method take embedding the owner's stem is not
+freely reusable, and the derivation chain is what enforces that line.
+
+**"BandLab, Kompoz, and Blend all did open collaboration. They stalled.
+Why does this work now?"**
+They asked strangers for whole songs with no distribution behind the ask.
+Two things changed: the unit of work and the location. A 14-second scoped
+ask with a one-revision cap is answerable between your own edits, and it
+lives inside the app where creators already are, not on a destination site
+you have to remember to visit. Generation also changes the economics of a
+take: auditioning an idea costs minutes, not a studio session. Supply
+starts as the same stuck editors flipped around, then widens through
+earned access.
 
 **"How do you know the primary metric is causal and not self-selection?"**
 You don't, until you design for it. Eligible stuck editors get randomized
