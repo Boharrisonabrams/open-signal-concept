@@ -2,9 +2,10 @@
 
 ## Recommended (short)
 
-**Open Signal — a playable, mobile-first product spec for Suno.** Browse open
-work, ask for one precise take, choose what ships, and mint rights-safe
-credit for who made it.
+**Open Signal — a playable, mobile-first product spec for Suno.** When
+re-rolling stops helping, you ask a person: browse open work, ask for one
+precise take, choose what ships, and mint rights-safe credit for who made
+it.
 
 https://open-signal-concept.boabrams.workers.dev
 

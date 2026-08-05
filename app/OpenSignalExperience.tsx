@@ -727,6 +727,7 @@ function CallScene({
 }
 
 function SubmitScene({
+  viaFork,
   method,
   rightsConfirmed,
   submitted,
@@ -738,6 +739,7 @@ function SubmitScene({
   onBack,
   onReview,
 }: {
+  viaFork: boolean;
   method: SubmissionMethod;
   rightsConfirmed: boolean;
   submitted: boolean;
@@ -842,8 +844,8 @@ function SubmitScene({
             <img src="/nia-okafor.png" alt="" />
             <div>
               <span>Ready to submit</span>
-              <strong>Muted trumpet counterline</strong>
-              <small>@lowlight · Take 02 · {methodDescriptor[method]}</small>
+              <strong>{viaFork ? "Fork of Drum texture" : "Muted trumpet counterline"}</strong>
+              <small>{viaFork ? "Built on @lowlight’s pack · fork credit attached" : `@lowlight · Take 02 · ${methodDescriptor[method]}`}</small>
             </div>
             <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} draft take`}>
               <Icon name={playing ? "pause" : "play"} size={17} />
@@ -857,8 +859,17 @@ function SubmitScene({
               onChange={(event) => onRightsConfirmed(event.target.checked)}
             />
             <span>
-              <strong>I made or control this audio.</strong>
-              <small>If accepted, Mara may publish and monetize it in this song. Separate stem reuse still requires permission.</small>
+              {viaFork ? (
+                <>
+                  <strong>My added layers are mine.</strong>
+                  <small>@lowlight’s forked layer keeps its locked credit under its pack terms. If accepted, Mara may publish and monetize the combined take in this song.</small>
+                </>
+              ) : (
+                <>
+                  <strong>I made or control this audio.</strong>
+                  <small>If accepted, Mara may publish and monetize it in this song. Separate stem reuse still requires permission.</small>
+                </>
+              )}
             </span>
           </label>
 
@@ -1184,9 +1195,9 @@ function ProfileScene({
       <VerifiedHuman />
       <div className="reputation-stats" aria-label="Suno reputation">
         <div><strong>{creator.acceptedCount + (accepted ? 1 : 0)}</strong><span>Accepted</span></div>
-        <div><strong>{contributionId === "lowlight" ? 214 + (starred ? 1 : 0) : 76}</strong><span>Stars</span></div>
         <div><strong>{creator.reuses}</strong><span>Reuses</span></div>
         <div><strong>{creator.openCalls}</strong><span>Open calls</span></div>
+        <div className="reputation-stats__soft"><strong>{contributionId === "lowlight" ? 214 + (starred ? 1 : 0) : 76}</strong><span>Stars</span></div>
       </div>
       <div className="profile-actions">
         <button className={following ? "is-following" : ""} type="button" onClick={onFollow} aria-pressed={following}><Icon name={following ? "check" : "person"} />{following ? "Following" : "Follow"}</button>
@@ -1616,6 +1627,8 @@ function PhoneDemo({
   onAddComment,
   onCloseComments,
   onSaveDraft,
+  onOpenSubmit,
+  submitViaFork,
   selected,
   submissionMethod,
   rightsConfirmed,
@@ -1653,6 +1666,8 @@ function PhoneDemo({
   onAddComment: (text: string) => void;
   onCloseComments: () => void;
   onSaveDraft: () => void;
+  onOpenSubmit: () => void;
+  submitViaFork: boolean;
   selected: ContributionId;
   submissionMethod: SubmissionMethod;
   rightsConfirmed: boolean;
@@ -1706,12 +1721,13 @@ function PhoneDemo({
       {scene === "call" ? (
         <CallScene
           onClose={() => onScene("player")}
-          onContribute={() => onScene("submit")}
+          onContribute={onOpenSubmit}
           onCompare={() => onScene("compare")}
         />
       ) : null}
       {scene === "submit" ? (
         <SubmitScene
+          viaFork={submitViaFork}
           method={submissionMethod}
           rightsConfirmed={rightsConfirmed}
           submitted={submitted}
@@ -1895,6 +1911,7 @@ export function OpenSignalExperience() {
   const [starred, setStarred] = useState(false);
   const [forked, setForked] = useState(false);
   const [forkedDraft, setForkedDraft] = useState(false);
+  const [submitViaFork, setSubmitViaFork] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState<string | null>(null);
@@ -2076,6 +2093,7 @@ export function OpenSignalExperience() {
     setStarred(false);
     setForked(false);
     setForkedDraft(false);
+    setSubmitViaFork(false);
     setComments([]);
     setCommentsOpen(false);
     stopAudio();
@@ -2149,7 +2167,9 @@ export function OpenSignalExperience() {
             forkedDraft={forkedDraft}
             onFork={() => { setForked(true); navigate("studio"); }}
             onOpenComments={() => setCommentsOpen(true)}
-            onSubmitDraft={() => navigate("submit")}
+            onSubmitDraft={() => { setSubmitViaFork(true); navigate("submit"); }}
+            onOpenSubmit={() => { setSubmitViaFork(false); navigate("submit"); }}
+            submitViaFork={submitViaFork}
             commentsOpen={commentsOpen}
             comments={comments}
             onAddComment={(text) => setComments((current) => [...current, text])}

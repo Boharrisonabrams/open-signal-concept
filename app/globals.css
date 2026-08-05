@@ -4392,6 +4392,25 @@ p {
   margin-top: 10px;
 }
 
+.phone-frame .reputation-stats__soft strong,
+.phone-frame .reputation-stats__soft span {
+  color: var(--p-muted);
+}
+
+.phone-frame .browse-call-card:not(.browse-call-card--live),
+.phone-frame .browse-comp-tile:not(.browse-comp-tile--live) {
+  opacity: 0.82;
+}
+
+@media (max-width: 680px) {
+  .scene-tabs {
+    justify-content: flex-start;
+    overflow-x: auto;
+    mask-image: linear-gradient(to right, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+}
+
 .phone-frame .studio-saved {
   display: flex;
   align-items: center;

@@ -218,6 +218,10 @@ carry the derivation chain in the receipt. The same logic caps what a
 passed take is worth outside the song: the contributor keeps their layer
 and their idea, but a remix-method take embedding the owner's stem is not
 freely reusable, and the derivation chain is what enforces that line.
+The demo now shows this in the interface: submitting a forked draft swaps
+the attestation to "My added layers are mine" with the forked layer's
+credit staying locked under its pack terms — dual provenance is attested
+as dual provenance, never flattened into a single ownership claim.
 
 **"BandLab, Kompoz, and Blend all did open collaboration. They stalled.
 Why does this work now?"**
@@ -228,7 +232,11 @@ lives inside the app where creators already are, not on a destination site
 you have to remember to visit. Generation also changes the economics of a
 take: auditioning an idea costs minutes, not a studio session. Supply
 starts as the same stuck editors flipped around, then widens through
-earned access.
+earned access. SoundBetter is the other half of the argument: it proves
+producers will do paid scoped work, but at off-platform gig prices and
+detached from the session. Keeping the ask where the section lives, at
+credit-first stakes until quality survives, is what neither graveyard nor
+gig site tried.
 
 **"How do you know the primary metric is causal and not self-selection?"**
 You don't, until you design for it. Eligible stuck editors get randomized
