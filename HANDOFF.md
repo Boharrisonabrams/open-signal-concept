@@ -717,6 +717,25 @@ memory; status-seeking UGC supply). Shipped as commit `38b2cf0`, Worker
 - Deploy note reconfirmed: consecutive Worker deploys serve mixed versions
   per-request for ~1 minute; poll for the new bundle hash before verifying.
 
+### Fork-flow retest fixes (2026-08-05, Bo's second phone test)
+
+Bo still couldn't see the Studio tab and found "Add your sound" dead. Root
+causes: (1) the scene-tab row never scrolled the ACTIVE tab into view, so
+landing in Studio left its tab hidden past the right-edge fade at 390px;
+(2) the empty studio layer was a dressing div styled like a control. Fixed
+(commit `d6f1ce8`, Worker `e2e435b3`, polled fully live):
+
+- A scene-change effect scrolls `.scene-tabs .is-active` into view
+  (inline center); arriving in any scene now shows its tab highlighted.
+- "Add your sound" is a real button (press feedback, hover ring): tap
+  focuses the prompt textarea; after Save draft the slot renders as
+  "♪ Your added layer · From your prompt · draft" so saving visibly
+  changes the layer stack. Subtitle now says "Describe it below, then
+  save."
+- Verified at 390: fork → toast → Studio tab visible/active; tap layer →
+  textarea focused; save → filled layer. Tests pin the new strings and the
+  active-tab scroll hook.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
