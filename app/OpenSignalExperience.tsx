@@ -2253,7 +2253,7 @@ export function OpenSignalExperience() {
           <h2 id="measurement-title">What the beta must prove</h2>
           <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
           <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
-          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are — where BandLab-style whole-song collabs stalled in empty rooms.</p>
+          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are — whole-song collab asks have stalled before because the ask was too big and the room too empty.</p>
         </div>
         <dl>
           <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>
