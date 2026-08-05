@@ -2,8 +2,8 @@
 
 ## The thesis in one sentence
 
-Open Signal applies an open-source-inspired collaboration protocol—not open
-licensing or GitHub visual chrome—to music: a creator can open one precise part
+Open Signal applies an open-source-inspired collaboration protocol (not open
+licensing or GitHub visual chrome) to music: a creator can open one precise part
 of a song for contribution, review alternatives in context, choose what ships,
 and preserve scoped rights, authorship, and reputation around that decision.
 
@@ -67,7 +67,7 @@ permissions remain explicit, scoped, and owner-controlled.
   privately, to asking for help, to contributing recognizable craft, to becoming
   sought-after collaborators.
 - **It makes profiles more credible.** A creator can show accepted work,
-  verified credits, collaborators, and downstream reuse—not only generated
+  verified credits, collaborators, and downstream reuse, not only generated
   songs, images, followers, or self-authored claims.
 - **It compounds creative quality.** Strong producers can contribute a narrow
   piece of distinctive sound without taking over the whole song. Good work can
@@ -156,8 +156,8 @@ without creating unacceptable rights or moderation cost?”
 > compare alternatives, request a revision, and choose what actually ships.
 > Acceptance produces a scoped rights-and-credit record, and the contributor's
 > profile becomes more credible through work selected by other creators. The
-> model borrows GitHub's collaboration protocol—request, branch, review, merge,
-> and lineage—without copying GitHub's interface or assuming that the music is
+> model borrows GitHub's collaboration protocol (request, branch, review, merge,
+> and lineage) without copying GitHub's interface or assuming that the music is
 > openly licensed. I would start invite-only and test whether this causes more
 > edited songs to reach publish or export without unacceptable trust cost.
 
@@ -212,7 +212,7 @@ dual-provenance. Mara's underlying stem stays hers throughout; what
 @lowlight controls is the additive layer and the creative transformation,
 which is what the rights confirmation attests and the receipt records. That
 is why song rights transfer only on acceptance, stems stay excluded by
-default, and the draft captures the take's method — recorded, Suno remix,
+default, and the draft captures the take's method: recorded, Suno remix,
 or uploaded. Provenance is a first-class field. In beta, remix-method takes
 carry the derivation chain in the receipt. The same logic caps what a
 passed take is worth outside the song: the contributor keeps their layer
@@ -220,7 +220,7 @@ and their idea, but a remix-method take embedding the owner's stem is not
 freely reusable, and the derivation chain is what enforces that line.
 The demo now shows this in the interface: submitting a forked draft swaps
 the attestation to "My added layers are mine" with the forked layer's
-credit staying locked under its pack terms — dual provenance is attested
+credit staying locked under its pack terms; dual provenance is attested
 as dual provenance, never flattened into a single ownership claim.
 
 **"BandLab, Kompoz, and Blend all did open collaboration. They stalled.
@@ -240,7 +240,7 @@ gig site tried.
 
 **"How do you know the primary metric is causal and not self-selection?"**
 You don't, until you design for it. Eligible stuck editors get randomized
-at the moment they qualify — invited to Open Signal or held out — and the
+at the moment they qualify (invited to Open Signal or held out) and the
 comparison is publish-or-export completion between arms, not before and
 after. Add a listener-side check: songs with accepted takes must hold skip
 and completion parity, so reciprocity pressure cannot inflate publishes
@@ -258,7 +258,7 @@ when a call's owner chooses that audience.
 **"Why does forking need no rights confirmation when submitting a take
 does?"**
 Different directions of risk. A published pack is offered for forking by
-its owner — that is what publishing a pack means, and the forked layer
+its owner: that is what publishing a pack means, and the forked layer
 carries locked credit wherever it goes. Submitting a take imports outside
 audio INTO someone else's song, which is where a false ownership claim
 does damage; that is the moment that needs the checkbox. Fork freely,
@@ -281,15 +281,15 @@ components, and contributor activity, ranked by work rather than plays.
 
 ## Application link copy
 
-**Open Signal — an interactive product specification**
+**Open Signal – an interactive product specification**
 
 I built a playable, mobile-first spec exploring directed contribution on Suno.
 It shows both sides of the loop: one creator opens a precise section of a song;
 another submits a take and confirms their rights; the owner compares, reviews,
 and chooses what ships; acceptance creates a portable credit receipt.
 
-The product hypothesis: borrow the collaboration protocol—not the visual
-chrome—of open source to help more music ship while turning accepted work into
+The product hypothesis: borrow the collaboration protocol (not the visual
+chrome) of open source to help more music ship while turning accepted work into
 visible creator reputation.
 
 [Explore the interactive spec](https://open-signal-concept.boabrams.workers.dev)

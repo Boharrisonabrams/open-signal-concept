@@ -26,6 +26,7 @@ type IconName =
   | "spark"
   | "star"
   | "studio"
+  | "thumb"
   | "upload"
   | "verified";
 
@@ -386,6 +387,14 @@ function Icon({
       </svg>
     );
   }
+  if (name === "thumb") {
+    return (
+      <svg {...common}>
+        <path d="M7 10.4 11.2 3c1.3 0 2.2 1 2.2 2.2 0 .5-.4 2-.9 3.4h5.2c1 0 1.8.9 1.6 1.9l-1.3 7.2a2 2 0 0 1-2 1.7H7" />
+        <path d="M7 10.4H3.6v9h3.4v-9Z" />
+      </svg>
+    );
+  }
   if (name === "reset") {
     return (
       <svg {...common}>
@@ -526,6 +535,10 @@ function MiniWaveform() {
   );
 }
 
+function SunoMark({ size = 16 }: { size?: number }) {
+  return <span className="suno-mark" style={{ width: size, height: size }} aria-hidden="true" />;
+}
+
 function BrandMark() {
   return (
     <div className="brand" aria-label="Open Signal, an independent concept for Suno">
@@ -578,7 +591,7 @@ function PlayerScene({
       </div>
       <header className="player-scene__header">
         <div>
-          <h2>Open Signal</h2>
+          <h2>Open Signal <span className="model-tag">v5.5</span></h2>
           <div className="artist-link">
             <span className="artist-orb" />
             Mara Venn
@@ -588,7 +601,7 @@ function PlayerScene({
       </header>
       <nav className="action-rail" aria-label="Song actions">
         <button className={liked ? "is-liked" : ""} type="button" onClick={onToggleLike} aria-label={liked ? "Unlike" : "Like"} aria-pressed={liked}>
-          <Icon name="heart" size={21} />
+          <Icon name="thumb" size={21} />
           <small>{liked ? "342" : "341"}</small>
         </button>
         <button type="button" onClick={onShare} aria-label="Share Open Signal">
@@ -699,7 +712,7 @@ function CallScene({
         <div className="call-copy">
           <h3>Replace the guitar riff</h3>
           <p>Keep the tension. Lose the stock indie cadence.</p>
-          <small>106 BPM <b>·</b> E minor <b>·</b> 14 sec</small>
+          <small>106 BPM, E minor, 14 sec</small>
           <p className="call-rights">If accepted, the take ships in this song. Stems stay yours.</p>
         </div>
         <div className="call-sheet__actions">
@@ -814,9 +827,9 @@ function SubmitScene({
           <div className="submission-context">
             <div>
               <span>Original in context</span>
-              <small>106 BPM · E minor · 14 sec</small>
+              <small>106 BPM, E minor, 14 sec</small>
             </div>
-            <WaveBars color="rgba(255, 255, 255, 0.35)" quiet />
+            <WaveBars color="rgba(28, 23, 18, 0.45)" quiet />
             <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} original section`}>
               <Icon name={playing ? "pause" : "play"} size={17} />
             </button>
@@ -833,7 +846,7 @@ function SubmitScene({
                   onClick={() => onMethod(option.id)}
                   aria-pressed={method === option.id}
                 >
-                  <Icon name={option.icon} size={18} />
+                  {option.id === "remix" ? <SunoMark size={17} /> : <Icon name={option.icon} size={18} />}
                   <span>{option.label}</span>
                 </button>
               ))}
@@ -845,7 +858,7 @@ function SubmitScene({
             <div>
               <span>Ready to submit</span>
               <strong>{viaFork ? "Fork of Drum texture" : "Muted trumpet counterline"}</strong>
-              <small>{viaFork ? "Built on @lowlight’s pack · fork credit attached" : `@lowlight · Take 02 · ${methodDescriptor[method]}`}</small>
+              <small>{viaFork ? "Built on @lowlight’s pack · fork credit attached" : `Take 02 · ${methodDescriptor[method]}`}</small>
             </div>
             <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} draft take`}>
               <Icon name={playing ? "pause" : "play"} size={17} />
@@ -877,7 +890,7 @@ function SubmitScene({
             Send for review
             <Icon name="arrow" size={17} />
           </button>
-          <p className="submission-note">One revision round · Attribution required · Illustrative terms</p>
+          <p className="submission-note">One revision round. Attribution required. Illustrative terms.</p>
         </div>
       )}
     </section>
@@ -1194,26 +1207,26 @@ function ProfileScene({
       <p className="profile-handle">{creator.handle}</p>
       <VerifiedHuman />
       <div className="reputation-stats" aria-label="Suno reputation">
-        <div><strong>{creator.acceptedCount + (accepted ? 1 : 0)}</strong><span>Accepted</span></div>
-        <div><strong>{creator.reuses}</strong><span>Reuses</span></div>
-        <div><strong>{creator.openCalls}</strong><span>Open calls</span></div>
-        <div className="reputation-stats__soft"><strong>{contributionId === "lowlight" ? 214 + (starred ? 1 : 0) : 76}</strong><span>Stars</span></div>
+        <div className="stat-chip"><Icon name="check" size={13} /><strong>{creator.acceptedCount + (accepted ? 1 : 0)}</strong><span>Accepted</span></div>
+        <div className="stat-chip"><Icon name="remix" size={13} /><strong>{creator.reuses}</strong><span>Reuses</span></div>
+        <div className="stat-chip"><Icon name="spark" size={13} /><strong>{creator.openCalls}</strong><span>Open calls</span></div>
+        <div className="stat-chip stat-chip--soft"><Icon name="star" size={13} /><strong>{contributionId === "lowlight" ? 214 + (starred ? 1 : 0) : 76}</strong><span>Stars</span></div>
       </div>
       <div className="profile-actions">
-        <button className={following ? "is-following" : ""} type="button" onClick={onFollow} aria-pressed={following}><Icon name={following ? "check" : "person"} />{following ? "Following" : "Follow"}</button>
+        <button className={`follow-button${following ? " is-following" : ""}`} type="button" onClick={onFollow} aria-pressed={following}>{following ? <><Icon name="check" />Following</> : "+ Follow"}</button>
         <button type="button" onClick={onShare} aria-label={`Share ${creator.name}'s profile`}><Icon name="share" /></button>
         <button className="gradient-square" type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} ${creator.name}'s work`}>
           <Icon name={playing ? "pause" : "play"} />
         </button>
       </div>
-      <small className="follower-count">{creator.followers} followers</small>
+      <small className="follower-count">{creator.followers} fans</small>
       <section className="credits">
         <div className="section-title-row">
           <h3>Selected credits</h3>
           <span><Icon name="verified" size={16} /> Credits verified</span>
         </div>
-        <p><Icon name="disc" size={15} /> <strong>{creator.album}</strong> — producer</p>
-        <p><Icon name="studio" size={15} /> <strong>{creator.workplace}</strong> — sound design</p>
+        <p><Icon name="disc" size={15} /> <strong>{creator.album}</strong> · producer</p>
+        <p><Icon name="studio" size={15} /> <strong>{creator.workplace}</strong> · sound design</p>
       </section>
       <section className="profile-contributions">
         <h3>Contributions</h3>
@@ -1233,7 +1246,7 @@ function ProfileScene({
           <div>
             <small>Reused</small>
             <strong>Drum texture reused in 14 projects</strong>
-            <span>Last used 2d ago · 14 projects</span>
+            <span>Last used 2d ago</span>
           </div>
           <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} reused texture`}><Icon name={playing ? "pause" : "play"} /></button>
         </article>
@@ -1284,7 +1297,7 @@ function AcceptanceReceipt({
           <Icon name="verified" size={19} />
         </div>
         <dl>
-          <div><dt>Exact asset</dt><dd>Take 02 · 0:42–0:56 · 14 sec</dd></div>
+          <div><dt>Exact asset</dt><dd>Take 02 · 0:42–0:56 (14 sec)</dd></div>
           <div><dt>Song rights</dt><dd>Mara may publish and monetize this accepted take in Open Signal.</dd></div>
           <div><dt>Stem reuse</dt><dd>Not included. Separate permission is required.</dd></div>
           <div><dt>Attribution</dt><dd>{creator.handle} stays attached to downstream remixes.</dd></div>
@@ -1335,7 +1348,7 @@ function BrowseScene({
         <button className="browse-call-card browse-call-card--live" type="button" onClick={onOpenCall}>
           <img src="/open-signal-cover.png" alt="" />
           <span className="browse-call-card__body">
-            <small>art-pop · E minor · 106 BPM</small>
+            <small>art-pop, E minor, 106 BPM</small>
             <strong>Replace the guitar riff</strong>
             <span>2 takes in review · Invite-only</span>
           </span>
@@ -1345,7 +1358,7 @@ function BrowseScene({
         <div className="browse-call-card">
           <span className="browse-tile browse-tile--dusk" aria-hidden="true" />
           <span className="browse-call-card__body">
-            <small>ambient · C♯ minor · 74 BPM</small>
+            <small>ambient, C♯ minor, 74 BPM</small>
             <strong>Granular pad under the bridge</strong>
             <span>4 takes in review · Open pool</span>
           </span>
@@ -1354,7 +1367,7 @@ function BrowseScene({
         <div className="browse-call-card">
           <span className="browse-tile browse-tile--ember" aria-hidden="true" />
           <span className="browse-call-card__body">
-            <small>alt-R&B · F major · 92 BPM</small>
+            <small>alt-R&B, F major, 92 BPM</small>
             <strong>Vocal texture for the outro</strong>
             <span>1 take in review · Invite-only</span>
           </span>
@@ -1362,7 +1375,10 @@ function BrowseScene({
         </div>
       </div>
 
-      <h3 className="browse-section-title">Trending packs</h3>
+      <div className="browse-section-row">
+        <h3 className="browse-section-title">Trending packs</h3>
+        <span className="browse-more" aria-hidden="true">More ›</span>
+      </div>
       <div className="browse-components">
         <div className="browse-comp-tile browse-comp-tile--live">
           <button className="browse-pack-open" type="button" onClick={onOpenComments} aria-label="Open Drum texture pack comments">
@@ -1408,7 +1424,10 @@ function BrowseScene({
         </>
       ) : null}
 
-      <h3 className="browse-section-title">Top contributors</h3>
+      <div className="browse-section-row">
+        <h3 className="browse-section-title">Top contributors</h3>
+        <span className="browse-more" aria-hidden="true">More ›</span>
+      </div>
       <div className="browse-people">
         <div className="browse-person">
           <img src="/nia-okafor.png" alt="Nia Okafor" />
@@ -1488,7 +1507,7 @@ function StudioScene({
         <textarea id="studio-prompt-input" placeholder="Describe what to change… e.g. more snare on the offbeat" />
         <div className="studio-methods">
           <span><Icon name="record" size={13} /> Record</span>
-          <span><Icon name="remix" size={13} /> Remix with Suno</span>
+          <span><SunoMark size={13} /> Remix with Suno</span>
           <span><Icon name="upload" size={13} /> Upload</span>
         </div>
       </div>
@@ -1560,7 +1579,11 @@ function CommentsSheet({
           </div>
           <button ref={closeButtonRef} className="round-control" type="button" onClick={onClose} aria-label="Close comments"><Icon name="close" /></button>
         </header>
-        <p className="comments-stats"><Icon name="star" size={14} /> {stars} · {forks} forks · 14 shipped</p>
+        <p className="comments-stats">
+          <span><Icon name="star" size={14} /> {stars}</span>
+          <span><Icon name="remix" size={14} /> {forks} forks</span>
+          <span><Icon name="check" size={14} /> 14 shipped</span>
+        </p>
         <div className="comments-thread">
           <div className="comment">
             <img src="/adopter-jules.jpg" alt="" />
@@ -1611,8 +1634,37 @@ function CommentsSheet({
   );
 }
 
+function CoachMark({ onDismiss }: { onDismiss: () => void }) {
+  const gotItRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onDismiss();
+    };
+    gotItRef.current?.focus();
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [onDismiss]);
+
+  return (
+    <div className="coach-mark" role="dialog" aria-modal="true" aria-label="How open calls work">
+      <button className="coach-mark__backdrop" type="button" onClick={onDismiss} aria-label="Dismiss tip" tabIndex={-1} />
+      <div className="coach-mark__body">
+        <p>Every open call asks for one section of a song. Add your take; the owner picks what ships.</p>
+        <button ref={gotItRef} type="button" onClick={onDismiss}>Got it</button>
+      </div>
+    </div>
+  );
+}
+
 function PhoneDemo({
   scene,
+  coachOpen,
+  onDismissCoach,
   acceptedId,
   passedIds,
   starred,
@@ -1652,6 +1704,8 @@ function PhoneDemo({
   onPlay,
 }: {
   scene: Scene;
+  coachOpen: boolean;
+  onDismissCoach: () => void;
   acceptedId: CreatorContributionId | null;
   passedIds: CreatorContributionId[];
   starred: boolean;
@@ -1771,6 +1825,7 @@ function PhoneDemo({
           onClose={() => onScene(acceptedId ? "accepted" : "compare")}
         />
       ) : null}
+      {scene === "browse" && coachOpen ? <CoachMark onDismiss={onDismissCoach} /> : null}
       {receiptOpen && acceptedId ? <AcceptanceReceipt contributionId={acceptedId} onClose={onCloseReceipt} /> : null}
       {commentsOpen ? (
         <CommentsSheet
@@ -1799,9 +1854,9 @@ function SongRail({
     <div className="song-rail">
       <img src="/open-signal-cover.png" alt="" />
       <div className="song-rail__meta">
-        <h2>Open Signal <span className="model-tag">v5.5</span></h2>
+        <h2>Open Signal <span className="on-suno"><SunoMark size={15} /><span className="model-tag">v5.5</span></span></h2>
         <strong>Mara Venn</strong>
-        <small>art-pop / indietronica · 106 BPM · E minor</small>
+        <small>art-pop, indietronica, 106 BPM, E minor</small>
       </div>
       <button type="button" onClick={onTogglePlay} aria-label={playing ? "Pause Open Signal" : "Play Open Signal"}>
         <Icon name={playing ? "pause" : "play"} />
@@ -1914,6 +1969,7 @@ export function OpenSignalExperience() {
   const [submitViaFork, setSubmitViaFork] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
+  const [coachDismissed, setCoachDismissed] = useState(false);
   const [shareStatus, setShareStatus] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<ContributionId | null>(null);
   const audioHandle = useRef<DemoAudioHandle | null>(null);
@@ -2007,6 +2063,7 @@ export function OpenSignalExperience() {
     setScene(next);
     setReceiptOpen(false);
     setCommentsOpen(false);
+    setCoachDismissed(true);
     const url = new URL(window.location.href);
     if (next === "browse") {
       url.searchParams.delete("scene");
@@ -2049,7 +2106,7 @@ export function OpenSignalExperience() {
   const sharePrototype = useCallback(async () => {
     const canShare = typeof navigator.share === "function";
     const shareData = {
-      title: "Open Signal — an interactive product spec",
+      title: "Open Signal – an interactive product spec",
       text: "Ask for a take, hear it in context, and preserve credit for what ships.",
       url: new URL("/", window.location.href).href,
     };
@@ -2098,6 +2155,7 @@ export function OpenSignalExperience() {
     setCommentsOpen(false);
     stopAudio();
     navigate("browse");
+    setCoachDismissed(false);
   }, [navigate, stopAudio]);
 
   const progress = useMemo(() => SCENES.indexOf(scene), [scene]);
@@ -2119,7 +2177,8 @@ export function OpenSignalExperience() {
           <p>
             Suno already helps creators generate, remix, and compare versions.
             Open Signal adds the human layer: ask for one precise take, choose
-            what ships, and preserve rights-safe credit for who made it.
+            what ships, and preserve rights-safe credit for who made it. It is
+            the collaboration loop GitHub proved for software, spoken in music.
           </p>
           <SongRail
             playing={playingId === "original"}
@@ -2142,7 +2201,7 @@ export function OpenSignalExperience() {
         </div>
 
         <div className="demo-column">
-          <p className="mobile-thesis">Ask for a take. Hear it in context. Keep what works. Credit who made it.</p>
+          <p className="mobile-thesis">GitHub&rsquo;s loop, in music: ask for a take, hear it in context, credit who made it.</p>
           <div className="scene-tabs" aria-label="Demo scenes">
             {SCENES.filter((item) => item !== "studio").map((item) => (
               <button
@@ -2159,6 +2218,8 @@ export function OpenSignalExperience() {
           </div>
           <PhoneDemo
             scene={scene}
+            coachOpen={!coachDismissed}
+            onDismissCoach={() => setCoachDismissed(true)}
             acceptedId={acceptedId}
             passedIds={passedIds}
             starred={starred}
@@ -2203,7 +2264,7 @@ export function OpenSignalExperience() {
           <div className="proof-column__copy">
             <span>The human layer.</span>
             <h2>Make contribution legible.</h2>
-            <p>Producers find open work in the feed; a precise request becomes a contribution, a review, a decision, and durable credit—all in Suno’s musical language.</p>
+            <p>Producers find open work in the feed; a precise request becomes a contribution, a review, a decision, and durable credit, all in Suno’s musical language.</p>
           </div>
           <HumanProofCard contributionId={acceptedId ?? "lowlight"} accepted={Boolean(acceptedId)} onOpen={() => navigate("profile")} />
           <div className="trust-stack">
@@ -2236,15 +2297,16 @@ export function OpenSignalExperience() {
           <article><strong>Human credit</strong><span>Accepted work strengthens a real profile.</span></article>
           <article><strong>Portable lineage</strong><span>Credit travels when the sound does.</span></article>
         </div>
-        <div className="product-horizon" aria-label="GitHub collaboration logic translated into Suno language">
+        <div className="protocol-map" aria-label="GitHub collaboration logic translated into Suno language">
           <strong>GitHub logic, Suno language</strong>
-          <span>Request</span>
-          <Icon name="arrow" size={17} />
-          <span>Contribution</span>
-          <Icon name="arrow" size={17} />
-          <span>Review</span>
-          <Icon name="arrow" size={17} />
-          <span>Accept + credit</span>
+          <div className="protocol-map__rows">
+            <div><span>Issue</span><Icon name="arrow" size={15} /><b>Open call</b></div>
+            <div><span>Pull request</span><Icon name="arrow" size={15} /><b>Take</b></div>
+            <div><span>Code review</span><Icon name="arrow" size={15} /><b>Compare in context</b></div>
+            <div><span>Merge</span><Icon name="arrow" size={15} /><b>Accept + credit</b></div>
+            <div><span>Fork</span><Icon name="arrow" size={15} /><b>Fork, credit locked</b></div>
+            <div><span>License</span><Icon name="arrow" size={15} /><b>Rights receipt</b></div>
+          </div>
         </div>
       </section>
 
@@ -2253,7 +2315,7 @@ export function OpenSignalExperience() {
           <h2 id="measurement-title">What the beta must prove</h2>
           <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
           <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
-          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are — whole-song collab asks have stalled before because the ask was too big and the room too empty.</p>
+          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are. Whole-song collab asks have stalled before because the ask was too big and the room too empty.</p>
         </div>
         <dl>
           <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>

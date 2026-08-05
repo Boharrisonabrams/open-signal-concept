@@ -543,6 +543,54 @@ across five panels. Shipped from converged findings (`385cb6f`,
   PNGs applies to the session pack only; nothing ships with the
   application.
 
+### Round 6: Mobbin brand grounding + taste skill + GitHub legibility (2026-08-05, Bo-directed)
+
+Bo re-downloaded the Suno iOS Mobbin capture (130 screens, Feb 2025; digest at
+`docs/suno-brand-reference-feb-2025.md`, superseding the App Store grounding),
+installed the Leonxlnx taste-skill (`design-taste-frontend`), and directed three
+fixes: match Suno's real brand and language, apply the taste skill, and make the
+GitHub translation explicit (assume reviewers know a little GitHub). Shipped as
+Worker version `e608145d`:
+
+- Surface strategy now mirrors Suno's: browse, submit, studio, and profile are
+  bone-light utility surfaces (scene-scoped `--p-*` var overrides at the end of
+  `globals.css`); player, call, and compare stay dark art-driven; receipt and
+  comments sheets are light over either scene (Song Actions idiom).
+- Suno idioms: thumbs-up like (was heart), lime v5.5 model chip (solid on
+  light, outlined on the dark player), player title compact sans, profile stat
+  chips in spaced caps (Accepted / Reuses / Open calls / Stars muted last),
+  "+ Follow" magenta, "1,132 fans", lowercase comma style tags, "More ›"
+  dressing affordances, black-pill CTAs on light (Save draft, Done, Post) with
+  lava kept for generate-grade moments (Send for review, Accept, Submit it to
+  the open call).
+- Suno app-icon mark (`.suno-mark`, CSS gradient squircle) added only where the
+  brand sits in the fiction: "Remix with Suno" chips (submit + studio) and the
+  page song-rail on-Suno badge. The masthead stays neutral per the panel-1
+  trademark fix; flipping it is a one-liner if Bo wants it anyway.
+- GitHub legibility: hero paragraph closes "It is the collaboration loop GitHub
+  proved for software, spoken in music."; mobile thesis is "GitHub's loop, in
+  music: …"; the product-horizon strip became `.protocol-map` (Issue→Open call,
+  Pull request→Take, Code review→Compare in context, Merge→Accept + credit,
+  Fork→Fork credit locked, License→Rights receipt); a browse-first-visit coach
+  mark in Suno's own coach idiom ("Every open call asks for one section of a
+  song. Add your take; the owner picks what ships." + magenta Got it) dismisses
+  on any navigation and returns after Reset. Link copy now names GitHub.
+- Humanizer/taste pass: zero em-dashes in TSX/MD (now test-pinned via
+  `doesNotMatch /—/`; titles use en-dash), middle-dot lines thinned phone-side,
+  "Last used 2d ago" de-duped, submission note in sentences, primer em-dashes
+  converted without meaning changes.
+- Deliberate exceptions, recorded: time ranges keep the en-dash (0:42–0:56);
+  compare-header chip stays hidden at mobile widths (pre-existing space rule);
+  `og.png` left as the Bo-approved card (its serif-on-bone design already
+  matches the new direction; refresh optional).
+- Verified: full battery green (lint, unpiped tsc, tests 2/2 with new pins,
+  `git diff --check`); local and production walks covered browse coach → call →
+  submit → success, fork → studio → save → fork-aware attestation, accept →
+  light receipt, profile chips, light comments sheet, and reset. Bugs caught
+  in-pass: draft-take white-on-bone text, follow-button specificity, method-chip
+  padding leaking into the Suno mark, weak coach backdrop, success-receipt
+  white text.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,

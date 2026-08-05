@@ -2,10 +2,10 @@
 
 ## Recommended (short)
 
-**Open Signal — a playable, mobile-first product spec for Suno.** When
+**Open Signal – a playable, mobile-first product spec for Suno.** When
 re-rolling stops helping, you ask a person: browse open work, ask for one
 precise take, choose what ships, and mint rights-safe credit for who made
-it.
+it. It's GitHub's collaboration loop, translated to music.
 
 https://open-signal-concept.boabrams.workers.dev
 
@@ -15,15 +15,18 @@ with Suno.
 
 ## Longer version
 
-**Open Signal — an interactive product specification**
+**Open Signal – an interactive product specification**
 
 I built a playable, mobile-first spec exploring directed contribution on
 Suno. It shows both sides of the loop: one creator opens a precise section of a
 song; another submits a take and confirms their rights; the owner compares,
 reviews, and chooses what ships; acceptance creates a portable credit receipt.
 
-The product hypothesis: borrow open source's collaboration protocol so more
-music ships, and turn accepted work into visible creator reputation.
+The product hypothesis: borrow GitHub's collaboration protocol so more
+music ships, and turn accepted work into visible creator reputation. The
+demo assumes you know roughly how GitHub works; the mapping (issue to open
+call, pull request to take, merge to accept-plus-credit) is spelled out on
+the page.
 
 [Explore the interactive spec →](https://open-signal-concept.boabrams.workers.dev)
 

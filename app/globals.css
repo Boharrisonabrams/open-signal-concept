@@ -213,8 +213,8 @@ p {
   margin-left: 5px;
   padding: 0 6px;
   border-radius: 5px;
-  background: #25242b;
-  color: white;
+  background: var(--lime);
+  color: #1a1a10;
   font-family: var(--font-ui), Arial, sans-serif;
   font-size: 11px;
   font-weight: 720;
@@ -526,12 +526,11 @@ p {
 }
 
 .player-scene__header h2 {
-  margin: 0 0 5px;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 46px;
-  font-weight: 450;
-  line-height: 1;
-  letter-spacing: -0.04em;
+  margin: 0 0 6px;
+  font-size: 21px;
+  font-weight: 680;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
 }
 
 .artist-link {
@@ -1385,9 +1384,8 @@ p {
 
 .compare-header h2 {
   margin: 0;
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 17px;
-  font-weight: 500;
+  font-size: 15px;
+  font-weight: 650;
 }
 
 .compare-header p {
@@ -1943,35 +1941,40 @@ p {
 }
 
 .reputation-stats {
-  margin: 26px 0 20px;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  margin: 22px -24px 18px;
+  padding: 0 24px;
+  display: flex;
+  gap: 7px;
+  overflow-x: auto;
+  scrollbar-width: none;
 }
 
-.reputation-stats div {
-  text-align: center;
+.reputation-stats::-webkit-scrollbar {
+  display: none;
 }
 
-.reputation-stats div + div {
-  border-left: 1px solid var(--line);
+.stat-chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 0 13px;
+  border-radius: 999px;
+  background: var(--soft);
+  white-space: nowrap;
 }
 
-.reputation-stats strong,
-.reputation-stats span {
-  display: block;
+.stat-chip strong {
+  font-size: 13.5px;
+  font-weight: 720;
 }
 
-.reputation-stats strong {
-  font-family: var(--font-display), Georgia, serif;
-  font-size: 31px;
-  font-weight: 520;
-}
-
-.reputation-stats span {
-  color: #4e4a50;
-  font-size: 9px;
+.stat-chip span {
+  font-size: 10px;
+  font-weight: 650;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.14em;
 }
 
 .profile-actions {
@@ -2646,20 +2649,46 @@ p {
   font-size: 11px;
 }
 
-.product-horizon {
-  margin-top: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 12px;
-  color: var(--muted);
-  font-size: 11px;
+.protocol-map {
+  margin-top: 26px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
 }
 
-.product-horizon strong {
-  margin-right: auto;
+.protocol-map > strong {
+  display: block;
+  margin-bottom: 12px;
   color: var(--ink);
   font-weight: 700;
+  font-size: 13px;
+}
+
+.protocol-map__rows {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px 22px;
+}
+
+.protocol-map__rows > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+}
+
+.protocol-map__rows span {
+  color: var(--muted);
+}
+
+.protocol-map__rows svg {
+  flex: none;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.protocol-map__rows b {
+  color: var(--ink);
+  font-weight: 680;
 }
 
 .measurement-section {
@@ -3109,23 +3138,9 @@ p {
     border-top: 0;
   }
 
-  .product-horizon {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 6px;
-    overflow: visible;
-    font-size: 9px;
-    white-space: normal;
-  }
-
-  .product-horizon strong {
-    flex-basis: 100%;
-    margin: 0 0 4px;
-  }
-
-  .product-horizon svg {
-    width: 13px;
-    height: 13px;
+  .protocol-map__rows {
+    grid-template-columns: 1fr;
+    gap: 7px;
   }
 
   .measurement-section dl > div {
@@ -3414,6 +3429,7 @@ p {
 
 .phone-frame .draft-take {
   background: var(--p-card-2);
+  color: var(--p-text);
 }
 
 .phone-frame .draft-take span {
@@ -3644,12 +3660,12 @@ p {
 .phone-frame .section-title-row span,
 .phone-frame .credits p > svg,
 .phone-frame .profile-contributions article span,
-.phone-frame .reputation-stats span {
+.phone-frame .stat-chip span {
   color: var(--p-muted);
 }
 
-.phone-frame .reputation-stats div + div {
-  border-color: var(--p-line);
+.phone-frame .stat-chip {
+  background: var(--p-chip);
 }
 
 .phone-frame .profile-actions button {
@@ -3657,8 +3673,16 @@ p {
   color: var(--p-text);
 }
 
-.phone-frame .profile-actions button.is-following {
+.phone-frame .profile-actions .follow-button {
+  color: var(--p-accent);
+  background: transparent;
+  border: 1px solid var(--p-line);
+  border-radius: 12px;
+}
+
+.phone-frame .profile-actions .follow-button.is-following {
   background: rgba(96, 214, 121, 0.16);
+  border-color: transparent;
   color: #8ce39a;
 }
 
@@ -4373,7 +4397,7 @@ p {
   margin: 9px 0 16px;
 }
 
-.phone-frame .studio-methods span {
+.phone-frame .studio-methods > span {
   display: inline-flex;
   align-items: center;
   gap: 5px;
@@ -4392,8 +4416,9 @@ p {
   margin-top: 10px;
 }
 
-.phone-frame .reputation-stats__soft strong,
-.phone-frame .reputation-stats__soft span {
+.phone-frame .stat-chip--soft strong,
+.phone-frame .stat-chip--soft span,
+.phone-frame .stat-chip--soft svg {
   color: var(--p-muted);
 }
 
@@ -4474,11 +4499,6 @@ p {
   transform: scale(0.985);
 }
 
-@media (max-width: 680px) {
-  .phone-frame .reputation-stats strong {
-    font-size: 19px;
-  }
-}
 
 @media (max-width: 680px) {
   .phone-frame .call-sheet {
@@ -4489,4 +4509,256 @@ p {
     margin-top: 5px;
     font-size: 11px;
   }
+}
+
+/* Suno light utility surfaces (grounded in the Mobbin iOS capture, Feb 2025):
+   browse, submit, studio, and profile follow Suno's bone utility idiom, while
+   player, call, and compare stay dark and art-driven like the Suno player.
+   Sheets go light over either, matching Song Actions / Add to Playlist. */
+
+.phone-frame--browse,
+.phone-frame--submit,
+.phone-frame--studio,
+.phone-frame--profile {
+  --p-bg: #f6f3ed;
+  --p-sheet: #f1ede5;
+  --p-card: #efeae1;
+  --p-card-2: #e9e2d7;
+  --p-line: rgba(28, 23, 18, 0.13);
+  --p-text: #1c1712;
+  --p-muted: rgba(28, 23, 18, 0.6);
+  --p-chip: rgba(28, 23, 18, 0.06);
+  --p-accent: #d81b74;
+  --p-amber: #9c5a10;
+}
+
+.phone-frame--browse .status-bar--light,
+.phone-frame--submit .status-bar--light,
+.phone-frame--studio .status-bar--light,
+.phone-frame--profile .status-bar--light {
+  color: #1c1712;
+  text-shadow: none;
+}
+
+.phone-frame--browse :is(button, input, textarea):focus-visible,
+.phone-frame--submit :is(button, input, textarea):focus-visible,
+.phone-frame--studio :is(button, input, textarea):focus-visible,
+.phone-frame--profile :is(button, input, textarea):focus-visible {
+  outline-color: rgba(216, 27, 116, 0.55);
+}
+
+.phone-frame--submit .submit-header {
+  background: rgba(246, 243, 237, 0.94);
+}
+
+.phone-frame .submission-success__receipt strong {
+  color: var(--p-text);
+}
+
+.phone-frame--submit .submission-methods button.is-selected {
+  border-color: var(--p-accent);
+  background: rgba(216, 27, 116, 0.09);
+  box-shadow: 0 0 0 2px rgba(216, 27, 116, 0.1);
+}
+
+.phone-frame--studio .studio-prompt textarea {
+  background: #fbf8f2;
+}
+
+.phone-frame--studio .studio-saved {
+  background: rgba(29, 122, 62, 0.11);
+  color: #1d7a3e;
+}
+
+.phone-frame--studio .studio-saved small {
+  color: rgba(29, 122, 62, 0.78);
+}
+
+.phone-frame--studio .studio-layer > svg,
+.phone-frame--browse .browse-draft > svg {
+  color: #1d7a3e;
+}
+
+.phone-frame--studio .studio-save {
+  background: #1c1712;
+}
+
+.phone-frame--studio .studio-submit {
+  background: var(--p-lava);
+}
+
+.phone-frame--profile .profile-actions .follow-button.is-following {
+  background: rgba(29, 122, 62, 0.12);
+  color: #1d7a3e;
+}
+
+.phone-frame--profile .profile-actions .gradient-square {
+  background: #1c1712;
+}
+
+/* Light sheets over any scene, like Suno's Song Actions sheet over the player */
+
+.phone-frame .receipt-sheet {
+  --p-sheet: #f3efe7;
+  --p-card: #ece7dd;
+  --p-card-2: #e7e0d4;
+  --p-line: rgba(28, 23, 18, 0.13);
+  --p-text: #1c1712;
+  --p-muted: rgba(28, 23, 18, 0.6);
+  --p-chip: rgba(28, 23, 18, 0.07);
+  --p-accent: #d81b74;
+  background: var(--p-sheet);
+  color: var(--p-text);
+}
+
+.phone-frame .receipt-sheet .sheet-handle {
+  background: rgba(28, 23, 18, 0.25);
+}
+
+.phone-frame .receipt-sheet :is(button, input, textarea):focus-visible {
+  outline-color: rgba(216, 27, 116, 0.55);
+}
+
+.phone-frame .receipt-sheet .receipt-confirmation {
+  background: rgba(29, 122, 62, 0.11);
+  color: #1d7a3e;
+}
+
+.phone-frame .receipt-sheet .gradient-button {
+  background: #1c1712;
+}
+
+.phone-frame .receipt-sheet .comments-composer input {
+  background: #fbf8f2;
+}
+
+.phone-frame .receipt-sheet .comments-composer button {
+  background: #1c1712;
+}
+
+.phone-frame .comments-sheet h2 {
+  font-family: var(--font-display), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.phone-frame .comments-stats {
+  gap: 13px;
+}
+
+.phone-frame .comments-stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Browse section rows with the Discover "More" affordance */
+
+.browse-section-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.browse-section-row .browse-section-title {
+  margin-right: auto;
+}
+
+.browse-more {
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+}
+
+/* Coach mark, the Suno first-run guidance idiom */
+
+.coach-mark {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  display: grid;
+  place-items: center;
+  padding: 34px;
+  text-align: center;
+}
+
+.coach-mark__backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(15, 11, 8, 0.78);
+  cursor: pointer;
+}
+
+.coach-mark__body {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  gap: 13px;
+  justify-items: center;
+  animation: coach-in 260ms ease-out;
+}
+
+.coach-mark__body p {
+  margin: 0;
+  max-width: 260px;
+  color: #fdfaf6;
+  font-size: 16.5px;
+  font-weight: 640;
+  line-height: 1.45;
+}
+
+.coach-mark__body button {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: #ff5ca8;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+@keyframes coach-in {
+  from { transform: translateY(7px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Dark player scenes keep the outlined lime chip like the Suno player */
+
+.phone-frame--player .model-tag,
+.phone-frame--call .model-tag,
+.phone-frame--compare .model-tag,
+.phone-frame--accepted .model-tag {
+  border: 1px solid var(--lime);
+  background: transparent;
+  color: var(--lime);
+}
+
+/* Suno app-icon mark, used only where Suno branding genuinely sits in the
+   fiction: the "Remix with Suno" method and the page song rail's on-Suno
+   badge. The site masthead stays neutral per the panel-1 trademark fix. */
+
+.suno-mark {
+  display: inline-block;
+  flex: none;
+  vertical-align: middle;
+  border-radius: 30%;
+  background:
+    radial-gradient(130% 130% at 22% 14%, rgba(255, 176, 46, 0.9) 0%, rgba(255, 176, 46, 0) 46%),
+    linear-gradient(135deg, #ff5ca8 0%, #f2148c 52%, #8e2bbf 100%);
+}
+
+.on-suno {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+.on-suno .model-tag {
+  margin-left: 0;
 }
