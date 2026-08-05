@@ -83,6 +83,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Credit and fans follow the work\./);
   assert.match(source, /the collaboration loop GitHub proved for software/);
   assert.match(source, /Pull request/);
+  assert.match(source, /a public ask for help/);
   assert.match(source, /Rights receipt/);
   assert.match(source, /Every open call asks for one section of a song/);
   assert.match(source, /Got it/);

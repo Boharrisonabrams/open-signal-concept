@@ -2300,12 +2300,12 @@ export function OpenSignalExperience() {
         <div className="protocol-map" aria-label="GitHub collaboration logic translated into Suno language">
           <strong>GitHub logic, Suno language</strong>
           <div className="protocol-map__rows">
-            <div><span>Issue</span><Icon name="arrow" size={15} /><b>Open call</b></div>
-            <div><span>Pull request</span><Icon name="arrow" size={15} /><b>Take</b></div>
-            <div><span>Code review</span><Icon name="arrow" size={15} /><b>Compare in context</b></div>
-            <div><span>Merge</span><Icon name="arrow" size={15} /><b>Accept + credit</b></div>
-            <div><span>Fork</span><Icon name="arrow" size={15} /><b>Fork, credit locked</b></div>
-            <div><span>License</span><Icon name="arrow" size={15} /><b>Rights receipt</b></div>
+            <div><span>Issue<small>a public ask for help</small></span><Icon name="arrow" size={15} /><b>Open call</b></div>
+            <div><span>Pull request<small>a proposed contribution</small></span><Icon name="arrow" size={15} /><b>Take</b></div>
+            <div><span>Code review<small>judge it before it lands</small></span><Icon name="arrow" size={15} /><b>Compare in context</b></div>
+            <div><span>Merge<small>accept it into the project</small></span><Icon name="arrow" size={15} /><b>Accept + credit</b></div>
+            <div><span>Fork<small>build on someone&rsquo;s work</small></span><Icon name="arrow" size={15} /><b>Fork, credit locked</b></div>
+            <div><span>License<small>the rules for reuse</small></span><Icon name="arrow" size={15} /><b>Rights receipt</b></div>
           </div>
         </div>
       </section>
