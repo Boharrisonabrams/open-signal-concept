@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type Scene = "player" | "call" | "submit" | "compare" | "accepted" | "profile";
+type Scene = "browse" | "player" | "call" | "submit" | "compare" | "accepted" | "profile";
 type ContributionId = "original" | "lowlight" | "circuitromance";
 type CreatorContributionId = Exclude<ContributionId, "original">;
 type SubmissionMethod = "record" | "remix" | "upload";
@@ -29,6 +29,7 @@ type IconName =
   | "verified";
 
 const SCENES: Scene[] = [
+  "browse",
   "player",
   "call",
   "submit",
@@ -38,6 +39,7 @@ const SCENES: Scene[] = [
 ];
 
 const SCENE_LABELS: Record<Scene, string> = {
+  browse: "Browse",
   player: "Player",
   call: "Open call",
   submit: "Submit",
@@ -1270,6 +1272,25 @@ function AcceptanceReceipt({
   );
 }
 
+function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
+  return (
+    <section className="browse-scene scene" aria-label="Browse open work">
+      <div className="status-bar status-bar--light" aria-hidden="true">
+        <strong>9:41</strong>
+        <StatusIcons />
+      </div>
+      <header className="browse-header">
+        <h2>Open work</h2>
+        <p>A feed of problems, not posts.</p>
+      </header>
+      <h3 className="browse-section-title">Trending open calls</h3>
+      <button className="browse-call-card browse-call-card--live" type="button" onClick={onOpenCall}>
+        Replace the guitar riff
+      </button>
+    </section>
+  );
+}
+
 function PhoneDemo({
   scene,
   acceptedId,
@@ -1326,6 +1347,9 @@ function PhoneDemo({
   return (
     <div className={`phone-frame phone-frame--${scene}`}>
       <div className="phone-island" aria-hidden="true" />
+      {scene === "browse" ? (
+        <BrowseScene onOpenCall={() => onScene("call")} />
+      ) : null}
       {scene === "player" ? (
         <PlayerScene
           playing={playingId === "original"}
@@ -1499,7 +1523,7 @@ function LineageDiagram({ acceptedId }: { acceptedId: CreatorContributionId | nu
 }
 
 export function OpenSignalExperience() {
-  const [scene, setScene] = useState<Scene>("player");
+  const [scene, setScene] = useState<Scene>("browse");
   const [acceptedId, setAcceptedId] = useState<CreatorContributionId | null>(null);
   const [passedIds, setPassedIds] = useState<CreatorContributionId[]>([]);
   const [selected, setSelected] = useState<ContributionId>("lowlight");
@@ -1584,7 +1608,7 @@ export function OpenSignalExperience() {
       const next = new URLSearchParams(window.location.search).get("scene") as Scene | null;
       const storedId = window.localStorage.getItem("open-signal:accepted-id");
       const validAcceptedId = storedId === "lowlight" || storedId === "circuitromance" ? storedId : null;
-      const requestedScene = next && SCENES.includes(next) ? next : "player";
+      const requestedScene = next && SCENES.includes(next) ? next : "browse";
       setAcceptedId(validAcceptedId);
       if (validAcceptedId) setSelected(validAcceptedId);
       setScene(requestedScene === "accepted" && !validAcceptedId ? "compare" : requestedScene);
@@ -1602,7 +1626,7 @@ export function OpenSignalExperience() {
     setScene(next);
     setReceiptOpen(false);
     const url = new URL(window.location.href);
-    if (next === "player") {
+    if (next === "browse") {
       url.searchParams.delete("scene");
     } else {
       url.searchParams.set("scene", next);
@@ -1685,7 +1709,7 @@ export function OpenSignalExperience() {
     setLiked(false);
     setFollowing(false);
     stopAudio();
-    navigate("player");
+    navigate("browse");
   }, [navigate, stopAudio]);
 
   const progress = useMemo(() => SCENES.indexOf(scene), [scene]);
@@ -1714,7 +1738,7 @@ export function OpenSignalExperience() {
             onTogglePlay={() => void togglePreview("original")}
           />
           <ol className="hero-steps">
-            <li className={progress >= 1 ? "is-active" : ""}>
+            <li className={progress >= 2 ? "is-active" : ""}>
               <span>1</span>
               <div><strong>Open</strong><small>Name the section and the ask.</small></div>
             </li>
