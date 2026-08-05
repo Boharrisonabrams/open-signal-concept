@@ -736,6 +736,22 @@ landing in Studio left its tab hidden past the right-edge fade at 390px;
   textarea focused; save → filled layer. Tests pin the new strings and the
   active-tab scroll hook.
 
+### Final mobile pass — submit candidate (2026-08-05)
+
+Bo asked for all remaining changes in one push so he could test once. CSS-only
+batch (commit `398b360`, Worker `0be86392`; JS bundle unchanged, so the live
+check polled the CSS asset — `touch-action:manipulation` confirmed served):
+
+- Scene tabs: white-space nowrap (kills the two-line "Open call" tab) and
+  40px min-height at mobile.
+- iOS focus zoom prevented: 16px font on phone inputs/textareas at ≤680px.
+- touch-action: manipulation on buttons/links (removes tap delay).
+- Profile stat-chip row gets the right-edge fade mask as a scroll cue.
+
+This build (`0be86392`) is the submit candidate. FREEZE: no further demo
+changes unless Bo explicitly asks; his single-pass phone test is the last
+gate. Everything is committed and pushed; working tree clean.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
