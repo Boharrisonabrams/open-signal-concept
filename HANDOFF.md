@@ -674,6 +674,23 @@ Compare); origination flow remains a known, primer-armed scope decision;
 NITs from the skeptic (profile chip truncation at 390, og.png 1.1 MB,
 non-interactive "Collaborate" span).
 
+### Studio entry point (2026-08-05, Bo's phone-test catch)
+
+Bo's energy test found Studio had no visible entry ("i dont see any studio
+button"): round 4 made it fork-entry-only and the Browse drafts row was a
+non-interactive div — a dead end after leaving Studio. Fixed with the
+ui-ux-pro-max skill's nav rules (empty-nav-state: show locked destinations,
+don't hide; persistent-nav; press feedback), which Bo asked about by name:
+
+- Studio tab now renders in the scene row, disabled until the first fork,
+  exactly like the Accepted tab's disabled-until-unlocked pattern.
+- Browse's drafts row is a real button ("Your studio" section, arrow
+  affordance, active-scale feedback) that opens the studio draft.
+- Verified locally and on production (tab gating, fork unlock, row
+  navigation); tests pin the aria-label and the tab gate. Commit `c59bb8b`,
+  Worker `e35e7605`. Skills note for the record: design-taste-frontend ran
+  through this whole session; ui-ux-pro-max was first invoked here.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
