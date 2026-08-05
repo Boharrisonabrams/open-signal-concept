@@ -513,6 +513,15 @@ Plan: `docs/superpowers/plans/2026-08-05-fork-social-studio.md`. Shipped:
 - Counts derive from one source everywhere (tile, sheet, profile);
   Reset restores 214/41/18 and clears drafts and comments.
 
-Pipeline per Bo: deploy → judge panel → Bo's energy test → only then
-publish source to github.com/boharrisonabrams/open-signal-concept
-(public), gated on gh auth being boharrisonabrams.
+Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
+COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
+rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
+derived comment chip, fork-time count semantics, on-page prior-art clause,
+fork-rights primer answer); Bo approved the energy test; source published
+PRIVATE (Bo's call, flipped from the spec's public default) to
+https://github.com/Boharrisonabrams/open-signal-concept (main, origin
+tracking). Kept over judge objection, Bo's explicit ask: Stars on the
+profile stat row. Live Worker: 8f94828c. Process note: a piped tsc gate
+briefly let a missing-prop error deploy (fork tick inert for one version);
+caught in live verification, fixed in 00ad393, typecheck now runs
+unpiped.
