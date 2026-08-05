@@ -614,9 +614,10 @@ Follow-up in the same round (Worker `10950350`, commit `0d3da2b`): Bo set the
 clarity bar at "a user and a CPO, without assuming they know GitHub." The
 principles heading "Borrow the protocol, not the chrome." (the panel-1 mantra)
 became "Borrow how GitHub works, not how it looks." — same claim, no jargon;
-test pin updated. The GitHub-vocab left column of the protocol map stays by
-design: it is the translation table for GitHub-literate readers, and its right
-column is plain music language.
+test pin updated. The protocol map's GitHub terms then got plain-word
+glosses on Bo's follow-up (Worker `d003668b`, commit `9f27364`): each row
+reads term + description, e.g. "Issue / a public ask for help → Open call",
+so the map needs no GitHub knowledge either.
 
 Also standing from this session: Bo invoked the i-have-adhd communication
 skill; future sessions should lead with the next action, number steps, and
