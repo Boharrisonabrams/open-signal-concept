@@ -60,6 +60,9 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Trending open calls/);
   assert.match(source, /Trending packs/);
   assert.match(source, /That’s genius\./);
+  assert.match(source, /Save draft/);
+  assert.match(source, /Saved to your studio/);
+  assert.match(source, /Forked from @lowlight/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);
   assert.match(source, /Separate stem reuse still requires permission/);

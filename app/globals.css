@@ -4238,6 +4238,181 @@ p {
   clip: rect(0 0 0 0);
 }
 
+/* Studio scene */
+
+.phone-frame .studio-scene {
+  padding: 58px 20px 24px;
+  overflow-y: auto;
+  background: var(--p-bg);
+}
+
+.phone-frame .studio-scene__close {
+  position: absolute;
+  top: 56px;
+  right: 18px;
+  z-index: 4;
+}
+
+.phone-frame .studio-header span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--p-accent);
+  font-size: 10.5px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.phone-frame .studio-header h2 {
+  margin: 7px 0 4px;
+  font-family: var(--font-display), Georgia, serif;
+  font-size: 28px;
+  font-weight: 470;
+  letter-spacing: -0.02em;
+}
+
+.phone-frame .studio-provenance {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 0 16px;
+  color: var(--p-muted);
+  font-size: 11.5px;
+}
+
+.phone-frame .studio-provenance svg {
+  color: var(--p-accent);
+}
+
+.phone-frame .studio-layers {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.phone-frame .studio-layer {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 12px;
+  border: 1px solid var(--p-line);
+  border-radius: 14px;
+  background: var(--p-card);
+}
+
+.phone-frame .studio-layer .texture-art {
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+}
+
+.phone-frame .studio-layer > svg {
+  color: #8ce39a;
+}
+
+.phone-frame .studio-layer__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+}
+
+.phone-frame .studio-layer__body strong {
+  font-size: 13px;
+  font-weight: 640;
+}
+
+.phone-frame .studio-layer__body small {
+  color: var(--p-muted);
+  font-size: 10.5px;
+}
+
+.phone-frame .studio-layer--empty {
+  border-style: dashed;
+  background: transparent;
+}
+
+.phone-frame .studio-layer__add {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 9px;
+  background: var(--p-chip);
+  color: var(--p-muted);
+  font-size: 20px;
+}
+
+.phone-frame .studio-prompt label {
+  display: block;
+  margin-bottom: 7px;
+  color: var(--p-muted);
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+}
+
+.phone-frame .studio-prompt textarea {
+  width: 100%;
+  min-height: 74px;
+  padding: 11px 13px;
+  border: 1px solid var(--p-line);
+  border-radius: 14px;
+  background: #141110;
+  color: var(--p-text);
+  font: inherit;
+  font-size: 13px;
+  resize: none;
+}
+
+.phone-frame .studio-methods {
+  display: flex;
+  gap: 7px;
+  margin: 9px 0 16px;
+}
+
+.phone-frame .studio-methods span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 11px;
+  border: 1px solid var(--p-line);
+  border-radius: 999px;
+  color: var(--p-muted);
+  font-size: 10.5px;
+}
+
+.phone-frame .studio-save {
+  width: 100%;
+}
+
+.phone-frame .studio-saved {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 14px;
+  border-radius: 14px;
+  background: rgba(96, 214, 121, 0.14);
+  color: #8ce39a;
+}
+
+.phone-frame .studio-saved span {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.phone-frame .studio-saved strong {
+  font-size: 13px;
+}
+
+.phone-frame .studio-saved small {
+  color: rgba(140, 227, 154, 0.75);
+  font-size: 10.5px;
+}
+
 @media (max-width: 680px) {
   .phone-frame .call-sheet {
     height: 76%;

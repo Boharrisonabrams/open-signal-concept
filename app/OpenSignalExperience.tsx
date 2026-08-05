@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
-type Scene = "browse" | "player" | "call" | "submit" | "compare" | "accepted" | "profile";
+type Scene = "browse" | "player" | "call" | "submit" | "compare" | "accepted" | "profile" | "studio";
 type ContributionId = "original" | "lowlight" | "circuitromance";
 type CreatorContributionId = Exclude<ContributionId, "original">;
 type SubmissionMethod = "record" | "remix" | "upload";
@@ -37,6 +37,7 @@ const SCENES: Scene[] = [
   "compare",
   "accepted",
   "profile",
+  "studio",
 ];
 
 const SCENE_LABELS: Record<Scene, string> = {
@@ -47,6 +48,7 @@ const SCENE_LABELS: Record<Scene, string> = {
   compare: "Compare",
   accepted: "Accepted",
   profile: "Profile",
+  studio: "Studio",
 };
 
 const contributions = {
@@ -1421,6 +1423,70 @@ function BrowseScene({
   );
 }
 
+function StudioScene({
+  saved,
+  onSave,
+  onClose,
+}: {
+  saved: boolean;
+  onSave: () => void;
+  onClose: () => void;
+}) {
+  return (
+    <section className="studio-scene scene" aria-label="Your studio draft">
+      <div className="status-bar status-bar--light" aria-hidden="true">
+        <strong>9:41</strong>
+        <StatusIcons />
+      </div>
+      <button className="round-control studio-scene__close" type="button" onClick={onClose} aria-label="Back to browse">
+        <Icon name="close" />
+      </button>
+      <header className="studio-header">
+        <span><Icon name="studio" size={14} /> Your studio · Draft</span>
+        <h2>Fork of Drum texture</h2>
+        <p className="studio-provenance"><Icon name="verified" size={14} /> Forked from @lowlight · credit attached</p>
+      </header>
+      <div className="studio-layers">
+        <div className="studio-layer">
+          <span className="texture-art" aria-hidden="true" />
+          <span className="studio-layer__body">
+            <strong>Drum texture</strong>
+            <small>@lowlight · Credit locked</small>
+          </span>
+          <Icon name="check" size={15} />
+        </div>
+        <div className="studio-layer studio-layer--empty">
+          <span className="studio-layer__add" aria-hidden="true">+</span>
+          <span className="studio-layer__body">
+            <strong>Add your sound</strong>
+            <small>Layer it over the fork</small>
+          </span>
+        </div>
+      </div>
+      <div className="studio-prompt">
+        <label htmlFor="studio-prompt-input">What should change?</label>
+        <textarea id="studio-prompt-input" placeholder="Describe what to change… e.g. more snare on the offbeat" />
+        <div className="studio-methods">
+          <span><Icon name="record" size={13} /> Record</span>
+          <span><Icon name="remix" size={13} /> Remix with Suno</span>
+          <span><Icon name="upload" size={13} /> Upload</span>
+        </div>
+      </div>
+      {saved ? (
+        <div className="studio-saved" role="status">
+          <Icon name="check" size={16} />
+          <span><strong>Saved to your studio</strong><small>Synced · in your drafts on Browse</small></span>
+        </div>
+      ) : (
+        <button className="gradient-button studio-save" type="button" onClick={onSave}>
+          <Icon name="spark" />
+          Save draft
+        </button>
+      )}
+    </section>
+  );
+}
+
 function CommentsSheet({
   comments,
   onAddComment,
@@ -1528,6 +1594,7 @@ function PhoneDemo({
   comments,
   onAddComment,
   onCloseComments,
+  onSaveDraft,
   selected,
   submissionMethod,
   rightsConfirmed,
@@ -1562,6 +1629,7 @@ function PhoneDemo({
   comments: string[];
   onAddComment: (text: string) => void;
   onCloseComments: () => void;
+  onSaveDraft: () => void;
   selected: ContributionId;
   submissionMethod: SubmissionMethod;
   rightsConfirmed: boolean;
@@ -1645,6 +1713,9 @@ function PhoneDemo({
           onProfile={() => onScene("profile")}
           onClose={() => onScene("call")}
         />
+      ) : null}
+      {scene === "studio" ? (
+        <StudioScene saved={forkedDraft} onSave={onSaveDraft} onClose={() => onScene("browse")} />
       ) : null}
       {scene === "profile" ? (
         <ProfileScene
@@ -2025,7 +2096,7 @@ export function OpenSignalExperience() {
         <div className="demo-column">
           <p className="mobile-thesis">Ask for a take. Hear it in context. Keep what works. Credit who made it.</p>
           <div className="scene-tabs" aria-label="Demo scenes">
-            {SCENES.map((item) => (
+            {SCENES.filter((item) => item !== "studio").map((item) => (
               <button
                 key={item}
                 type="button"
@@ -2045,12 +2116,13 @@ export function OpenSignalExperience() {
             starred={starred}
             onToggleStar={() => setStarred((current) => !current)}
             forkedDraft={forkedDraft}
-            onFork={() => {}}
+            onFork={() => navigate("studio")}
             onOpenComments={() => setCommentsOpen(true)}
             commentsOpen={commentsOpen}
             comments={comments}
             onAddComment={(text) => setComments((current) => [...current, text])}
             onCloseComments={() => setCommentsOpen(false)}
+            onSaveDraft={() => setForkedDraft(true)}
             selected={selected}
             submissionMethod={submissionMethod}
             rightsConfirmed={rightsConfirmed}
