@@ -399,3 +399,30 @@ Bo filed the application with this link on 2026-08-02 and marked the project
 complete. The Worker stays live for reviewers and interviews; no further
 changes without a new mandate. Interview prep lives in SUBMISSION-PRIMER.md
 ("Hard questions to carry").
+
+### Reopened same day: browse discovery surface (2026-08-02, shipped)
+
+Bo reopened with a new mandate: make the mobile-first browsing behavior the
+demo's entry — GitHub-trending for music. Designed via brainstorm
+(spec: `docs/superpowers/specs/2026-08-02-browse-discovery-design.md`),
+planned (`docs/superpowers/plans/2026-08-02-browse-discovery.md`), executed
+inline with ui-ux-pro-max + frontend-design guidance.
+
+Shipped: `browse` is the demo's opening scene — "Open work / A feed of
+problems, not posts." with trending open calls (live Open Signal card routes
+into the existing flow), reusable components, top contributors, and active
+collaborations; all dressing content is non-interactive by design. Bare URL
+and Reset land on browse; every prior deep link still works; hero step
+gating adjusted for the new scene index. Page right-rail now opens
+"Producers find open work in the feed;…"; primer's discovery-bridge answer
+and the link-copy 60-second path (Browse → …) updated.
+
+Verified: full battery green; end-to-end walk (browse → call → rights gate →
+submit → compare → pass → accept → receipt focus/Escape → profile → follow →
+reset-to-browse) on the final build; seven-tab row scrolls and every tab is
+reachable at 390; no horizontal overflow at 390/1024/1440; hero step 1
+lights only from the call scene onward. Deployed as Worker version
+`cc809beb-bb9a-4447-9e8c-41d842c4bfc6` and verified live (SSR serves the
+browse scene; tap-through and rights gate confirmed on production). Known
+harness-only artifact: agent-browser long composite evals can drop a
+trailing reset click; discrete clicks and real flows are unaffected.
