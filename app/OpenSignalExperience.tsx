@@ -2145,6 +2145,7 @@ export function OpenSignalExperience() {
             passedIds={passedIds}
             starred={starred}
             onToggleStar={() => setStarred((current) => !current)}
+            forked={forked}
             forkedDraft={forkedDraft}
             onFork={() => { setForked(true); navigate("studio"); }}
             onOpenComments={() => setCommentsOpen(true)}
