@@ -206,6 +206,8 @@ True, and deliberate: the beta tests the protocol, not the marketplace. The
 bridge to discovery is a qualified pool built from demonstrated work, in the
 spirit of Listen & Rank: contributors earn access to open calls through
 accepted work, before any public feed exists.
+The demo's Browse surface sketches that bridge: open calls, reusable
+components, and contributor activity, ranked by work rather than plays.
 
 ## Application link copy
 

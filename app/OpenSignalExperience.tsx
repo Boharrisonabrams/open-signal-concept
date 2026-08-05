@@ -1878,7 +1878,7 @@ export function OpenSignalExperience() {
           <div className="proof-column__copy">
             <span>The human layer.</span>
             <h2>Make contribution legible.</h2>
-            <p>A precise request becomes a contribution, a review, a decision, and durable credit—all in Suno’s musical language.</p>
+            <p>Producers find open work in the feed; a precise request becomes a contribution, a review, a decision, and durable credit—all in Suno’s musical language.</p>
           </div>
           <HumanProofCard contributionId={acceptedId ?? "lowlight"} accepted={Boolean(acceptedId)} onOpen={() => navigate("profile")} />
           <div className="trust-stack">

@@ -14,7 +14,7 @@ music ships, and turn accepted work into visible creator reputation.
 
 [Explore the interactive spec →](https://open-signal-concept.boabrams.workers.dev)
 
-Try the 60-second path: **Open call → Add your take → Compare → Accept → Profile**.
+Try the 60-second path: **Browse → Open call → Add your take → Compare → Accept → Profile**.
 
 Fictional people, audio, and outcomes. Independent concept; not affiliated
 with Suno.
