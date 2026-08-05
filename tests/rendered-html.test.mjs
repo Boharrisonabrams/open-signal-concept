@@ -71,6 +71,9 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /You, via your fork/);
   assert.match(source, /Open your studio draft/);
   assert.match(source, /item === "studio" && !forked/);
+  assert.match(source, /human layer that makes it\s+multiplayer/);
+  assert.match(source, /Neither can be re-rolled\./);
+  assert.match(source, /Studio unlocked · your draft lives in the Studio tab/);
   assert.match(source, /How I’d know it’s working/);
   assert.match(source, /randomized holdout/);
   assert.match(source, /Send for review/);
@@ -87,7 +90,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /GitHub logic, Suno language/);
   assert.match(source, /Make something people fork\./);
   assert.match(source, /Credit and fans follow the work\./);
-  assert.match(source, /the collaboration loop GitHub proved for software/);
+  assert.match(source, /the\s+collaboration loop GitHub proved for software/);
   assert.match(source, /Pull request/);
   assert.match(source, /a public ask for help/);
   assert.match(source, /Rights receipt/);

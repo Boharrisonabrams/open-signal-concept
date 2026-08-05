@@ -2141,6 +2141,16 @@ export function OpenSignalExperience() {
 
   }, []);
 
+  const handleFork = useCallback(() => {
+    if (!forked) {
+      setShareStatus("Studio unlocked · your draft lives in the Studio tab");
+      if (shareTimeout.current) window.clearTimeout(shareTimeout.current);
+      shareTimeout.current = window.setTimeout(() => setShareStatus(null), 3400);
+    }
+    setForked(true);
+    navigate("studio");
+  }, [forked, navigate]);
+
   const resetDemo = useCallback(() => {
     window.localStorage.removeItem("open-signal:accepted");
     window.localStorage.removeItem("open-signal:accepted-id");
@@ -2181,10 +2191,11 @@ export function OpenSignalExperience() {
         <div className="hero-copy">
           <h1>Hear every version. Credit what ships.</h1>
           <p>
-            Suno already helps creators generate, remix, and compare versions.
-            Open Signal adds the human layer: ask for one precise take, choose
-            what ships, and preserve rights-safe credit for who made it. It is
-            the collaboration loop GitHub proved for software, spoken in music.
+            Suno already nails single-player creation: generate, remix, compare
+            versions. Open Signal adds the human layer that makes it
+            multiplayer: ask for one precise take, choose what ships, and
+            preserve rights-safe credit for who made it. It is the
+            collaboration loop GitHub proved for software, spoken in music.
           </p>
           <SongRail
             playing={playingId === "original"}
@@ -2216,6 +2227,13 @@ export function OpenSignalExperience() {
                 className={scene === item ? "is-active" : ""}
                 onClick={() => navigate(item)}
                 disabled={(item === "accepted" && !acceptedId) || (item === "studio" && !forked)}
+                title={
+                  item === "accepted" && !acceptedId
+                    ? "Unlocks when a take is accepted"
+                    : item === "studio" && !forked
+                      ? "Unlocks after you fork a pack"
+                      : undefined
+                }
                 aria-pressed={scene === item}
               >
                 {SCENE_LABELS[item]}
@@ -2232,7 +2250,7 @@ export function OpenSignalExperience() {
             onToggleStar={() => setStarred((current) => !current)}
             forked={forked}
             forkedDraft={forkedDraft}
-            onFork={() => { setForked(true); navigate("studio"); }}
+            onFork={handleFork}
             onOpenComments={() => setCommentsOpen(true)}
             onSubmitDraft={() => { setSubmitViaFork(true); navigate("submit"); }}
             onOpenSubmit={() => { setSubmitViaFork(false); navigate("submit"); }}
@@ -2319,7 +2337,7 @@ export function OpenSignalExperience() {
       <section className="measurement-section" aria-labelledby="outcome-title">
         <div>
           <h2 id="outcome-title">Make something people fork.</h2>
-          <p>Taste becomes reputation. Other creators star your packs, fork your sounds, and ship your takes. Credit and fans follow the work.</p>
+          <p>Taste becomes reputation. Other creators star your packs, fork your sounds, and ship your takes. Credit and fans follow the work. That is the moat: a network of people and a memory of who made what. Neither can be re-rolled.</p>
           <div className="know-strip">
             <strong>How I’d know it’s working</strong>
             <p><b>Metric</b> Incremental 7-day publish or export completion versus editing alone.</p>

@@ -4835,3 +4835,20 @@ p {
 .phone-frame .browse-draft:active {
   transform: scale(0.985);
 }
+
+/* Touch-target hit areas for the compact social chips (ui-ux-pro-max:
+   44pt minimum via extended hit area, visuals unchanged) */
+
+.phone-frame .browse-star,
+.phone-frame .browse-pack-comments,
+.phone-frame .comment__snippet-fork {
+  position: relative;
+}
+
+.phone-frame .browse-star::after,
+.phone-frame .browse-pack-comments::after,
+.phone-frame .comment__snippet-fork::after {
+  content: "";
+  position: absolute;
+  inset: -10px -6px;
+}

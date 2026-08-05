@@ -79,6 +79,28 @@ permissions remain explicit, scoped, and owner-controlled.
   rewards useful contribution, acceptance, and responsible reuse. Popularity is
   an output of craft, not the primary mechanic.
 
+### The phase framing (why now, and why work at Suno)
+
+Technology cycles start technical and end product: the founding era belongs
+to infrastructure teams, and once the infrastructure matures the winners are
+the product companies that make it engaging, intuitive, and social. Consumer
+AI is still in its single-player phase; the breakout products are powerful
+text boxes that reward prompting skill and hold no relationship between
+users. Suno has already won its infrastructure race: generation is fast,
+good, and mobile. The open move is the product-genius move, and that is
+exactly the slider position this role sits at.
+
+Two things make the multiplayer move defensible rather than copyable. First,
+network effects: open calls, takes, forks, and fans form a graph between
+people, and a graph cannot be re-rolled by a better model. Second, memory:
+the credit ledger (who made what, what shipped, what got reused) is
+accumulated state that raises switching costs for every creator who has
+reputation stored in it. Status-seeking closes the loop: power creators
+share their best work as packs because stars, forks, and accepted takes
+convert taste into standing, and everyone else levels up by forking what the
+best people publish. Open Signal is a working sketch of that system: the
+UGC-network answer for music, built on infrastructure Suno already finished.
+
 ## MVP boundary
 
 Start with directed collaboration, not an open marketplace:
