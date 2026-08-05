@@ -247,6 +247,15 @@ pool. GitHub runs on the same norm: you can read a repo you cannot commit
 to. The beta opens with everything invite-only; open-pool cards appear only
 when a call's owner chooses that audience.
 
+**"Why does forking need no rights confirmation when submitting a take
+does?"**
+Different directions of risk. A published pack is offered for forking by
+its owner — that is what publishing a pack means, and the forked layer
+carries locked credit wherever it goes. Submitting a take imports outside
+audio INTO someone else's song, which is where a false ownership claim
+does damage; that is the moment that needs the checkbox. Fork freely,
+attest on the way in.
+
 **"Stars are the popularity contest you said you rejected. Why add them?"**
 Stars rank packs for discovery; they never touch reputation or acceptance.
 The profile leads with accepted work, acceptance stays owner-controlled,

@@ -4388,6 +4388,10 @@ p {
   width: 100%;
 }
 
+.phone-frame .studio-submit {
+  margin-top: 10px;
+}
+
 .phone-frame .studio-saved {
   display: flex;
   align-items: center;

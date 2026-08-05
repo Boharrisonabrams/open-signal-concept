@@ -1290,7 +1290,9 @@ function BrowseScene({
   acceptedId,
   starred,
   onToggleStar,
+  forked,
   forkedDraft,
+  commentCount,
   onFork,
   onOpenComments,
 }: {
@@ -1298,7 +1300,9 @@ function BrowseScene({
   acceptedId: CreatorContributionId | null;
   starred: boolean;
   onToggleStar: () => void;
+  forked: boolean;
   forkedDraft: boolean;
+  commentCount: number;
   onFork: () => void;
   onOpenComments: () => void;
 }) {
@@ -1360,8 +1364,8 @@ function BrowseScene({
               <Icon name="star" size={13} />
               <span key={`s${starred ? 1 : 0}`} className="count-pop">{214 + (starred ? 1 : 0)}</span>
             </button>
-            <span className="browse-forks"><Icon name="remix" size={13} /><span key={`f${forkedDraft ? 1 : 0}`} className="count-pop">{41 + (forkedDraft ? 1 : 0)}</span></span>
-            <button className="browse-pack-comments" type="button" onClick={onOpenComments} aria-label="3 comments"><Icon name="comment" size={13} />3</button>
+            <span className="browse-forks"><Icon name="remix" size={13} /><span key={`f${forked ? 1 : 0}`} className="count-pop">{41 + (forked ? 1 : 0)}</span></span>
+            <button className="browse-pack-comments" type="button" onClick={onOpenComments} aria-label={`${2 + commentCount} comments`}><Icon name="comment" size={13} />{2 + commentCount}</button>
           </span>
           <button className="browse-fork-btn" type="button" onClick={onFork}><Icon name="remix" size={14} />Fork</button>
         </div>
@@ -1429,10 +1433,12 @@ function BrowseScene({
 function StudioScene({
   saved,
   onSave,
+  onSubmitDraft,
   onClose,
 }: {
   saved: boolean;
   onSave: () => void;
+  onSubmitDraft: () => void;
   onClose: () => void;
 }) {
   return (
@@ -1476,10 +1482,16 @@ function StudioScene({
         </div>
       </div>
       {saved ? (
-        <div className="studio-saved" role="status">
-          <Icon name="check" size={16} />
-          <span><strong>Saved to your studio</strong><small>Synced · in your drafts on Browse</small></span>
-        </div>
+        <>
+          <div className="studio-saved" role="status">
+            <Icon name="check" size={16} />
+            <span><strong>Saved to your studio</strong><small>Synced · in your drafts on Browse</small></span>
+          </div>
+          <button className="gradient-button studio-save studio-submit" type="button" onClick={onSubmitDraft}>
+            <Icon name="arrow" />
+            Submit it to the open call
+          </button>
+        </>
       ) : (
         <button className="gradient-button studio-save" type="button" onClick={onSave}>
           <Icon name="spark" />
@@ -1594,9 +1606,11 @@ function PhoneDemo({
   passedIds,
   starred,
   onToggleStar,
+  forked,
   forkedDraft,
   onFork,
   onOpenComments,
+  onSubmitDraft,
   commentsOpen,
   comments,
   onAddComment,
@@ -1629,9 +1643,11 @@ function PhoneDemo({
   passedIds: CreatorContributionId[];
   starred: boolean;
   onToggleStar: () => void;
+  forked: boolean;
   forkedDraft: boolean;
   onFork: () => void;
   onOpenComments: () => void;
+  onSubmitDraft: () => void;
   commentsOpen: boolean;
   comments: string[];
   onAddComment: (text: string) => void;
@@ -1670,7 +1686,9 @@ function PhoneDemo({
           acceptedId={acceptedId}
           starred={starred}
           onToggleStar={onToggleStar}
+          forked={forked}
           forkedDraft={forkedDraft}
+          commentCount={comments.length}
           onFork={onFork}
           onOpenComments={onOpenComments}
         />
@@ -1722,7 +1740,7 @@ function PhoneDemo({
         />
       ) : null}
       {scene === "studio" ? (
-        <StudioScene saved={forkedDraft} onSave={onSaveDraft} onClose={() => onScene("browse")} />
+        <StudioScene saved={forkedDraft} onSave={onSaveDraft} onSubmitDraft={onSubmitDraft} onClose={() => onScene("browse")} />
       ) : null}
       {scene === "profile" ? (
         <ProfileScene
@@ -1741,7 +1759,7 @@ function PhoneDemo({
       {commentsOpen ? (
         <CommentsSheet
           stars={214 + (starred ? 1 : 0)}
-          forks={41 + (forkedDraft ? 1 : 0)}
+          forks={41 + (forked ? 1 : 0)}
           comments={comments}
           onAddComment={onAddComment}
           onFork={onFork}
@@ -1875,6 +1893,7 @@ export function OpenSignalExperience() {
   const [liked, setLiked] = useState(false);
   const [following, setFollowing] = useState(false);
   const [starred, setStarred] = useState(false);
+  const [forked, setForked] = useState(false);
   const [forkedDraft, setForkedDraft] = useState(false);
   const [comments, setComments] = useState<string[]>([]);
   const [commentsOpen, setCommentsOpen] = useState(false);
@@ -2055,6 +2074,7 @@ export function OpenSignalExperience() {
     setLiked(false);
     setFollowing(false);
     setStarred(false);
+    setForked(false);
     setForkedDraft(false);
     setComments([]);
     setCommentsOpen(false);
@@ -2126,8 +2146,9 @@ export function OpenSignalExperience() {
             starred={starred}
             onToggleStar={() => setStarred((current) => !current)}
             forkedDraft={forkedDraft}
-            onFork={() => navigate("studio")}
+            onFork={() => { setForked(true); navigate("studio"); }}
             onOpenComments={() => setCommentsOpen(true)}
+            onSubmitDraft={() => navigate("submit")}
             commentsOpen={commentsOpen}
             comments={comments}
             onAddComment={(text) => setComments((current) => [...current, text])}
@@ -2211,13 +2232,14 @@ export function OpenSignalExperience() {
           <h2 id="measurement-title">What the beta must prove</h2>
           <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
           <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
-          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are.</p>
+          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are — where BandLab-style whole-song collabs stalled in empty rooms.</p>
         </div>
         <dl>
           <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>
           <div><dt>Supply</dt><dd>Eligible Open Calls receiving a qualified take within 24 hours</dd></div>
           <div><dt>Quality</dt><dd>Accepted contributions that survive into the published or exported song</dd></div>
           <div><dt>Trust</dt><dd>Rights disputes, spam, and moderator time per 1,000 contributions</dd></div>
+          <div><dt>Loop</dt><dd>Forked drafts that come back as submitted takes</dd></div>
         </dl>
       </section>
 

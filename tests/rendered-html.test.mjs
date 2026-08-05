@@ -63,6 +63,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Save draft/);
   assert.match(source, /Saved to your studio/);
   assert.match(source, /Forked from @lowlight/);
+  assert.match(source, /Submit it to the open call/);
+  assert.match(source, /Forked drafts that come back as submitted takes/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);
   assert.match(source, /Separate stem reuse still requires permission/);
