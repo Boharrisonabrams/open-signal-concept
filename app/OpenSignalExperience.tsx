@@ -59,6 +59,7 @@ const contributions = {
     note: "More tension, fewer safe choices.",
     color: "#ff5ca8",
     tint: "rgba(255, 92, 168, 0.16)",
+    take: "Take 02",
     name: "Nia Okafor",
     image: "/nia-okafor.png",
     verification: "Verified creator",
@@ -75,6 +76,7 @@ const contributions = {
     note: "Sharper rhythm. Keep the negative space.",
     color: "#ff9d47",
     tint: "rgba(255, 157, 71, 0.16)",
+    take: "Take 01",
     name: "Malik Chen",
     image: "/adopter-malik.jpg",
     verification: "Verified creator",
@@ -804,9 +806,10 @@ function SubmitScene({
           <h2>Your take is in context.</h2>
           <p>Mara can hear your 14-second contribution against the same song and ask for one revision before deciding.</p>
           <div className="submission-success__receipt">
-            <div><span>Take</span><strong>Muted trumpet counterline</strong></div>
-            <div><span>Rights</span><strong>Confirmed by @lowlight</strong></div>
-            <div><span>If accepted</span><strong>Credit attaches to what ships</strong></div>
+            <div><span>Take</span><strong>{viaFork ? "Fork of Drum texture" : "Muted trumpet counterline"}</strong></div>
+            {viaFork ? <div><span>Built on</span><strong>@lowlight&rsquo;s pack · fork credit locked</strong></div> : null}
+            <div><span>Rights</span><strong>{viaFork ? "Added layers confirmed by @lowlight" : "Confirmed by @lowlight"}</strong></div>
+            <div><span>If accepted</span><strong>{viaFork ? "Credit attaches to both layers" : "Credit attaches to what ships"}</strong></div>
           </div>
           <button className="gradient-button" type="button" onClick={onReview}>
             Review the decision flow
@@ -1080,7 +1083,7 @@ function CompareScene({
                   <div className="acceptance-receipt-summary">
                     <div>
                       <small>Rights + credit recorded</small>
-                      <strong>{selectedData.handle} · Take 02</strong>
+                      <strong>{selectedData.handle} · {selectedData.take}</strong>
                     </div>
                     <button type="button" onClick={onReceipt}>View receipt</button>
                   </div>
@@ -1297,7 +1300,7 @@ function AcceptanceReceipt({
           <Icon name="verified" size={19} />
         </div>
         <dl>
-          <div><dt>Exact asset</dt><dd>Take 02 · 0:42–0:56 (14 sec)</dd></div>
+          <div><dt>Exact asset</dt><dd>{creator.take} · 0:42–0:56 (14 sec)</dd></div>
           <div><dt>Song rights</dt><dd>Mara may publish and monetize this accepted take in Open Signal.</dd></div>
           <div><dt>Stem reuse</dt><dd>Not included. Separate permission is required.</dd></div>
           <div><dt>Attribution</dt><dd>{creator.handle} stays attached to downstream remixes.</dd></div>

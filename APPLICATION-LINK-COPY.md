@@ -4,7 +4,7 @@
 
 **Open Signal – a playable, mobile-first product spec for Suno.** When
 re-rolling stops helping, you ask a person: browse open work, ask for one
-precise take, choose what ships, and mint rights-safe credit for who made
+precise take, choose what ships, and lock rights-safe credit to who made
 it. It's GitHub's collaboration loop, translated to music.
 
 https://open-signal-concept.boabrams.workers.dev

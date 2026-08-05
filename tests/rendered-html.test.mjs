@@ -67,6 +67,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Forked drafts that come back as submitted takes/);
   assert.match(source, /My added layers are mine\./);
   assert.match(source, /fork credit attached/);
+  assert.match(source, /Credit attaches to both layers/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);
   assert.match(source, /Separate stem reuse still requires permission/);
