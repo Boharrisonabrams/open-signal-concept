@@ -4872,3 +4872,31 @@ p {
 .phone-frame .studio-layer--empty:hover {
   border-color: rgba(216, 27, 116, 0.45);
 }
+
+/* Final mobile pass: single-line tabs, Apple-minimum tab height, no iOS
+   focus zoom (16px inputs), snappier taps, scroll cue on the stat chips */
+
+button,
+a {
+  touch-action: manipulation;
+}
+
+.scene-tabs button {
+  white-space: nowrap;
+}
+
+@media (max-width: 680px) {
+  .scene-tabs button {
+    min-height: 40px;
+  }
+
+  .phone-frame input,
+  .phone-frame textarea {
+    font-size: 16px;
+  }
+
+  .phone-frame .reputation-stats {
+    mask-image: linear-gradient(to right, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+}
