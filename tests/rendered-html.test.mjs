@@ -78,8 +78,9 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Native reputation/);
   assert.match(source, /Borrow the protocol, not the chrome/);
   assert.match(source, /Independent concept/);
-  assert.match(source, /Credit-first by design/);
   assert.match(source, /GitHub logic, Suno language/);
+  assert.match(source, /Make something people fork\./);
+  assert.match(source, /Credit and fans follow the work\./);
   assert.match(source, /the collaboration loop GitHub proved for software/);
   assert.match(source, /Pull request/);
   assert.match(source, /Rights receipt/);
@@ -89,8 +90,6 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /name="thumb"/);
   assert.match(source, /followers\} fans/);
   assert.doesNotMatch(source, /—/);
-  assert.match(source, /What the beta must prove/);
-  assert.match(source, /Incremental 7-day publish or export completion/);
   assert.match(source, /scheduleVersionPreview/);
   assert.match(source, /Tap a version to hear it in context/);
   assert.match(source, /open-signal:accepted-id/);

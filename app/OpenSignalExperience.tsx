@@ -2310,18 +2310,15 @@ export function OpenSignalExperience() {
         </div>
       </section>
 
-      <section className="measurement-section" aria-labelledby="measurement-title">
+      <section className="measurement-section" aria-labelledby="outcome-title">
         <div>
-          <h2 id="measurement-title">What the beta must prove</h2>
-          <p>Start invite-only with creators who repeatedly edit one section but have not exported the song.</p>
-          <p className="measurement-note">Credit-first by design. Compensation and splits enter once accepted takes prove they help songs ship.</p>
-          <p className="measurement-note">Supply starts with the same stuck editors flipped around: a 14-second ask is small enough to answer between your own edits, and it lands where creators already are. Whole-song collab asks have stalled before because the ask was too big and the room too empty.</p>
+          <h2 id="outcome-title">Make something people fork.</h2>
+          <p>Taste becomes reputation. Other creators star your packs, fork your sounds, and ship your takes. Credit and fans follow the work.</p>
         </div>
         <dl>
-          <div><dt>Primary</dt><dd>Incremental 7-day publish or export completion versus editing alone</dd></div>
-          <div><dt>Supply</dt><dd>Eligible Open Calls receiving a qualified take within 24 hours</dd></div>
-          <div><dt>Quality</dt><dd>Accepted contributions that survive into the published or exported song</dd></div>
-          <div><dt>Trust</dt><dd>Rights disputes, spam, and moderator time per 1,000 contributions</dd></div>
+          <div><dt>Taste</dt><dd>Stars and accepted takes are other creators choosing your sound</dd></div>
+          <div><dt>Forks</dt><dd>Your pack travels with your credit locked inside</dd></div>
+          <div><dt>Fans</dt><dd>Accepted work pulls followers to your profile</dd></div>
           <div><dt>Loop</dt><dd>Forked drafts that come back as submitted takes</dd></div>
         </dl>
       </section>
