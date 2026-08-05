@@ -793,10 +793,10 @@ function SubmitScene({
           <Icon name="back" />
         </button>
         <div>
-          <span>Contributor view · @lowlight, invited</span>
+          <span>{viaFork ? "Contributor view · You, via your fork" : "Contributor view · @lowlight, invited"}</span>
           <strong>Add your take</strong>
         </div>
-        <img src="/nia-okafor.png" alt="Nia Okafor" />
+        {viaFork ? <span className="you-chip" aria-hidden="true">You</span> : <img src="/nia-okafor.png" alt="Nia Okafor" />}
       </header>
 
       {submitted ? (
@@ -808,7 +808,7 @@ function SubmitScene({
           <div className="submission-success__receipt">
             <div><span>Take</span><strong>{viaFork ? "Fork of Drum texture" : "Muted trumpet counterline"}</strong></div>
             {viaFork ? <div><span>Built on</span><strong>@lowlight&rsquo;s pack · fork credit locked</strong></div> : null}
-            <div><span>Rights</span><strong>{viaFork ? "Added layers confirmed by @lowlight" : "Confirmed by @lowlight"}</strong></div>
+            <div><span>Rights</span><strong>{viaFork ? "Your added layers, confirmed" : "Confirmed by @lowlight"}</strong></div>
             <div><span>If accepted</span><strong>{viaFork ? "Credit attaches to both layers" : "Credit attaches to what ships"}</strong></div>
           </div>
           <button className="gradient-button" type="button" onClick={onReview}>
@@ -857,7 +857,7 @@ function SubmitScene({
           </fieldset>
 
           <div className="draft-take">
-            <img src="/nia-okafor.png" alt="" />
+            {viaFork ? <span className="texture-art" aria-hidden="true" /> : <img src="/nia-okafor.png" alt="" />}
             <div>
               <span>Ready to submit</span>
               <strong>{viaFork ? "Fork of Drum texture" : "Muted trumpet counterline"}</strong>
@@ -2317,6 +2317,12 @@ export function OpenSignalExperience() {
         <div>
           <h2 id="outcome-title">Make something people fork.</h2>
           <p>Taste becomes reputation. Other creators star your packs, fork your sounds, and ship your takes. Credit and fans follow the work.</p>
+          <div className="know-strip">
+            <strong>How I’d know it’s working</strong>
+            <p><b>Metric</b> Incremental 7-day publish or export completion versus editing alone.</p>
+            <p><b>Riskiest assumption</b> Skilled creators answer a 14-second ask between their own edits.</p>
+            <p><b>Cheapest test</b> An invite-only beta with a randomized holdout.</p>
+          </div>
         </div>
         <dl>
           <div><dt>Taste</dt><dd>Stars and accepted takes are other creators choosing your sound</dd></div>

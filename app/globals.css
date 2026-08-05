@@ -4772,3 +4772,47 @@ p {
 .on-suno .model-tag {
   margin-left: 0;
 }
+
+/* You-chip: the viewer identity in the fork-submit path, matching the
+   comments sheet's "You" avatar */
+
+.submit-header .you-chip {
+  flex: none;
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--p-chip);
+  color: var(--p-muted);
+  font-size: 10px;
+  font-weight: 650;
+}
+
+/* How-I'd-know strip under the outcome thesis */
+
+.know-strip {
+  margin-top: 22px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  display: grid;
+  gap: 7px;
+}
+
+.know-strip > strong {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.know-strip p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.know-strip b {
+  margin-right: 6px;
+  color: var(--ink);
+  font-weight: 680;
+}
