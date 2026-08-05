@@ -76,7 +76,7 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.doesNotMatch(source, /Verified human/);
   assert.match(source, /Credits verified/);
   assert.match(source, /Native reputation/);
-  assert.match(source, /Borrow the protocol, not the chrome/);
+  assert.match(source, /Borrow how GitHub works, not how it looks\./);
   assert.match(source, /Independent concept/);
   assert.match(source, /GitHub logic, Suno language/);
   assert.match(source, /Make something people fork\./);

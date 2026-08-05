@@ -2288,7 +2288,7 @@ export function OpenSignalExperience() {
 
       <section className="principles-section" aria-labelledby="principles-title">
         <div className="principles-heading">
-          <h2 id="principles-title">Borrow the protocol, not the chrome.</h2>
+          <h2 id="principles-title">Borrow how GitHub works, not how it looks.</h2>
           <p>When re-rolling stops helping, you ask a person.</p>
         </div>
         <div className="principles-rail">
