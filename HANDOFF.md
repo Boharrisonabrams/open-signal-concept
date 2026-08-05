@@ -623,6 +623,48 @@ Also standing from this session: Bo invoked the i-have-adhd communication
 skill; future sessions should lead with the next action, number steps, and
 skip preamble/recaps when writing to him.
 
+### Panel 6 + fixes (2026-08-05, on the Mobbin-brand build)
+
+Sixth blind panel (recruiter, CPO, skeptic) on Worker `d003668b` with a fresh
+16-shot md5-unique production evidence pack. 3/3 ready-to-send — 18/18
+positive verdicts across six panels. Recruiter: "Forward… top-decile"
+(first impression 9, mobile craft 9, brand fit 9). CPO: "Interview… clears
+the bar 95% of PM applications never reach" (thesis 8, differentiation 8).
+Skeptic: "No hard blockers"; verified the counts derive and reconcile across
+seven screens, the rights gate is real, the fork attestation adapts,
+trademark posture 9, zero analytics calls.
+
+Shipped from converged findings (commit `215d22b`, Worker `77033118`,
+verified live after ~1 min propagation delay):
+
+- Fork-aware submit success sheet — Take "Fork of Drum texture", Built on
+  "@lowlight's pack · fork credit locked", Rights "Added layers confirmed",
+  If accepted "Credit attaches to both layers". Closed the skeptic's only
+  MAJOR (success sheet previously hardcoded the standard take after a fork
+  submission). Standard path regression-checked unchanged.
+- Receipt "Exact asset" + accepted-panel labels derive per contributor
+  (lowlight Take 02, circuitromance Take 01); accepting Malik no longer
+  inherits lowlight's take label.
+- Coach-mark backdrop to 0.86 + text shadow (recruiter's first-pixel
+  collision with feed text).
+- Blurb "mint rights-safe credit" → "lock rights-safe credit" (crypto
+  misread).
+- OG/Twitter descriptions now end "Independent concept, not affiliated with
+  Suno." (skeptic's unqualified-preview finding).
+
+Held for Bo (explicitly NOT shipped):
+1. Recruiter #1 + CPO #3 independently want a 3-line "how I'd know" strip
+   (metric / riskiest assumption / cheapest test) — a slim version of the
+   GTM section Bo removed this morning. Bo's call: it reverses part of a
+   same-day decision.
+2. Persona circularity (skeptic MINOR, standing rehearse-don't-fix item,
+   now sharper: @lowlight forks @lowlight's own pack): fix by neutral demo
+   handle, or keep rehearsing the one-line answer.
+3. CPO notes "Fork" appears in-product before definition; option to extend
+   the coach mark or add a first-tap hint. Also noted: CPO's "missing
+   rejection state" is an evidence-pack gap (Pass exists on Compare), and
+   the origination flow remains a known, primer-armed scope decision.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
