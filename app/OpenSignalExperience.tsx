@@ -1149,6 +1149,7 @@ function CompareScene({
 function ProfileScene({
   contributionId,
   accepted,
+  starred,
   playing,
   following,
   onPlay,
@@ -1158,6 +1159,7 @@ function ProfileScene({
 }: {
   contributionId: CreatorContributionId;
   accepted: boolean;
+  starred: boolean;
   playing: boolean;
   following: boolean;
   onPlay: () => void;
@@ -1182,6 +1184,7 @@ function ProfileScene({
       <VerifiedHuman />
       <div className="reputation-stats" aria-label="Suno reputation">
         <div><strong>{creator.acceptedCount + (accepted ? 1 : 0)}</strong><span>Accepted</span></div>
+        <div><strong>{contributionId === "lowlight" ? 214 + (starred ? 1 : 0) : 76}</strong><span>Stars</span></div>
         <div><strong>{creator.reuses}</strong><span>Reuses</span></div>
         <div><strong>{creator.openCalls}</strong><span>Open calls</span></div>
       </div>
@@ -1721,6 +1724,7 @@ function PhoneDemo({
         <ProfileScene
           contributionId={profileContributionId}
           accepted={acceptedId === profileContributionId}
+          starred={starred}
           playing={playingId === profileContributionId}
           following={following}
           onPlay={() => onPlay(profileContributionId)}

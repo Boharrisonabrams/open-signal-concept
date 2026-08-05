@@ -4413,6 +4413,50 @@ p {
   font-size: 10.5px;
 }
 
+/* Motion tokens */
+
+.phone-frame .call-sheet,
+.phone-frame .receipt-sheet {
+  animation: sheet-rise 340ms cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+@keyframes sheet-rise {
+  from { transform: translateY(26px); opacity: 0.4; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.phone-frame .browse-scene > * {
+  animation: browse-in 300ms ease-out backwards;
+}
+
+.phone-frame .browse-scene > *:nth-child(3) { animation-delay: 30ms; }
+.phone-frame .browse-scene > *:nth-child(4) { animation-delay: 60ms; }
+.phone-frame .browse-scene > *:nth-child(5) { animation-delay: 90ms; }
+.phone-frame .browse-scene > *:nth-child(6) { animation-delay: 120ms; }
+.phone-frame .browse-scene > *:nth-child(7) { animation-delay: 150ms; }
+.phone-frame .browse-scene > *:nth-child(8) { animation-delay: 180ms; }
+.phone-frame .browse-scene > *:nth-child(9) { animation-delay: 210ms; }
+.phone-frame .browse-scene > *:nth-child(10) { animation-delay: 240ms; }
+
+@keyframes browse-in {
+  from { transform: translateY(9px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.phone-frame .browse-call-card--live:active,
+.phone-frame .browse-fork-btn:active,
+.phone-frame .browse-pack-open:active,
+.phone-frame .gradient-button:active,
+.phone-frame .comment__snippet-fork:active {
+  transform: scale(0.985);
+}
+
+@media (max-width: 680px) {
+  .phone-frame .reputation-stats strong {
+    font-size: 19px;
+  }
+}
+
 @media (max-width: 680px) {
   .phone-frame .call-sheet {
     height: 76%;
