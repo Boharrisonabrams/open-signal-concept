@@ -247,6 +247,12 @@ pool. GitHub runs on the same norm: you can read a repo you cannot commit
 to. The beta opens with everything invite-only; open-pool cards appear only
 when a call's owner chooses that audience.
 
+**"Stars are the popularity contest you said you rejected. Why add them?"**
+Stars rank packs for discovery; they never touch reputation or acceptance.
+The profile leads with accepted work, acceptance stays owner-controlled,
+and a thousand stars will not merge a take. Attention finds the work;
+craft still decides what ships.
+
 **"Invite-only assumes owners have collaborators. Most Suno creators can
 invite nobody. Then what?"**
 True, and deliberate: the beta tests the protocol, not the marketplace. The

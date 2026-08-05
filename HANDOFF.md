@@ -489,3 +489,30 @@ plausible"). Shipped from converged findings + Bo's copy-voice rule:
 
 Remaining known probes are primer-armed, not page-fixed: derivative
 provenance depth, experiment design, browse-at-beta-scale.
+
+### Round 4: fork, social graph, studio (2026-08-05, Bo-directed)
+
+Spec: `docs/superpowers/specs/2026-08-05-fork-social-studio-design.md`.
+Plan: `docs/superpowers/plans/2026-08-05-fork-social-studio.md`. Shipped:
+
+- "Trending packs" (Bo picked the producer word) with the full graph on the
+  featured pack: derived ★ 214/215, 41/42 forks, comment chip, Fork button;
+  quiet static stats on dressing packs (★58/9, ★31/6).
+- Comments sheet on the featured pack: Bo's dialogue verbatim
+  (@julesmakes' snare comment with the embedded playable "Offbeat snare
+  flip" fork + Fork action; @lowlight replies "That's genius." wearing a
+  Creator chip), plus a live composer that posts locally as "You".
+- Studio scene (outside the tab row, fork-entry only): "Your studio ·
+  Draft", "Forked from @lowlight · credit attached", credit-locked layer +
+  empty layer, create prompt, method chips, "Save draft" → "Saved to your
+  studio · Synced" → drafts strip on Browse; fork count ticks 42.
+- Profile: four-cell stats with Stars (derived 214/215; 76 for Malik).
+- Motion tokens: sheet-rise 340ms, staggered browse entrance, pressed
+  scale, count/star pops; all under the reduced-motion collapse.
+- Primer: stars-vs-popularity hard question.
+- Counts derive from one source everywhere (tile, sheet, profile);
+  Reset restores 214/41/18 and clears drafts and comments.
+
+Pipeline per Bo: deploy → judge panel → Bo's energy test → only then
+publish source to github.com/boharrisonabrams/open-signal-concept
+(public), gated on gh auth being boharrisonabrams.

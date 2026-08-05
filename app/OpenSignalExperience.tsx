@@ -1491,6 +1491,8 @@ function StudioScene({
 }
 
 function CommentsSheet({
+  stars,
+  forks,
   comments,
   onAddComment,
   onFork,
@@ -1498,6 +1500,8 @@ function CommentsSheet({
   snippetPlaying,
   onClose,
 }: {
+  stars: number;
+  forks: number;
   comments: string[];
   onAddComment: (text: string) => void;
   onFork: () => void;
@@ -1533,7 +1537,7 @@ function CommentsSheet({
           </div>
           <button ref={closeButtonRef} className="round-control" type="button" onClick={onClose} aria-label="Close comments"><Icon name="close" /></button>
         </header>
-        <p className="comments-stats"><Icon name="star" size={14} /> 214 · 41 forks · 14 shipped</p>
+        <p className="comments-stats"><Icon name="star" size={14} /> {stars} · {forks} forks · 14 shipped</p>
         <div className="comments-thread">
           <div className="comment">
             <img src="/adopter-jules.jpg" alt="" />
@@ -1736,6 +1740,8 @@ function PhoneDemo({
       {receiptOpen && acceptedId ? <AcceptanceReceipt contributionId={acceptedId} onClose={onCloseReceipt} /> : null}
       {commentsOpen ? (
         <CommentsSheet
+          stars={214 + (starred ? 1 : 0)}
+          forks={41 + (forkedDraft ? 1 : 0)}
           comments={comments}
           onAddComment={onAddComment}
           onFork={onFork}
