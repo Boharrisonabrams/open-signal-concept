@@ -24,6 +24,7 @@ type IconName =
   | "reset"
   | "share"
   | "spark"
+  | "star"
   | "studio"
   | "upload"
   | "verified";
@@ -328,6 +329,13 @@ function Icon({
     return (
       <svg {...common}>
         <path d="m6 6 12 12M18 6 6 18" />
+      </svg>
+    );
+  }
+  if (name === "star") {
+    return (
+      <svg {...common}>
+        <path d="M12 3.4l2.5 5.1 5.6.8-4 3.9 1 5.6-5.1-2.7-5.1 2.7 1-5.6-4-3.9 5.6-.8L12 3.4z" />
       </svg>
     );
   }
@@ -1275,9 +1283,19 @@ function AcceptanceReceipt({
 function BrowseScene({
   onOpenCall,
   acceptedId,
+  starred,
+  onToggleStar,
+  forkedDraft,
+  onFork,
+  onOpenComments,
 }: {
   onOpenCall: () => void;
   acceptedId: CreatorContributionId | null;
+  starred: boolean;
+  onToggleStar: () => void;
+  forkedDraft: boolean;
+  onFork: () => void;
+  onOpenComments: () => void;
 }) {
   const malik = contributions.circuitromance;
 
@@ -1324,24 +1342,51 @@ function BrowseScene({
         </div>
       </div>
 
-      <h3 className="browse-section-title">Reusable components</h3>
+      <h3 className="browse-section-title">Trending packs</h3>
       <div className="browse-components">
-        <div className="browse-comp-tile">
-          <span className="texture-art" aria-hidden="true" />
-          <strong>Drum texture</strong>
-          <small>@lowlight · Reused in 14 projects</small>
+        <div className="browse-comp-tile browse-comp-tile--live">
+          <button className="browse-pack-open" type="button" onClick={onOpenComments} aria-label="Open Drum texture pack comments">
+            <span className="texture-art" aria-hidden="true" />
+            <strong>Drum texture</strong>
+            <small>@lowlight</small>
+          </button>
+          <span className="browse-pack-stats">
+            <button className={`browse-star${starred ? " is-starred" : ""}`} type="button" onClick={onToggleStar} aria-pressed={starred} aria-label="Star this pack">
+              <Icon name="star" size={13} />
+              <span key={`s${starred ? 1 : 0}`} className="count-pop">{214 + (starred ? 1 : 0)}</span>
+            </button>
+            <span className="browse-forks"><Icon name="remix" size={13} /><span key={`f${forkedDraft ? 1 : 0}`} className="count-pop">{41 + (forkedDraft ? 1 : 0)}</span></span>
+            <button className="browse-pack-comments" type="button" onClick={onOpenComments} aria-label="3 comments"><Icon name="comment" size={13} />3</button>
+          </span>
+          <button className="browse-fork-btn" type="button" onClick={onFork}><Icon name="remix" size={14} />Fork</button>
         </div>
         <div className="browse-comp-tile">
           <span className="browse-tile browse-tile--haze" aria-hidden="true" />
           <strong>Tape-warble keys</strong>
-          <small>@circuitromance · Reused in 4 projects</small>
+          <small>@circuitromance</small>
+          <span className="browse-pack-stats"><span><Icon name="star" size={12} />58</span><span><Icon name="remix" size={12} />9</span></span>
         </div>
         <div className="browse-comp-tile">
           <span className="browse-tile browse-tile--dusk" aria-hidden="true" />
           <strong>Dusted bass one-shots</strong>
-          <small>@riverchapel · Reused in 3 projects</small>
+          <small>@riverchapel</small>
+          <span className="browse-pack-stats"><span><Icon name="star" size={12} />31</span><span><Icon name="remix" size={12} />6</span></span>
         </div>
       </div>
+
+      {forkedDraft ? (
+        <>
+          <h3 className="browse-section-title">Your drafts</h3>
+          <div className="browse-draft">
+            <span className="texture-art" aria-hidden="true" />
+            <span className="browse-draft__body">
+              <strong>Fork of Drum texture</strong>
+              <small>Draft · Synced just now</small>
+            </span>
+            <Icon name="check" size={15} />
+          </div>
+        </>
+      ) : null}
 
       <h3 className="browse-section-title">Top contributors</h3>
       <div className="browse-people">
@@ -1376,10 +1421,113 @@ function BrowseScene({
   );
 }
 
+function CommentsSheet({
+  comments,
+  onAddComment,
+  onFork,
+  onPlaySnippet,
+  snippetPlaying,
+  onClose,
+}: {
+  comments: string[];
+  onAddComment: (text: string) => void;
+  onFork: () => void;
+  onPlaySnippet: () => void;
+  snippetPlaying: boolean;
+  onClose: () => void;
+}) {
+  const [draft, setDraft] = useState("");
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    closeButtonRef.current?.focus();
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      previouslyFocused?.focus();
+    };
+  }, [onClose]);
+
+  return (
+    <div className="receipt-overlay" role="dialog" aria-modal="true" aria-labelledby="comments-title">
+      <button className="receipt-overlay__backdrop" type="button" onClick={onClose} aria-label="Close comments" tabIndex={-1} />
+      <section className="receipt-sheet comments-sheet">
+        <span className="sheet-handle" aria-hidden="true" />
+        <header>
+          <div>
+            <span>Pack by @lowlight</span>
+            <h2 id="comments-title">Drum texture</h2>
+          </div>
+          <button ref={closeButtonRef} className="round-control" type="button" onClick={onClose} aria-label="Close comments"><Icon name="close" /></button>
+        </header>
+        <p className="comments-stats"><Icon name="star" size={14} /> 214 · 41 forks · 14 shipped</p>
+        <div className="comments-thread">
+          <div className="comment">
+            <img src="/adopter-jules.jpg" alt="" />
+            <div className="comment__body">
+              <strong>@julesmakes</strong>
+              <p>I added more snare to this to really bring out the offbeat</p>
+              <div className="comment__snippet">
+                <button type="button" onClick={onPlaySnippet} aria-label={`${snippetPlaying ? "Pause" : "Play"} Offbeat snare flip`}>
+                  <Icon name={snippetPlaying ? "pause" : "play"} size={14} />
+                </button>
+                <span><strong>Offbeat snare flip</strong><small>Fork of Drum texture</small></span>
+                <button className="comment__snippet-fork" type="button" onClick={onFork}><Icon name="remix" size={13} />Fork</button>
+              </div>
+            </div>
+          </div>
+          <div className="comment">
+            <img src="/nia-okafor.png" alt="" />
+            <div className="comment__body">
+              <strong>@lowlight <em className="comment__creator">Creator</em></strong>
+              <p>That’s genius.</p>
+            </div>
+          </div>
+          {comments.map((text, index) => (
+            <div className="comment" key={index}>
+              <span className="comment__you" aria-hidden="true">You</span>
+              <div className="comment__body">
+                <strong>You</strong>
+                <p>{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <form
+          className="comments-composer"
+          onSubmit={(event) => {
+            event.preventDefault();
+            if (!draft.trim()) return;
+            onAddComment(draft.trim());
+            setDraft("");
+          }}
+        >
+          <label htmlFor="pack-comment" className="visually-hidden-label">Add a comment</label>
+          <input id="pack-comment" value={draft} onChange={(event) => setDraft(event.target.value)} placeholder="Add a comment…" />
+          <button type="submit">Post</button>
+        </form>
+      </section>
+    </div>
+  );
+}
+
 function PhoneDemo({
   scene,
   acceptedId,
   passedIds,
+  starred,
+  onToggleStar,
+  forkedDraft,
+  onFork,
+  onOpenComments,
+  commentsOpen,
+  comments,
+  onAddComment,
+  onCloseComments,
   selected,
   submissionMethod,
   rightsConfirmed,
@@ -1405,6 +1553,15 @@ function PhoneDemo({
   scene: Scene;
   acceptedId: CreatorContributionId | null;
   passedIds: CreatorContributionId[];
+  starred: boolean;
+  onToggleStar: () => void;
+  forkedDraft: boolean;
+  onFork: () => void;
+  onOpenComments: () => void;
+  commentsOpen: boolean;
+  comments: string[];
+  onAddComment: (text: string) => void;
+  onCloseComments: () => void;
   selected: ContributionId;
   submissionMethod: SubmissionMethod;
   rightsConfirmed: boolean;
@@ -1433,7 +1590,15 @@ function PhoneDemo({
     <div className={`phone-frame phone-frame--${scene}`}>
       <div className="phone-island" aria-hidden="true" />
       {scene === "browse" ? (
-        <BrowseScene onOpenCall={() => onScene("call")} acceptedId={acceptedId} />
+        <BrowseScene
+          onOpenCall={() => onScene("call")}
+          acceptedId={acceptedId}
+          starred={starred}
+          onToggleStar={onToggleStar}
+          forkedDraft={forkedDraft}
+          onFork={onFork}
+          onOpenComments={onOpenComments}
+        />
       ) : null}
       {scene === "player" ? (
         <PlayerScene
@@ -1494,6 +1659,16 @@ function PhoneDemo({
         />
       ) : null}
       {receiptOpen && acceptedId ? <AcceptanceReceipt contributionId={acceptedId} onClose={onCloseReceipt} /> : null}
+      {commentsOpen ? (
+        <CommentsSheet
+          comments={comments}
+          onAddComment={onAddComment}
+          onFork={onFork}
+          onPlaySnippet={() => onPlay("lowlight")}
+          snippetPlaying={playingId === "lowlight"}
+          onClose={onCloseComments}
+        />
+      ) : null}
     </div>
   );
 }
@@ -1618,6 +1793,10 @@ export function OpenSignalExperience() {
   const [receiptOpen, setReceiptOpen] = useState(false);
   const [liked, setLiked] = useState(false);
   const [following, setFollowing] = useState(false);
+  const [starred, setStarred] = useState(false);
+  const [forkedDraft, setForkedDraft] = useState(false);
+  const [comments, setComments] = useState<string[]>([]);
+  const [commentsOpen, setCommentsOpen] = useState(false);
   const [shareStatus, setShareStatus] = useState<string | null>(null);
   const [playingId, setPlayingId] = useState<ContributionId | null>(null);
   const audioHandle = useRef<DemoAudioHandle | null>(null);
@@ -1710,6 +1889,7 @@ export function OpenSignalExperience() {
   const navigate = useCallback((next: Scene) => {
     setScene(next);
     setReceiptOpen(false);
+    setCommentsOpen(false);
     const url = new URL(window.location.href);
     if (next === "browse") {
       url.searchParams.delete("scene");
@@ -1793,6 +1973,10 @@ export function OpenSignalExperience() {
     setReceiptOpen(false);
     setLiked(false);
     setFollowing(false);
+    setStarred(false);
+    setForkedDraft(false);
+    setComments([]);
+    setCommentsOpen(false);
     stopAudio();
     navigate("browse");
   }, [navigate, stopAudio]);
@@ -1858,6 +2042,15 @@ export function OpenSignalExperience() {
             scene={scene}
             acceptedId={acceptedId}
             passedIds={passedIds}
+            starred={starred}
+            onToggleStar={() => setStarred((current) => !current)}
+            forkedDraft={forkedDraft}
+            onFork={() => {}}
+            onOpenComments={() => setCommentsOpen(true)}
+            commentsOpen={commentsOpen}
+            comments={comments}
+            onAddComment={(text) => setComments((current) => [...current, text])}
+            onCloseComments={() => setCommentsOpen(false)}
             selected={selected}
             submissionMethod={submissionMethod}
             rightsConfirmed={rightsConfirmed}
