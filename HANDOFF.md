@@ -610,6 +610,14 @@ to your profile), Loop (forked drafts that come back as submitted takes; the
 panel-4 pinned string survives). Tests updated accordingly; battery green;
 live SSR verified (new strings present, GTM strings absent).
 
+Follow-up in the same round (Worker `10950350`, commit `0d3da2b`): Bo set the
+clarity bar at "a user and a CPO, without assuming they know GitHub." The
+principles heading "Borrow the protocol, not the chrome." (the panel-1 mantra)
+became "Borrow how GitHub works, not how it looks." — same claim, no jargon;
+test pin updated. The GitHub-vocab left column of the protocol map stays by
+design: it is the translation table for GitHub-literate readers, and its right
+column is plain music language.
+
 Also standing from this session: Bo invoked the i-have-adhd communication
 skill; future sessions should lead with the next action, number steps, and
 skip preamble/recaps when writing to him.
