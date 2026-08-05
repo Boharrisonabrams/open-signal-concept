@@ -594,6 +594,26 @@ Worker version `e608145d`:
   padding leaking into the Suno mark, weak coach backdrop, success-receipt
   white text.
 
+### Round 7: GTM off the page, social outcome on (2026-08-05, Bo-directed)
+
+Bo cut the on-page go-to-market material ("confusing; that's for the
+interview") and asked the experience to communicate the real outcome: taste,
+network effects, followers, people forking your pack and building new sounds,
+legible to a creator and to a CTO. Shipped as Worker `bae0251a` (commit
+`6ecf37c`): "What the beta must prove" (metrics dl + invite-only targeting +
+credit-first + cold-start notes) is gone from the page; every removed claim
+already lives in SUBMISSION-PRIMER.md for interview use. The closing section
+is now "Make something people fork." with four rows: Taste (stars and
+accepted takes are other creators choosing your sound), Forks (your pack
+travels with your credit locked inside), Fans (accepted work pulls followers
+to your profile), Loop (forked drafts that come back as submitted takes; the
+panel-4 pinned string survives). Tests updated accordingly; battery green;
+live SSR verified (new strings present, GTM strings absent).
+
+Also standing from this session: Bo invoked the i-have-adhd communication
+skill; future sessions should lead with the next action, number steps, and
+skip preamble/recaps when writing to him.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
