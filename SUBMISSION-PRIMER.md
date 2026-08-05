@@ -191,6 +191,11 @@ Credit-first is the v1 wedge, not the end state. Splits attach cleanly to the
 receipt object once it exists; introducing money before trust and quality
 metrics exist maximizes disputes exactly when moderation is weakest. In beta,
 contributors are collaborators the owner invited, not a gig marketplace.
+The trigger for money is empirical, not ideological: once QUALITY shows
+accepted takes surviving into published songs and TRUST holds under load,
+splits attach to the receipt that already records exactly who contributed
+what. At open-pool scale, credit alone adverse-selects supply; the receipt
+is designed so a split can be added without changing the acceptance flow.
 
 **"What stops an owner from hearing an idea, passing, and prompting the model
 to regenerate it?"**
@@ -199,6 +204,34 @@ pattern. Candidate mitigations to explore in beta: similarity flags between a
 passed take and subsequent generations in that section, a cooldown on the
 section after a pass, and a credit nudge when the resemblance is high. The
 receipt already creates the evidence trail that makes any of them enforceable.
+
+**"The demo take is a Suno remix of Mara's own section. Does @lowlight
+actually control it?"**
+Partly, and the receipt is built for exactly that split: a remix take is
+dual-provenance. Mara's underlying stem stays hers throughout; what
+@lowlight controls is the additive layer and the creative transformation,
+which is what the rights confirmation attests and the receipt records. That
+is why song rights transfer only on acceptance, stems stay excluded by
+default, and the draft captures the take's method — recorded, Suno remix,
+or uploaded. Provenance is a first-class field. In beta, remix-method takes
+carry the derivation chain in the receipt.
+
+**"How do you know the primary metric is causal and not self-selection?"**
+You don't, until you design for it. Eligible stuck editors get randomized
+at the moment they qualify — invited to Open Signal or held out — and the
+comparison is publish-or-export completion between arms, not before and
+after. Add a listener-side check: songs with accepted takes must hold skip
+and completion parity, so reciprocity pressure cannot inflate publishes
+while quality falls. The 7-day window gets a sensitivity check against the
+loop's own review latency.
+
+**"Why does a public trending feed show an invite-only call?"**
+Visibility and submission are different gates. Calls are browsable so
+contributors can see what kind of work wins acceptance and build toward
+access; submission stays gated to the call's audience, invite-only or open
+pool. GitHub runs on the same norm: you can read a repo you cannot commit
+to. The beta opens with everything invite-only; open-pool cards appear only
+when a call's owner chooses that audience.
 
 **"Invite-only assumes owners have collaborators. Most Suno creators can
 invite nobody. Then what?"**

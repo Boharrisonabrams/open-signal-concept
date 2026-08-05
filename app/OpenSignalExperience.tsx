@@ -1208,8 +1208,8 @@ function ProfileScene({
           <div className="texture-art" aria-hidden="true" />
           <div>
             <small>Reused</small>
-            <strong>Drum texture reused in 12 projects</strong>
-            <span>Last used 2d ago · 12 projects</span>
+            <strong>Drum texture reused in 14 projects</strong>
+            <span>Last used 2d ago · 14 projects</span>
           </div>
           <button type="button" onClick={onPlay} aria-label={`${playing ? "Pause" : "Play"} reused texture`}><Icon name={playing ? "pause" : "play"} /></button>
         </article>
@@ -1312,7 +1312,7 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
           <span className="browse-call-card__body">
             <small>alt-R&B · F major · 92 BPM</small>
             <strong>Vocal texture for the outro</strong>
-            <span>1 take in review · Invited</span>
+            <span>1 take in review · Invite-only</span>
           </span>
           <span className="browse-call-card__by">@juneaux</span>
         </div>
@@ -1323,7 +1323,7 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
         <div className="browse-comp-tile">
           <span className="texture-art" aria-hidden="true" />
           <strong>Drum texture</strong>
-          <small>@lowlight · Reused in 12 projects</small>
+          <small>@lowlight · Reused in 14 projects</small>
         </div>
         <div className="browse-comp-tile">
           <span className="browse-tile browse-tile--haze" aria-hidden="true" />
@@ -1332,7 +1332,7 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
         </div>
         <div className="browse-comp-tile">
           <span className="browse-tile browse-tile--dusk" aria-hidden="true" />
-          <strong>Granular bass one-shots</strong>
+          <strong>Dusted bass one-shots</strong>
           <small>@riverchapel · Reused in 3 projects</small>
         </div>
       </div>
@@ -1352,10 +1352,12 @@ function BrowseScene({ onOpenCall }: { onOpenCall: () => void }) {
         <div className="browse-person">
           <img src="/adopter-ana.jpg" alt="" />
           <strong>@anaverse</strong>
+          <small>9 accepted</small>
         </div>
         <div className="browse-person">
           <img src="/adopter-jules.jpg" alt="" />
           <strong>@julesmakes</strong>
+          <small>7 accepted</small>
         </div>
       </div>
 
@@ -1903,7 +1905,7 @@ export function OpenSignalExperience() {
       <section className="principles-section" aria-labelledby="principles-title">
         <div className="principles-heading">
           <h2 id="principles-title">Borrow the protocol, not the chrome.</h2>
-          <p>Less feed. More authorship.</p>
+          <p>When re-rolling stops helping, you ask a person.</p>
         </div>
         <div className="principles-rail">
           <article><strong>Precise ask</strong><span>One section. One problem.</span></article>

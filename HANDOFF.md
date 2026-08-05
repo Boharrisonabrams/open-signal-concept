@@ -426,3 +426,31 @@ lights only from the call scene onward. Deployed as Worker version
 browse scene; tap-through and rights gate confirmed on production). Known
 harness-only artifact: agent-browser long composite evals can drop a
 trailing reset click; discrete clicks and real flows are unaffected.
+
+### Judge panel 2 + fixes (2026-08-02, on the browse build)
+
+Second three-judge blind panel (fresh agents, rebuilt production evidence):
+unanimous strengthen/forward/interview, zero blockers. Panel-1 fixes
+confirmed landed (recruiter brand fit 7→9, "near best-practice nominative
+use"; compensation and Explore-duplication probes "defended on-page"; CPO:
+"fork-to-merge is the correct structural read"). Browse judged ~60% real
+differentiator. Shipped from converged findings:
+
+- Browse taxonomy collapsed to one axis: Invite-only / Open pool (third
+  card's "Invited" removed).
+- World consistency: drum texture reuse 12→14 (kills the double-12 with
+  lineage), "Granular bass one-shots" → "Dusted bass one-shots", all four
+  top contributors now carry accepted counts.
+- Principles subtitle "Less feed. More authorship." → "When re-rolling
+  stops helping, you ask a person." — thins the antithesis stack the
+  skeptic flagged AND answers the regeneration counterfactual on-page.
+- Primer hard questions extended: compensation trigger/mechanism at
+  open-pool scale, remix-derivative rights chain, randomized-holdout +
+  listener-side causal design, visibility-vs-submission taxonomy.
+
+Deliberately skipped (recorded): song/product name collision (self-titling
+defense stands; renaming touches ~15 validated strings pre-interview) and
+the post-pass profile "In review" seam (edge path). Evidence-pack note:
+four capture files in the session scratchpad were byte-identical duplicates
+(harness artifact, deleted); judges verified those states on the live build
+directly.
