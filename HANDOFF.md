@@ -652,18 +652,27 @@ verified live after ~1 min propagation delay):
 - OG/Twitter descriptions now end "Independent concept, not affiliated with
   Suno." (skeptic's unqualified-preview finding).
 
-Held for Bo (explicitly NOT shipped):
-1. Recruiter #1 + CPO #3 independently want a 3-line "how I'd know" strip
-   (metric / riskiest assumption / cheapest test) — a slim version of the
-   GTM section Bo removed this morning. Bo's call: it reverses part of a
-   same-day decision.
-2. Persona circularity (skeptic MINOR, standing rehearse-don't-fix item,
-   now sharper: @lowlight forks @lowlight's own pack): fix by neutral demo
-   handle, or keep rehearsing the one-line answer.
-3. CPO notes "Fork" appears in-product before definition; option to extend
-   the coach mark or add a first-tap hint. Also noted: CPO's "missing
-   rejection state" is an evidence-pack gap (Pass exists on Compare), and
-   the origination flow remains a known, primer-armed scope decision.
+Bo's calls, shipped same session (commit `0b6ec23`, Worker `b4349756`,
+live-verified after gradual rollout settled — note: two consecutive deploys
+this session briefly served mixed versions per-request; always poll for the
+new client-bundle hash before declaring a deploy live):
+1. "How I'd know it's working" strip under the outcome thesis — Metric
+   (incremental 7-day publish/export vs editing alone), Riskiest assumption
+   (skilled creators answer a 14-second ask between their own edits),
+   Cheapest test (invite-only beta with a randomized holdout). Three quiet
+   lines; the GTM section stays gone.
+2. Self-fork fixed: the fork-submit path speaks as "You" — eyebrow
+   "Contributor view · You, via your fork", You-chip avatar (comments-sheet
+   idiom), texture-art draft thumb, success rights row "Your added layers,
+   confirmed". The standard invited-@lowlight role-play is unchanged; the
+   viewer no longer forks or attests as @lowlight.
+
+Still open (small, non-blocking): CPO's note that "Fork" appears in-product
+before definition (option: coach-mark second line or first-tap hint); CPO's
+"missing rejection state" was an evidence-pack gap (Pass exists on
+Compare); origination flow remains a known, primer-armed scope decision;
+NITs from the skeptic (profile chip truncation at 390, og.png 1.1 MB,
+non-interactive "Collaborate" span).
 
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
