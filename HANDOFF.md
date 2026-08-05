@@ -580,9 +580,12 @@ Worker version `e608145d`:
   "Last used 2d ago" de-duped, submission note in sentences, primer em-dashes
   converted without meaning changes.
 - Deliberate exceptions, recorded: time ranges keep the en-dash (0:42–0:56);
-  compare-header chip stays hidden at mobile widths (pre-existing space rule);
-  `og.png` left as the Bo-approved card (its serif-on-bone design already
-  matches the new direction; refresh optional).
+  compare-header chip stays hidden at mobile widths (pre-existing space rule).
+- `og.png` regenerated on Bo's ask (same session): identical approved
+  composition, call cards flipped to the bone idiom, footer separator
+  de-em-dashed. Rendered from a 1731×909 HTML card via agent-browser
+  (Newsreader + Geist from Google Fonts, repo cover art). Live as Worker
+  `816ade79`; edge cache confirmed serving the new bytes.
 - Verified: full battery green (lint, unpiped tsc, tests 2/2 with new pins,
   `git diff --check`); local and production walks covered browse coach → call →
   submit → success, fork → studio → save → fork-aware attestation, accept →
