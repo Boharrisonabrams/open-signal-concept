@@ -513,6 +513,36 @@ Plan: `docs/superpowers/plans/2026-08-05-fork-social-studio.md`. Shipped:
 - Counts derive from one source everywhere (tile, sheet, profile);
   Reset restores 214/41/18 and clears drafts and comments.
 
+### Panel 5 — final pre-send check + fixes (2026-08-05)
+
+Fifth blind panel, framed as the final gate before sending to Suno:
+recruiter "Ready to send? Yes — no blockers. Send it." (top-5%); CPO
+"ready to send: yes — no blocker" (top-decile, craft 9); skeptic "no hard
+blockers" after deobfuscating the live bundle. 15/15 positive verdicts
+across five panels. Shipped from converged findings (`385cb6f`,
+`fcfda2d`, live `41674f6a`):
+
+- **Fork-submission rights collision resolved in-product** (CPO Q1 +
+  skeptic's bundle-level confirmation): submitting a forked draft now
+  shows "Fork of Drum texture · fork credit attached" and swaps the
+  attestation to "My added layers are mine." with the forked layer's
+  credit locked under pack terms. Standard path unchanged.
+- Stars demoted to the last, muted profile cell (Accepted · Reuses ·
+  Open calls lead) — kept as a feature per Bo, subordinated per two
+  rounds of judge pressure.
+- Application short blurb leads with the re-rolling hook; dressing
+  cards/tiles render quieter than live ones; mobile tab row fades at the
+  right edge as a scroll affordance (7 tabs cannot honestly fit at 390).
+- Why-now line claims the failure mode, not the competitor ("whole-song
+  collab asks have stalled before because the ask was too big and the
+  room too empty"); BandLab/Kompoz/SoundBetter stay named in the primer.
+- Primer: SoundBetter paid-prior-art clause; fork-attestation resolution
+  folded into the derivative-rights answer.
+- Known cosmetic (pre-existing, standing): wide desktop compare
+  deliberately overlaps the right rail. Skeptic note on stale evidence
+  PNGs applies to the session pack only; nothing ships with the
+  application.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
