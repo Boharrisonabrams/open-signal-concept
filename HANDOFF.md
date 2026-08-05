@@ -392,3 +392,10 @@ npm run deploy
 ```
 
 Do not run the deployment command until Bo approves the revised public build.
+
+### Project closed (2026-08-02)
+
+Bo filed the application with this link on 2026-08-02 and marked the project
+complete. The Worker stays live for reviewers and interviews; no further
+changes without a new mandate. Interview prep lives in SUBMISSION-PRIMER.md
+("Hard questions to carry").
