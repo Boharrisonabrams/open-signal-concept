@@ -691,6 +691,32 @@ don't hide; persistent-nav; press feedback), which Bo asked about by name:
   Worker `e35e7605`. Skills note for the record: design-taste-frontend ran
   through this whole session; ui-ux-pro-max was first invoked here.
 
+### Final flow pass + phase framing (2026-08-05, pre-submit)
+
+Bo asked for one last ui-ux-pro-max pass on the full flow ("not the most
+intuitive") plus application of his podcast framing (technical-to-product
+slider; consumer AI is single-player; defensibility = network effects +
+memory; status-seeking UGC supply). Shipped as commit `38b2cf0`, Worker
+`e38a6fc4`, all verified live:
+
+- Flow fixes: first fork fires a Suno-idiom toast ("Studio unlocked · your
+  draft lives in the Studio tab") explaining the unlock at the moment it
+  happens; disabled Accepted/Studio tabs carry title text saying how to
+  unlock; star/comment/snippet-fork chips got 44pt extended hit areas.
+  Full loop re-walked at 390 (coach → call → submit → success → compare →
+  accept → receipt → browse → fork → toast → studio → tab unlocked).
+- Theme copy: hero now reads "Suno already nails single-player creation…
+  Open Signal adds the human layer that makes it multiplayer" (pinned
+  phrase preserved); outcome section closes "That is the moat: a network of
+  people and a memory of who made what. Neither can be re-rolled."
+- Primer gained "The phase framing (why now, and why work at Suno)" under
+  the strategic-interest section — the slider, the single-player era,
+  network-effects + memory defensibility, and status-seeking supply, for
+  interview and why-Suno answers. Bo may echo this in the resume (separate
+  lane; resume files untouched per constraints).
+- Deploy note reconfirmed: consecutive Worker deploys serve mixed versions
+  per-request for ~1 minute; poll for the new bundle hash before verifying.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
