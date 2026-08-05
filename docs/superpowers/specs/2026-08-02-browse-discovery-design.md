@@ -39,14 +39,16 @@ light status bar; uses the established `.phone-frame` token layer.
     an ambient call ("Granular pad under the bridge") and an alt-R&B call
     ("Vocal texture for the outro"), each with plausible key/BPM and
     activity lines.
-- **Module 2 — Reusable components:** horizontal tile row anchored by
-  existing fiction: "Drum texture · @lowlight · Reused in 12 projects"
-  (number already exists in profile + lineage), plus 2–3 fictional tiles
-  (e.g. tape-warble keys, granular bass one-shots) with reuse counts.
+- **Module 2 — Reusable components:** horizontal tile row of three:
+  "Drum texture · @lowlight · Reused in 12 projects" (number already exists
+  in profile + lineage) plus two fictional tiles (tape-warble keys, granular
+  bass one-shots) with smaller reuse counts.
 - **Module 3 — Top contributors:** avatar strip reusing existing images
   only (Nia leading with `18 accepted`, adopter portraits following).
-- **Module 4 — Active collaborations:** two slim activity rows
-  ("Open Signal · take accepted 2h ago", one fictional).
+- **Module 4 — Active collaborations:** two slim activity rows, both true
+  within demo state: "Open Signal · new take submitted 2h ago" (takes are
+  in review pre-acceptance) and "Hollow City · take accepted 1d ago"
+  (Hollow City already exists as Nia's credit).
 
 ## Integration
 
