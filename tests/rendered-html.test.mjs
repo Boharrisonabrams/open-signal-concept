@@ -69,6 +69,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /fork credit attached/);
   assert.match(source, /Credit attaches to both layers/);
   assert.match(source, /You, via your fork/);
+  assert.match(source, /Open your studio draft/);
+  assert.match(source, /item === "studio" && !forked/);
   assert.match(source, /How I’d know it’s working/);
   assert.match(source, /randomized holdout/);
   assert.match(source, /Send for review/);

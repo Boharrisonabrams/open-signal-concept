@@ -1322,6 +1322,7 @@ function BrowseScene({
   commentCount,
   onFork,
   onOpenComments,
+  onOpenStudio,
 }: {
   onOpenCall: () => void;
   acceptedId: CreatorContributionId | null;
@@ -1332,6 +1333,7 @@ function BrowseScene({
   commentCount: number;
   onFork: () => void;
   onOpenComments: () => void;
+  onOpenStudio: () => void;
 }) {
   const malik = contributions.circuitromance;
 
@@ -1415,15 +1417,15 @@ function BrowseScene({
 
       {forkedDraft ? (
         <>
-          <h3 className="browse-section-title">Your drafts</h3>
-          <div className="browse-draft">
+          <h3 className="browse-section-title">Your studio</h3>
+          <button className="browse-draft" type="button" onClick={onOpenStudio} aria-label="Open your studio draft">
             <span className="texture-art" aria-hidden="true" />
             <span className="browse-draft__body">
               <strong>Fork of Drum texture</strong>
               <small>Draft · Synced just now</small>
             </span>
-            <Icon name="check" size={15} />
-          </div>
+            <Icon name="arrow" size={15} />
+          </button>
         </>
       ) : null}
 
@@ -1763,6 +1765,7 @@ function PhoneDemo({
           commentCount={comments.length}
           onFork={onFork}
           onOpenComments={onOpenComments}
+          onOpenStudio={() => onScene("studio")}
         />
       ) : null}
       {scene === "player" ? (
@@ -2206,13 +2209,13 @@ export function OpenSignalExperience() {
         <div className="demo-column">
           <p className="mobile-thesis">GitHub&rsquo;s loop, in music: ask for a take, hear it in context, credit who made it.</p>
           <div className="scene-tabs" aria-label="Demo scenes">
-            {SCENES.filter((item) => item !== "studio").map((item) => (
+            {SCENES.map((item) => (
               <button
                 key={item}
                 type="button"
                 className={scene === item ? "is-active" : ""}
                 onClick={() => navigate(item)}
-                disabled={item === "accepted" && !acceptedId}
+                disabled={(item === "accepted" && !acceptedId) || (item === "studio" && !forked)}
                 aria-pressed={scene === item}
               >
                 {SCENE_LABELS[item]}

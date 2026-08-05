@@ -4583,9 +4583,12 @@ p {
   color: rgba(29, 122, 62, 0.78);
 }
 
-.phone-frame--studio .studio-layer > svg,
-.phone-frame--browse .browse-draft > svg {
+.phone-frame--studio .studio-layer > svg {
   color: #1d7a3e;
+}
+
+.phone-frame--browse .browse-draft > svg {
+  color: var(--p-muted);
 }
 
 .phone-frame--studio .studio-save {
@@ -4815,4 +4818,20 @@ p {
   margin-right: 6px;
   color: var(--ink);
   font-weight: 680;
+}
+
+/* Tappable studio draft row on Browse (ui-ux-pro-max: persistent-nav +
+   press feedback; the Studio tab itself unlocks after the first fork) */
+
+.phone-frame .browse-draft {
+  width: 100%;
+  color: var(--p-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 140ms ease;
+}
+
+.phone-frame .browse-draft:active {
+  transform: scale(0.985);
 }
