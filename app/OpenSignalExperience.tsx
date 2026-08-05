@@ -1476,6 +1476,8 @@ function StudioScene({
   onSubmitDraft: () => void;
   onClose: () => void;
 }) {
+  const promptRef = useRef<HTMLTextAreaElement>(null);
+
   return (
     <section className="studio-scene scene" aria-label="Your studio draft">
       <div className="status-bar status-bar--light" aria-hidden="true">
@@ -1499,17 +1501,35 @@ function StudioScene({
           </span>
           <Icon name="check" size={15} />
         </div>
-        <div className="studio-layer studio-layer--empty">
-          <span className="studio-layer__add" aria-hidden="true">+</span>
-          <span className="studio-layer__body">
-            <strong>Add your sound</strong>
-            <small>Layer it over the fork</small>
-          </span>
-        </div>
+        {saved ? (
+          <div className="studio-layer">
+            <span className="studio-layer__add" aria-hidden="true">♪</span>
+            <span className="studio-layer__body">
+              <strong>Your added layer</strong>
+              <small>From your prompt · draft</small>
+            </span>
+            <Icon name="check" size={15} />
+          </div>
+        ) : (
+          <button
+            className="studio-layer studio-layer--empty"
+            type="button"
+            onClick={() => {
+              promptRef.current?.focus();
+              promptRef.current?.scrollIntoView({ block: "nearest", behavior: "smooth" });
+            }}
+          >
+            <span className="studio-layer__add" aria-hidden="true">+</span>
+            <span className="studio-layer__body">
+              <strong>Add your sound</strong>
+              <small>Describe it below, then save</small>
+            </span>
+          </button>
+        )}
       </div>
       <div className="studio-prompt">
         <label htmlFor="studio-prompt-input">What should change?</label>
-        <textarea id="studio-prompt-input" placeholder="Describe what to change… e.g. more snare on the offbeat" />
+        <textarea ref={promptRef} id="studio-prompt-input" placeholder="Describe what to change… e.g. more snare on the offbeat" />
         <div className="studio-methods">
           <span><Icon name="record" size={13} /> Record</span>
           <span><SunoMark size={13} /> Remix with Suno</span>
@@ -2175,6 +2195,12 @@ export function OpenSignalExperience() {
   }, [navigate, stopAudio]);
 
   const progress = useMemo(() => SCENES.indexOf(scene), [scene]);
+
+  useEffect(() => {
+    document
+      .querySelector<HTMLElement>(".scene-tabs button.is-active")
+      ?.scrollIntoView({ inline: "center", block: "nearest" });
+  }, [scene]);
 
   return (
     <main className="site-shell">

@@ -74,6 +74,9 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /human layer that makes it\s+multiplayer/);
   assert.match(source, /Neither can be re-rolled\./);
   assert.match(source, /Studio unlocked · your draft lives in the Studio tab/);
+  assert.match(source, /Your added layer/);
+  assert.match(source, /Describe it below, then save/);
+  assert.match(source, /scene-tabs button\.is-active/);
   assert.match(source, /How I’d know it’s working/);
   assert.match(source, /randomized holdout/);
   assert.match(source, /Send for review/);

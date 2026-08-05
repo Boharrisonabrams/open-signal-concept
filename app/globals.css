@@ -4852,3 +4852,23 @@ p {
   position: absolute;
   inset: -10px -6px;
 }
+
+/* Add-your-sound is a real control: it focuses the prompt, and fills in as
+   a layer once the draft is saved */
+
+.phone-frame .studio-layer--empty {
+  width: 100%;
+  color: var(--p-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 140ms ease, border-color 140ms ease;
+}
+
+.phone-frame .studio-layer--empty:active {
+  transform: scale(0.985);
+}
+
+.phone-frame .studio-layer--empty:hover {
+  border-color: rgba(216, 27, 116, 0.45);
+}
