@@ -796,11 +796,18 @@ gate now checks the npm test exit code, not grep output.
 Bo walked the full flow on his phone and approved: "the walk feels right -
 freeze it as the submit build." Frozen state:
 
-- Live Worker version: `bfc1d76b` at
+- Live Worker version: `206a6664` at
   https://open-signal-concept.boabrams.workers.dev
-- Repo: commit `ad54318` on main, tagged `submit-build-final` (supersedes
-  `submit-build-2026-08-05`; force-pushing tags is blocked by Bo's git
-  safety rules, so the older tag remains at `d9b63c9`), clean.
+- Repo: commit `cfcaca5` on main, tagged `submit-build-final-2`
+  (successor tags, oldest first: `submit-build-2026-08-05` at `d9b63c9`,
+  `submit-build-final` at `ad54318`; tag force-push is blocked by Bo's
+  git safety rules, so each freeze gets a new tag), clean.
+- Second post-freeze addendum, Bo's mandate: the principles section now
+  opens with the model in one plain sentence: "Your song is the repo. You
+  open one section, other creators send takes, you decide what ships, and
+  credit sticks to whoever made it." Bo read the section and had to
+  re-derive the model himself; the clever fragments never said it
+  straight. Pinned via /Your song is the repo\./ in tests.
 - Post-freeze fix folded in with Bo's report: at mobile, arriving on the
   accepted scene auto-scrolls to the accepted panel (View receipt /
   profile CTA above the fold). Accept-button path was verified unbroken on
