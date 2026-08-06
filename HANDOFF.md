@@ -752,6 +752,29 @@ This build (`0be86392`) is the submit candidate. FREEZE: no further demo
 changes unless Bo explicitly asks; his single-pass phone test is the last
 gate. Everything is committed and pushed; working tree clean.
 
+### Audio debug + strip removal (2026-08-05, evening)
+
+Bo heard no audio on any track on his iPhone. Systematic debugging outcome:
+zero audio-path code changed all day (git diff vs 5be3a66), zero console
+errors, and a trusted click on production produced an AudioContext that
+reached "running" and played the full 8.1s preview. Root cause: iOS puts
+Web Audio in the ambient audio-session category, which the ring/silent
+switch mutes, and the demo never declared itself playback media. Fix
+(commit `ff41ed5`, Worker `7654b4d9`): set
+`navigator.audioSession.type = "playback"` inside the play gesture —
+previews now route as media playback on iOS 17+ (audible with the silent
+switch on); guarded no-op elsewhere. Pinned via /audioSession/ in tests.
+Caveat for older iOS (<17): the API is absent and the silent switch still
+mutes previews; volume-up + switch off is the fallback.
+
+Same deploy, Bo's call: the "How I'd know it's working" strip is removed
+(Bo: overkill; keep the what and the why simple). Outcome section closes on
+the moat paragraph + Taste/Forks/Fans/Loop rows; metrics remain in the
+primer. Stale test pin (/randomized holdout/) removed. Process note: a
+`grep -E "pass|fail"` gate let a failing test through to deploy once this
+session (grep exits 0 on any match) — check test exit codes, not grep
+matches; the shipped build was correct, the pin was stale.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
