@@ -791,7 +791,21 @@ the landscape mode are untouched. Verified on emulated iPhone 14 Pro across
 all seven scenes plus sticky behavior and zero horizontal overflow; test
 gate now checks the npm test exit code, not grep output.
 
-Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
+## FROZEN: submit build (2026-08-05, Bo's approval)
+
+Bo walked the full flow on his phone and approved: "the walk feels right -
+freeze it as the submit build." Frozen state:
+
+- Live Worker version: `0c224462` at
+  https://open-signal-concept.boabrams.workers.dev
+- Repo: commit `d9b63c9` on main, tagged `submit-build-2026-08-05`, clean.
+- Panels: six blind panels, 18/18 ready-to-send verdicts; every converged
+  fix shipped or explicitly parked with Bo's sign-off.
+- Do NOT deploy, edit, or re-theme this demo without an explicit new
+  mandate from Bo. Interview prep = SUBMISSION-PRIMER.md (including the
+  phase-framing section); paste-ready copy = APPLICATION-LINK-COPY.md.
+
+Pipeline per Bo: deploy → judge panel → Bo's energy test → publish. COMPLETE.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
 derived comment chip, fork-time count semantics, on-page prior-art clause,
