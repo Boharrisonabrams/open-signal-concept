@@ -2355,6 +2355,7 @@ export function OpenSignalExperience() {
           <h2 id="principles-title">Borrow how GitHub works, not how it looks.</h2>
           <p>When re-rolling stops helping, you ask a person.</p>
         </div>
+        <p className="principles-model">Your song is the repo. You open one section, other creators send takes, you decide what ships, and credit sticks to whoever made it.</p>
         <div className="principles-rail">
           <article><strong>Precise ask</strong><span>One section. One problem.</span></article>
           <article><strong>Listen in context</strong><span>Switch versions without losing the song.</span></article>

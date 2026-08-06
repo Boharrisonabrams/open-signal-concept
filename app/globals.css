@@ -4950,3 +4950,13 @@ a {
     top: 18px;
   }
 }
+
+/* The model in one plain sentence, under the principles heading */
+
+.principles-model {
+  margin: 14px 0 26px;
+  max-width: 620px;
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.55;
+}
