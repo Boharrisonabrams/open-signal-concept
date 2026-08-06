@@ -2204,6 +2204,18 @@ export function OpenSignalExperience() {
       ?.scrollIntoView({ inline: "center", block: "nearest" });
   }, [scene]);
 
+  useEffect(() => {
+    if (scene !== "accepted") return;
+    if (!window.matchMedia("(max-width: 680px)").matches) return;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth";
+    const timeout = window.setTimeout(() => {
+      document
+        .querySelector<HTMLElement>(".contribution-inspector")
+        ?.scrollIntoView({ block: "start", behavior });
+    }, 260);
+    return () => window.clearTimeout(timeout);
+  }, [scene]);
+
   return (
     <main className="site-shell">
       <header className="site-header">
