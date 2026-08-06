@@ -2028,6 +2028,8 @@ export function OpenSignalExperience() {
       }
 
       stopAudio();
+      const audioSession = (navigator as Navigator & { audioSession?: { type: string } }).audioSession;
+      if (audioSession) audioSession.type = "playback";
       const context = new AudioContext();
       await context.resume();
       const master = context.createGain();
@@ -2364,12 +2366,6 @@ export function OpenSignalExperience() {
         <div>
           <h2 id="outcome-title">Make something people fork.</h2>
           <p>Taste becomes reputation. Other creators star your packs, fork your sounds, and ship your takes. Credit and fans follow the work. That is the moat: a network of people and a memory of who made what. Neither can be re-rolled.</p>
-          <div className="know-strip">
-            <strong>How I’d know it’s working</strong>
-            <p><b>Metric</b> Incremental 7-day publish or export completion versus editing alone.</p>
-            <p><b>Riskiest assumption</b> Skilled creators answer a 14-second ask between their own edits.</p>
-            <p><b>Cheapest test</b> An invite-only beta with a randomized holdout.</p>
-          </div>
         </div>
         <dl>
           <div><dt>Taste</dt><dd>Stars and accepted takes are other creators choosing your sound</dd></div>

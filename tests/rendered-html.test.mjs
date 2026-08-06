@@ -77,8 +77,8 @@ test("keeps the complete decision, credit, and lineage story in source", async (
   assert.match(source, /Your added layer/);
   assert.match(source, /Describe it below, then save/);
   assert.match(source, /scene-tabs button\.is-active/);
-  assert.match(source, /How I’d know it’s working/);
-  assert.match(source, /randomized holdout/);
+  assert.match(source, /audioSession/);
+  assert.doesNotMatch(source, /How I’d know it’s working/);
   assert.match(source, /Send for review/);
   assert.match(source, /Rights \+ credit receipt/);
   assert.match(source, /Separate stem reuse still requires permission/);

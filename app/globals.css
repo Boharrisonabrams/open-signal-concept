@@ -4792,33 +4792,7 @@ p {
   font-weight: 650;
 }
 
-/* How-I'd-know strip under the outcome thesis */
 
-.know-strip {
-  margin-top: 22px;
-  padding-top: 16px;
-  border-top: 1px solid var(--line);
-  display: grid;
-  gap: 7px;
-}
-
-.know-strip > strong {
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.know-strip p {
-  margin: 0;
-  color: var(--muted);
-  font-size: 12.5px;
-  line-height: 1.5;
-}
-
-.know-strip b {
-  margin-right: 6px;
-  color: var(--ink);
-  font-weight: 680;
-}
 
 /* Tappable studio draft row on Browse (ui-ux-pro-max: persistent-nav +
    press feedback; the Studio tab itself unlocks after the first fork) */
