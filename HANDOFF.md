@@ -796,9 +796,15 @@ gate now checks the npm test exit code, not grep output.
 Bo walked the full flow on his phone and approved: "the walk feels right -
 freeze it as the submit build." Frozen state:
 
-- Live Worker version: `0c224462` at
+- Live Worker version: `bfc1d76b` at
   https://open-signal-concept.boabrams.workers.dev
-- Repo: commit `d9b63c9` on main, tagged `submit-build-2026-08-05`, clean.
+- Repo: commit `ad54318` on main, tagged `submit-build-final` (supersedes
+  `submit-build-2026-08-05`; force-pushing tags is blocked by Bo's git
+  safety rules, so the older tag remains at `d9b63c9`), clean.
+- Post-freeze fix folded in with Bo's report: at mobile, arriving on the
+  accepted scene auto-scrolls to the accepted panel (View receipt /
+  profile CTA above the fold). Accept-button path was verified unbroken on
+  production before the fix; the dead-end was the Accepted-tab landing.
 - Panels: six blind panels, 18/18 ready-to-send verdicts; every converged
   fix shipped or explicitly parked with Bo's sign-off.
 - Do NOT deploy, edit, or re-theme this demo without an explicit new
