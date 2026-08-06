@@ -775,6 +775,22 @@ primer. Stale test pin (/randomized holdout/) removed. Process note: a
 session (grep exits 0 on any match) — check test exit codes, not grep
 matches; the shipped build was correct, the pin was stale.
 
+### Full-bleed mobile mode (2026-08-05, night — resolves handoff assumption 9)
+
+Bo: the mobile experience wasn't as clear as web. Root cause was the
+phone-in-phone framing. Shipped (commit `472be1a`, Worker `0c224462`): at
+≤680px the demo now renders as the app itself — no bezel, no Dynamic
+Island, no fake 9:41 status bar; edge-to-edge at min(760px, 86dvh);
+scene-tab row is a sticky app bar (auto-scrolls the active tab into view);
+scene scroll uses overscroll-behavior: contain; per-scene top paddings
+compressed (browse/studio 22, profile 26, submit 0, player header 20,
+song ribbon 18). Structural fix that made sticky possible: `.site-shell`
+overflow hidden → `overflow-x: clip` (hidden made site-shell a scroll
+container, silently killing every position: sticky inside it). Desktop and
+the landscape mode are untouched. Verified on emulated iPhone 14 Pro across
+all seven scenes plus sticky behavior and zero horizontal overflow; test
+gate now checks the npm test exit code, not grep output.
+
 Pipeline per Bo: deploy → judge panel → Bo's energy test → publish.
 COMPLETE (2026-08-05): panel four unanimous (12/12 judges across four
 rounds); converged fixes shipped (fork→submit loop closure + Loop metric,
