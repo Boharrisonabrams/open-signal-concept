@@ -66,7 +66,7 @@ p {
 
 .site-shell {
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: clip;
 }
 
 .site-header {
@@ -4872,5 +4872,81 @@ a {
   .phone-frame .reputation-stats {
     mask-image: linear-gradient(to right, black 88%, transparent);
     -webkit-mask-image: linear-gradient(to right, black 88%, transparent);
+  }
+}
+
+/* Full-bleed mobile demo (extends the existing landscape pattern): on a
+   real phone the product fills the screen like an app instead of a phone
+   picture inside a phone. Fake device chrome (bezel, island, 9:41 status
+   bar) disappears; scene paddings compress to match; the scene tabs become
+   a sticky app bar; internal scrolling stops chaining to the page. */
+
+.phone-frame .browse-scene,
+.phone-frame .submit-scene,
+.phone-frame .profile-scene,
+.phone-frame .studio-scene,
+.phone-frame .comments-thread {
+  overscroll-behavior: contain;
+}
+
+@media (max-width: 680px) {
+  .scene-tabs {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    padding: 10px 24px 9px;
+    background: var(--paper);
+    box-shadow: 0 1px 0 var(--line);
+  }
+
+  .phone-frame,
+  .phone-frame--compare,
+  .phone-frame--accepted {
+    width: 100vw;
+    height: min(760px, 86dvh);
+    min-height: 560px;
+    margin-left: calc(50% - 50vw);
+    border: 0;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .phone-island,
+  .phone-frame .status-bar {
+    display: none;
+  }
+
+  .phone-frame .browse-scene,
+  .phone-frame .studio-scene {
+    padding-top: 22px;
+  }
+
+  .phone-frame .profile-scene {
+    padding-top: 26px;
+  }
+
+  .phone-frame .submit-scene {
+    padding-top: 0;
+  }
+
+  .phone-frame .studio-scene__close {
+    top: 18px;
+  }
+
+  .phone-frame .profile-scene__close {
+    top: 18px;
+    right: 16px;
+  }
+
+  .player-scene__header {
+    top: 20px;
+  }
+
+  .song-ribbon {
+    top: 18px;
   }
 }
